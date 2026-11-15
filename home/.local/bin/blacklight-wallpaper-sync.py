@@ -59,8 +59,25 @@ def get_active_wallpaper() -> Path:
 
 
 def share_wallpaper(channel, wallpaper, mirrored):
-    for prop, current in channel.get_properties("/backdrop").items():
-        if prop.endswith("/last-image") and current != str(wallpaper):
+    properties = channel.get_properties("/backdrop")
+    targets = {prop for prop in properties if prop.endswith("/last-image")}
+
+    if os.environ.get("XDG_SESSION_TYPE") == "wayland":
+        # XFCE 4.20 settings can write the display model while the desktop
+        # reads the compositor connector (for example HDMI-A-1).
+        workspace = channel.get_int("/backdrop/single-workspace-number", 0)
+        for status in Path("/sys/class/drm").glob("card*-*/status"):
+            if status.read_text().strip() != "connected":
+                continue
+            connector = status.parent.name.split("-", 1)[1]
+            prefix = f"/backdrop/screen0/monitor{connector}/workspace{workspace}"
+            style = f"{prefix}/image-style"
+            if not channel.has_property(style):
+                channel.set_int(style, 5)  # Zoomed.
+            targets.add(f"{prefix}/last-image")
+
+    for prop in sorted(targets):
+        if properties.get(prop) != str(wallpaper):
             mirrored[prop] = str(wallpaper)
             if not channel.set_string(prop, str(wallpaper)):
                 mirrored.pop(prop, None)

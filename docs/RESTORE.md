@@ -65,3 +65,9 @@ Screenshots folder under your configured Pictures directory and are copied
 to the clipboard. Escape cancels selection. X11 still opens Flameshot.
 For a persistent manual wallpaper selection, leave wallpaper cycling off
 in XFCE Desktop Settings.
+
+On physical Wayland outputs, the wallpaper service also fills in the
+connector entries XFCE 4.20 uses to draw the desktop. Desktop Settings can
+write a monitor model entry while xfdesktop reads a connector entry such as
+HDMI-A-1. The service mirrors the selected image to both. Connector
+discovery uses connected DRM outputs exposed in /sys/class/drm.
