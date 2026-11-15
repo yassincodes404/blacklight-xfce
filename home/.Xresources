@@ -1,0 +1,13 @@
+
+! Blacklight-Ultra palette for legacy X terminals
+XTerm*foreground: #909090
+XTerm*background: #000000
+XTerm*cursorColor: #606060
+UXTerm*foreground: #909090
+UXTerm*background: #000000
+UXTerm*cursorColor: #606060
+
+XTerm*faceName: JetBrains Mono
+XTerm*faceSize: 11
+UXTerm*faceName: JetBrains Mono
+UXTerm*faceSize: 11

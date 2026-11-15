@@ -1,0 +1,59 @@
+{
+  "wallpaper": "@HOME@/.local/share/backgrounds/Blacklight-Ultra/dharmx_minimal_a_cartoon_of_a_island_with_a_bridge_and_trees.jpg",
+  "is_mono": false,
+  "bg_0_rgb": [
+    11,
+    11,
+    10
+  ],
+  "bg_1_rgb": [
+    18,
+    18,
+    16
+  ],
+  "bg_2_rgb": [
+    28,
+    26,
+    24
+  ],
+  "bg_3_rgb": [
+    40,
+    38,
+    35
+  ],
+  "border_rgb": [
+    48,
+    45,
+    42
+  ],
+  "accent_rgb": [
+    240,
+    211,
+    168
+  ],
+  "accent_soft_rgb": [
+    205,
+    171,
+    122
+  ],
+  "bg_0": "#0b0b0a",
+  "bg_1": "#121210",
+  "bg_2": "#1c1a18",
+  "bg_3": "#282623",
+  "border_hex": "#302d2a",
+  "accent_hex": "#f0d3a8",
+  "accent_soft_hex": "#cdab7a",
+  "fg_hex": "#f0f0f5",
+  "sub_hex": "#aaaab6",
+  "sel_fg_hex": "#0b0b0a",
+  "bg_rgb": [
+    11,
+    11,
+    10
+  ],
+  "card_rgb": [
+    18,
+    18,
+    16
+  ]
+}

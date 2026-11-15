@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xfce4-terminal" version="1.0">
+  <property name="color-foreground" type="string" value="#f0f0f5" />
+  <property name="color-background" type="string" value="#0b0b0a" />
+  <property name="color-cursor" type="string" value="#f0d3a8" />
+  <property name="color-cursor-foreground" type="string" value="#0b0b0a" />
+  <property name="color-cursor-use-default" type="bool" value="false" />
+  <property name="color-selection" type="string" value="#282623" />
+  <property name="color-selection-use-default" type="bool" value="false" />
+  <property name="color-bold" type="string" value="#f0d3a8" />
+  <property name="color-bold-use-default" type="bool" value="false" />
+  <property name="color-palette" type="string" value="#121216;#b8b8c4;#c8c8d4;#a8a8b6;#d4d4e0;#bcbcc8;#e0e0ec;#dcdce6;#565662;#d0d0dc;#e4e4f0;#c0c0ce;#ececf6;#d6d6e2;#f4f4fa;#ffffff" />
+  <property name="background-mode" type="string" value="TERMINAL_BACKGROUND_SOLID" />
+  <property name="background-darkness" type="double" value="0.91000000000000003" />
+  <property name="font-name" type="string" value="JetBrains Mono 11" />
+  <property name="tab-activity-color" type="string" value="#f0d3a8" />
+  <property name="misc-menubar-default" type="bool" value="false" />
+  <property name="scrolling-bar" type="string" value="TERMINAL_SCROLLBAR_NONE" />
+  <property name="misc-cursor-blinks" type="bool" value="true" />
+</channel>

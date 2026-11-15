@@ -1,0 +1,1897 @@
+[
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/303030_horizontal.png",
+    "sha256": "7646431392b18a21bde766474c5e7050300914392d0b8335b7e3c587ae755f18",
+    "bytes": 39212
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/303030_vertical.png",
+    "sha256": "cddb7d3462edcbcaae7ab7c2fd0a86cbe343d49373c61b24241de603350e9054",
+    "bytes": 75773
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/Blacklight_App_Menu.svg",
+    "sha256": "8ce309e8510c870ba7cf62fdb4be9be0943db79f6fd55bcffa3dd9c499742063",
+    "bytes": 4121
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/Fire_Light.png",
+    "sha256": "6d78ab21315af84a5f1e868546877e8a96fa4d7c14f28f5ad56f98c0efb5f592",
+    "bytes": 2917430
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/FrAmorth.png",
+    "sha256": "67804b0a2bf1a25ce5bd264721a81aaac8ca7ceed16c0fcf1e516ceec3e1b376",
+    "bytes": 600123
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/Lightning.png",
+    "sha256": "2259c1098eb78765e97cb388f39ee418c4e9e0104aacf9ede5c182588fcca4fa",
+    "bytes": 1927892
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/M87.png",
+    "sha256": "ab05e3f8d71bb2f46298f8955e8dfeab42c2661e5057320b0686f6eaa58c3c46",
+    "bytes": 177925
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/a_bird_flying_over_a_mountain.jpg",
+    "sha256": "6ac4f34c7825f991451d20c86d593729ca95354ce53d8d2e0ddad5c98483b651",
+    "bytes": 1192101
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/a_black_and_white_building_with_a_fire_escape.jpg",
+    "sha256": "e6c50ef8150a39bdae5e188bdbc60ef5cd48c3aebf801df68552a2dbaf8a2965",
+    "bytes": 1447532
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/a_city_skyline_seen_through_a_window.jpg",
+    "sha256": "b6068531b783e60fa8681c3656e6ad3e1e6127b4adb5a03c066ef6de25481996",
+    "bytes": 579003
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/a_dock_on_the_water.jpeg",
+    "sha256": "fb06563ecc9fc5fb62474bc940abd0300a2719a5ad8dd47e08bba4c2e3af9943",
+    "bytes": 2585628
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/a_foggy_forest_with_trees.jpg",
+    "sha256": "fdc128e352b6553d8a05008c744340c03b41b9437e0f72c1205baca979f5c660",
+    "bytes": 307076
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/a_hallway_with_lights_on_the_ceiling.png",
+    "sha256": "1386bc94314c7df6ee160005d421703d7e4c0b32170b141b71aa0fa3cc2d9d83",
+    "bytes": 1181718
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/a_microphone_on_a_stand.jpg",
+    "sha256": "033703371f253038c2909c245ef7bbc754dcd2007fe37c572ea42736857cca9b",
+    "bytes": 3791833
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/a_moon_in_the_sky_above_mountains.jpg",
+    "sha256": "3306f7c147b1b3a86c3c035609ac0c837a5cac1f183dd572d52a3a451bd6a305",
+    "bytes": 146833
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/a_mountain_with_clouds_in_the_sky.jpg",
+    "sha256": "dc7e15b22d6903e0953623edfc857388f67100962a9ad35e6588459a849a75f8",
+    "bytes": 2396466
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/a_person_in_a_hat_standing_in_a_room_with_windows.png",
+    "sha256": "a173465641ce4dad690461e85345f32f1ef4c0a0e98c726a3420c276464e0458",
+    "bytes": 93193
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/a_person_playing_a_guitar.png",
+    "sha256": "ca806852c8269f61ceb0fdb8a373872c95ea993b1985f81b3b340fecbcf62239",
+    "bytes": 1477665
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/a_street_lights_at_night_01.jpg",
+    "sha256": "e8800f95a2b068f617033c806986b2ffefe526eca7b2dd39331435915bc84217",
+    "bytes": 165845
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/a_white_car_parked_on_a_brick_road.png",
+    "sha256": "fc52bd82d785feacade94831060c4fad283f6193c1160645e48e935e807beace",
+    "bytes": 1527111
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/april.png",
+    "sha256": "433aeb6cf378a27a26f42c39b97235ac4c348dfc83e0fa3ae785dbace69531b1",
+    "bytes": 6234951
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/b-067.jpg",
+    "sha256": "d3b1c2fe1f9a8a7d925fdd7337ab066e05aec5e6f8fb4c909e21ac6dafb1d042",
+    "bytes": 142544
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/b-080.jpg",
+    "sha256": "7f5499d97d1cf4a7c1f0547fa3ead9f2888d4220d6a1e1382e3fd8039f349e08",
+    "bytes": 85002
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/b-205.jpg",
+    "sha256": "900581b7d581f81ace2be294bea40175777a10b3714b0a7e3cfd5d7816f294cd",
+    "bytes": 92972
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/b-618.jpg",
+    "sha256": "44e93a54ac9854abcefefb83837d71d208e1409b9e37af54a3e9978afe056da8",
+    "bytes": 73012
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/b-726.jpg",
+    "sha256": "2382e4df122d5e3d4f0e7ef496f8fa0965886ea4ea8362c220d06540556643d8",
+    "bytes": 104232
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/car-girl-white.png",
+    "sha256": "2043a4d316e2cc6c16653e581b6455da63a57c488f6a89fd16e49416e67afe0c",
+    "bytes": 1210194
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/cmatrix_black.png",
+    "sha256": "d4fc36fa2ccca4cb62ec85044a5253847787e88bc5c936e7bb9d6754c2b2a14b",
+    "bytes": 95029
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dark-mountain.jpg",
+    "sha256": "e5c405c56f7ce3ea012fe2ae4715e6ce10b89a82db03a0bf35a3ad25771a783e",
+    "bytes": 450959
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/death-life.png",
+    "sha256": "486859d236eb5099cadb2bf773cde075348a8723d861ead9b0007f8c9f807524",
+    "bytes": 2801228
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/detective-spiderman.jpg",
+    "sha256": "d2f1a458b869066cb0af9182bb8eb65072c89c764728e96129f7de9e0822c937",
+    "bytes": 389985
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_abstract_a_black_and_white_drawing_of_a_person_with_a_blindfold.png",
+    "sha256": "ee89e9c8de00f2e0ed9aa3eb799894504723326074e1c0686a3caa36346b600f",
+    "bytes": 399164
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_abstract_a_black_and_white_drawing_of_a_woman_in_a_black_and_white_dress.jpg",
+    "sha256": "4a48e7b92aa6c2651f15668486f9b430e8d90687353153ea3da8bce6b0afcc7e",
+    "bytes": 80554
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_abstract_a_black_and_white_image_of_a_group_of_people.png",
+    "sha256": "8e238767a4feb0fe2cc74fb73b72a4344d43020e36437f2604aecddb21fbe2b1",
+    "bytes": 208436
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_abstract_a_black_and_white_logo.png",
+    "sha256": "81ff2ff51d9b3ff179f5777c4bf818d3973d84500833cbe258095340b04e17e0",
+    "bytes": 286487
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_abstract_a_black_and_white_maze.png",
+    "sha256": "9d9bdf6f9c9cfd1cd94f5380ea8b428f97db05920deeba57d81d3f799bdce75c",
+    "bytes": 272350
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_abstract_a_black_and_white_picture_of_mountains_and_trees.png",
+    "sha256": "e8ddacc3c047b8165ea4960c3ecd490b028caa6260802b2ba55c9c57846599f7",
+    "bytes": 1460393
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_architecture_Osaka_Castle_with_a_green_roof.png",
+    "sha256": "fe40ca8d7e9118b55d5dc0f78820b6dd7858d72d972e624f6c8d483df1baf485",
+    "bytes": 3714401
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_architecture_a_bridge_with_lights_on_it.jpg",
+    "sha256": "465390cba5d4fa1861f2948b59fabe399bd2d7d53ddd6c896b0739bee4eca2c8",
+    "bytes": 1093744
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_architecture_a_building_with_a_balcony.jpeg",
+    "sha256": "59ca0cfd06da1b1a19f17d5b5e580f5c89fc97ebf4e014089b22c43fb2fe1f24",
+    "bytes": 506405
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_architecture_a_building_with_a_drone_on_top.jpg",
+    "sha256": "297a79bcd129830c5d6334ec4fa77f079ca428bf6550b8035d22b4204978dff8",
+    "bytes": 1750446
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_architecture_a_building_with_a_sign_on_it.jpg",
+    "sha256": "e161fbd3a06287ea86c143aace50a9a19e7be30164000326059aab34befec41a",
+    "bytes": 3004751
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_architecture_a_building_with_a_walkway_and_trees.jpg",
+    "sha256": "c791f305036a32f0edbe254f291003c9df2712880e4f6df5c3f1fa26e62db5bf",
+    "bytes": 333331
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_basalt_a_cave_in_a_rocky_area.jpg",
+    "sha256": "8173fba390750a869d315620a8633dc87363a2c76d8b6fa000ee50020cc40ebd",
+    "bytes": 4786700
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_basalt_a_close-up_of_a_rocky_area.jpg",
+    "sha256": "51318103d191eeedaa2a41c6438814d3751a2297ba8c0ea453683502b4d79d23",
+    "bytes": 1227522
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_basalt_a_close_up_of_a_rock_formation.jpg",
+    "sha256": "1c59c9eaa92f1c3ff812fef31724e2455ab354b0430d51c6b8c8e897eaf4399f",
+    "bytes": 5981585
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_basalt_a_road_with_a_road_in_the_middle_of_a_river.jpg",
+    "sha256": "b6bfbea9259ab95276d406be0b0458060278e69a2498d896b2d754528822bdc6",
+    "bytes": 2670117
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_basalt_a_rock_arch_over_water.jpg",
+    "sha256": "fada2dc168c97c11092a57056ab60335435f84278f78d29364352dea52a7ba5f",
+    "bytes": 3498141
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_basalt_a_waterfall_in_the_snow.jpg",
+    "sha256": "1670043b60ffa99f007983b89dbbf1fa5e6c86dba574ec59037f1ba0988c663e",
+    "bytes": 2576093
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_calm_a_beach_with_trees_on_the_side.jpg",
+    "sha256": "0b9ebfab23f67419e1cb11016eba7cfd6427b31f5a9a14fa0a3249b48f66fe9d",
+    "bytes": 442707
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_calm_a_bed_with_a_view_of_trees_outside.jpg",
+    "sha256": "0e34ee9258117130a9d4dabb07606c7c3e7a798b1acfd624b10b6568200edb0e",
+    "bytes": 1497509
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_calm_a_blue_wall_with_a_balcony_and_a_door.jpg",
+    "sha256": "1e4114bcd69f65bc2b1c1e0ed2945f39a9b86c61497422a086fd9c392536c68e",
+    "bytes": 4375084
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_calm_a_boat_on_the_water.jpg",
+    "sha256": "d773c82294cb10acb10406c2d03069254708ac095a9e6ed5cca6dfcb5381a30e",
+    "bytes": 1396769
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_calm_a_group_of_wooden_posts_in_water.jpg",
+    "sha256": "27e1a19b4a76186c2a02a1ee15d835c9ede014e23d8195d10bc0a58f7d32ee4d",
+    "bytes": 2503059
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_calm_a_house_on_stilts_on_a_lake.jpg",
+    "sha256": "b796c7465d8d25dfd8b458a167c54a51046418aae1e0d3637136ae5de18e131d",
+    "bytes": 2171019
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_cold_a_black_sand_beach_with_waves_and_clouds_above.jpg",
+    "sha256": "74d858fe80c5ef6ca20e00486dfe0d18e994d21877bf93413d04771764c75790",
+    "bytes": 1401572
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_cold_a_mountain_with_clouds_in_the_sky.jpg",
+    "sha256": "5282b470e2416e337a5ba55df5dc9348d607ac8f9e789f3d6221d2b73fd1826e",
+    "bytes": 2230735
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_cold_a_mountain_with_snow_and_clouds.jpg",
+    "sha256": "766197a6fa5065253846f90b1f1ee24c12d642263cc77de663271f61f99737e4",
+    "bytes": 294633
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_cold_a_mountain_with_snow_and_trees.jpg",
+    "sha256": "232190e0769dc35b3395162815e7fa7bbff99c7badcba2e08b4a7d7ad73e3920",
+    "bytes": 237435
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_cold_a_mountain_with_snow_on_it.jpg",
+    "sha256": "c46956fbd022cdbe7e8c11a76f08e7ed6c133e1fee564e2c1d1db536de7901bd",
+    "bytes": 2574853
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_cold_a_music_stand_with_a_book_on_it.jpg",
+    "sha256": "9b043dcce102e28b979921c6e42cf87af20f17c6e477c2ec1acb324a2d32009e",
+    "bytes": 1716844
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_digital_a_car_driving_on_a_road_at_night.png",
+    "sha256": "67cdacaa5df1d16e7ea69728d92d2f4490bab58fa24d0b97183c9e9b92b45868",
+    "bytes": 1127165
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_digital_a_car_in_a_field_with_trees_and_a_fire.png",
+    "sha256": "3d9a20813e80e324e9970b4e921385a777cc21ab084c0930d1950c641dde0d3d",
+    "bytes": 1236100
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_digital_a_car_on_a_road_with_orange_clouds_in_the_sky.jpg",
+    "sha256": "7ad700c6e4bfb0799eda39221bf0c0738650c5a891056d36956bb46788b8496a",
+    "bytes": 130316
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_digital_a_car_on_a_road_with_purple_clouds_in_the_sky.png",
+    "sha256": "84efaaa0338d43b38221fa9222ab6e0403711c80eb820229dd4ce26324976df5",
+    "bytes": 1835859
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_digital_a_car_on_the_road.png",
+    "sha256": "4c2c595afec5d7233a267c8be832c02fc3230b4ef13e5c74fbfe5c84b54d9829",
+    "bytes": 2040086
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_digital_a_car_parked_in_a_field_with_trees_and_a_crescent_moon_in_the_sky.png",
+    "sha256": "80a85e97c8b63311543a59403c1266310df73b27ce0c491561ca69e5b309ce3e",
+    "bytes": 1430803
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_fogsmoke_Bixby_Creek_Bridge_over_a_cliff.jpg",
+    "sha256": "51d3f2ccbf9dbc9f9ee9c81488bb6092c733c3f13da6e7883a236eedf56e8bcd",
+    "bytes": 419804
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_fogsmoke_a_bridge_with_clouds_in_the_sky.jpg",
+    "sha256": "9424a4e2df71a714bf79176d763fec1600f56c7ba36726f9b20c89abb1930f71",
+    "bytes": 1455384
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_fogsmoke_a_car_on_a_road_with_fog.jpg",
+    "sha256": "27584efae0d1e73326e2f152820637cbe633d442a254146b292cc38be1411c42",
+    "bytes": 393511
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_fogsmoke_a_foggy_forest_with_trees.jpg",
+    "sha256": "b3167fc22cad357ee60250f607d5d2a91632cf6ef2fc43b7734418eeb9609710",
+    "bytes": 1689431
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_fogsmoke_a_foggy_forest_with_trees_01.jpg",
+    "sha256": "9cf18813f8aaf0a26abd18d68d3203a95edde005055d61476cb095cb9166df6f",
+    "bytes": 176658
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_fogsmoke_a_foggy_forest_with_trees_02.jpg",
+    "sha256": "cfd3ce893ec4fdc7caa7f0837093ef0e139143d0d296fae8cdabeda231c96ad9",
+    "bytes": 360413
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_geometry_a_black_and_white_logo.jpg",
+    "sha256": "462363bdbe88d66ae3dfb2256193343d369189c80fc9fae4b02dea30ecb29e5b",
+    "bytes": 223100
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_geometry_a_group_of_symbols_on_a_black_background.jpg",
+    "sha256": "f5517fe3e59239cf5abf3869276b7a962f1494e97b0be4e031e03bcb15a3e135",
+    "bytes": 1480578
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_minimal_a_black_sky_with_white_dots.jpg",
+    "sha256": "26b16cba9fbe11e4c3495ebc534259c7626ec330c0c3ad03cda8f02a4c897e42",
+    "bytes": 207474
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_minimal_a_blue_and_pink_sky_over_a_mountain_range.png",
+    "sha256": "d8848bb5111f77a6a3bb9e9a8888cde7794b17376fac379cdeb99a11fbab2434",
+    "bytes": 5504378
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_minimal_a_blue_mountains_with_a_blue_sky.jpg",
+    "sha256": "80db09fcbd1084cfa60faf3c40d4563a607621a9726bd24265652c8f8a85043d",
+    "bytes": 81307
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_minimal_a_blue_pen_and_a_note.jpg",
+    "sha256": "d20caaa3616f920b7b799ab5f08e3abaa6db319024b8484cd135603364b6131d",
+    "bytes": 79195
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_minimal_a_blue_rectangular_object_with_a_black_background.jpg",
+    "sha256": "2217e5522a62caaef8c5d07af1fe3ed5931e1f97b8345e59f7ab59e3f461df7c",
+    "bytes": 53194
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_minimal_a_cartoon_of_a_island_with_a_bridge_and_trees.jpg",
+    "sha256": "958440fb5a0d522a4707acbae103c843d723890dc1c7ccf26c145a15a5c7bfe2",
+    "bytes": 686508
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_monochrome_a_bird_flying_over_a_mountain.jpg",
+    "sha256": "6ac4f34c7825f991451d20c86d593729ca95354ce53d8d2e0ddad5c98483b651",
+    "bytes": 1192101
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_monochrome_a_black_and_white_building_with_a_fire_escape.jpg",
+    "sha256": "e6c50ef8150a39bdae5e188bdbc60ef5cd48c3aebf801df68552a2dbaf8a2965",
+    "bytes": 1447532
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_monochrome_a_black_and_white_image_of_a_hill.jpg",
+    "sha256": "63e0ffe06a8ebb19a0ef8a0799544bb6edfb3c5c9a0eab5f9d78ec010386514a",
+    "bytes": 531122
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_monochrome_a_black_and_white_photo_of_clouds.jpg",
+    "sha256": "c9687d1401a91e906ced6d39e5873ebc20f29a95c853959773b175bfc551904a",
+    "bytes": 2017640
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_monochrome_a_black_computer_monitor_with_a_white_screen.jpg",
+    "sha256": "16f1cd694eb6daca6104a651cefc0e19db480f9ca4687fb852c3762384f8de6b",
+    "bytes": 311039
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/dharmx_monochrome_a_black_rose_with_a_black_background.jpg",
+    "sha256": "2506df552d4d6aa7760cac203b6648b3171a3ba04a9263dbc76784087874db83",
+    "bytes": 494802
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/girl-head.png",
+    "sha256": "e800e1c6ffbb74e3764f8aa02c7ae17cebf15f9d758a4004bae2c4d149708b58",
+    "bytes": 466409
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/glasses.png",
+    "sha256": "3137e4aefc97bcef7292bbcb02ea61c5fb63752639513dbad708f6ebbbdc7dd2",
+    "bytes": 66587
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/mac_.jpg",
+    "sha256": "fe80acebd38fc05cf53447b0f67deb2c2b039df7e310ddc4f8f818ea2177c48f",
+    "bytes": 422030
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/mac__.jpg",
+    "sha256": "3d61ea966882346cd86c5e3052aeb2323bb06d45400fd69a1a04eca1c43f847b",
+    "bytes": 3704336
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/monochrome-headless.jpg",
+    "sha256": "9f8214a7e152a1bb2dd81dee7b72b90a3682fa8b29fa498155c4d36ecd67a246",
+    "bytes": 191627
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/rm-rf.jpg",
+    "sha256": "459afcd3cf1ee12ca34d8b5055345faf53ec6e2dbf9e9be8e8e8bdb18592c4e5",
+    "bytes": 49411
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/servrs.png",
+    "sha256": "a352da76d889c39310b3292aeaf502928d4ef6ebf01447e0e6b2593df6768535",
+    "bytes": 2190735
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/stars_black.png",
+    "sha256": "0f6bbb5741d7d38e9a2c3f717fabc0f44259685c18258c787d8654474d7aadeb",
+    "bytes": 143960
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/windows-black.jpg",
+    "sha256": "2075e2deabac3cf1570d0a64f4e89688a7e1ba47f34d3c7d30b428767e84821f",
+    "bytes": 250105
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/wireframe_black.png",
+    "sha256": "0e0292d9394b9f52e55ac2fd6f494f1c1fbb533cd6e6df0c21de3fca74172093",
+    "bytes": 853142
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/wireframe_black2.png",
+    "sha256": "d40ffdb8d62f4fb7f51dd1bb96add560cb3e8dd75353fd945bdeacaed364292d",
+    "bytes": 740544
+  },
+  {
+    "path": ".local/share/backgrounds/Blacklight-Ultra/wireframe_stars.png",
+    "sha256": "8b60c156f714c9442d80ece299726234fadfd67e74a4dbc14ab7627be2bed55c",
+    "bytes": 1392133
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursor.theme",
+    "sha256": "26abc9afdbb10ca7eebebf111bc19b15c8289a8b528c171d8712a98150ee3edc",
+    "bytes": 61
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/00000000000000020006000e7e9ffc3f",
+    "sha256": "6e4dbbce60fb9fd85f8c783f0a7cb231df3d03ca50104dbd7c507d8c5d735ee2",
+    "bytes": 10409296
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/00008160000006810000408080010102",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/028006030e0e7ebffc7f7070c0600140",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/03b6e0fcb3499374a867c041f52298f0",
+    "sha256": "990d42adbafe5d98d075283f6abd27075ea0fb1a4c7552b62a132ff0c3d621cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/08e8e1c95fe2fc01f976f1e063a24ccd",
+    "sha256": "6e4dbbce60fb9fd85f8c783f0a7cb231df3d03ca50104dbd7c507d8c5d735ee2",
+    "bytes": 10409296
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/1081e37283d90000800003c07f3ef6bf",
+    "sha256": "1a4b262fa73db4e4aa7def848c7087b62fa538cb74a8fba7cd7dd1c367948249",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/14fef782d02440884392942c1120523",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/2870a09082c103050810ffdffffe0204",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/3085a0e285430894940527032f8b26df",
+    "sha256": "deb5fe247ec09262a6252c6a20df319015442d6d8c3f4129e66eebf4a73d3de8",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/3ecb610c1bf2410f44200f48c40d3599",
+    "sha256": "6e4dbbce60fb9fd85f8c783f0a7cb231df3d03ca50104dbd7c507d8c5d735ee2",
+    "bytes": 10409296
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/4498f0e0c1937ffe01fd06f973665830",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/5c6cd98b3f3ebcb1f9c7f1c204630408",
+    "sha256": "9fac90a68da87a1a90f35e08235458420f9146f712d857db5ab89f0726f19288",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/6407b0e94181790501fd1e167b474872",
+    "sha256": "1a4b262fa73db4e4aa7def848c7087b62fa538cb74a8fba7cd7dd1c367948249",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/640fb0e74195791501fd1ed57b41487f",
+    "sha256": "deb5fe247ec09262a6252c6a20df319015442d6d8c3f4129e66eebf4a73d3de8",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/9081237383d90e509aa00f00170e968f",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/9d800788f1b08800ae810202380a0822",
+    "sha256": "deb5fe247ec09262a6252c6a20df319015442d6d8c3f4129e66eebf4a73d3de8",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/X_cursor",
+    "sha256": "71b34f533eee0cf39dde4e333a37a56f7bc4085619e0b8ca87ab238dfe0f31ec",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/a2a266d0498c3104214a47bd64ab0fc8",
+    "sha256": "deb5fe247ec09262a6252c6a20df319015442d6d8c3f4129e66eebf4a73d3de8",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/alias",
+    "sha256": "deb5fe247ec09262a6252c6a20df319015442d6d8c3f4129e66eebf4a73d3de8",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/all-scroll",
+    "sha256": "e35a2724014ccfc44442b268f9a7f71e6fe0f593034b118229345204b64c64cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/arrow",
+    "sha256": "e952f537537094b4e93daace60c920e24be9d15153e8a29c151a792facbc4433",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/b66166c04f8c3109214a4fbd64a50fc8",
+    "sha256": "1a4b262fa73db4e4aa7def848c7087b62fa538cb74a8fba7cd7dd1c367948249",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/bd_double_arrow",
+    "sha256": "af394c7eaa211167e7d5303ca3e1ba67819f2dff204ba30fcbc94c52212ece14",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/bottom_left_corner",
+    "sha256": "dbc5512aae5c6674a7f80760188e94d2cd40edb6e7e78331c665d349d0339e28",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/bottom_right_corner",
+    "sha256": "bf9ea60ad75e8db0e9b7fae4d5a24a76af66c5ef6332fed3f950820210abe441",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/bottom_side",
+    "sha256": "6c2b0b12d4c305324586ec1cc7aa88196c7985ee249e9f67b2dcb3f6a063352b",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/c7088f0f3e6c8088236ef8e1e3e70000",
+    "sha256": "af394c7eaa211167e7d5303ca3e1ba67819f2dff204ba30fcbc94c52212ece14",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/cell",
+    "sha256": "99c0239461008dcc50b5d3f43b0f1fe4d860176731e564102c6f5272044b79b4",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/center_ptr",
+    "sha256": "3320518345bcf9f578329bac42f20be70809660341af34e8535078d3977ef987",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/circle",
+    "sha256": "990d42adbafe5d98d075283f6abd27075ea0fb1a4c7552b62a132ff0c3d621cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/closedhand",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/col-resize",
+    "sha256": "521e4da204aa577a1ce23d2f92448854494bfe2d8a34b0134f94a4b67191560a",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/color-picker",
+    "sha256": "719ff4fb9ba75a5720902cd8156668133222fb67d7abc99bd48c160342ad8ba7",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/context-menu",
+    "sha256": "afd21f58f3caf2a24a62b8f27975f2de0cae32615e32245106b59880b5f74260",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/copy",
+    "sha256": "1a4b262fa73db4e4aa7def848c7087b62fa538cb74a8fba7cd7dd1c367948249",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/cross",
+    "sha256": "ffaca8b85ad0a783411a05f04c8c7430fa4f3904609bf951dd0afe0eaee4f736",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/cross_reverse",
+    "sha256": "ffaca8b85ad0a783411a05f04c8c7430fa4f3904609bf951dd0afe0eaee4f736",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/crossed_circle",
+    "sha256": "58fe4d4efe0a6c09d53c3bbbec9794ccebc7a93a762d6d5f5c94ffd58b061423",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/crosshair",
+    "sha256": "ffaca8b85ad0a783411a05f04c8c7430fa4f3904609bf951dd0afe0eaee4f736",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/d9ce0ab605698f320427677b458ad60b",
+    "sha256": "9fac90a68da87a1a90f35e08235458420f9146f712d857db5ab89f0726f19288",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/default",
+    "sha256": "e952f537537094b4e93daace60c920e24be9d15153e8a29c151a792facbc4433",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/diamond_cross",
+    "sha256": "ffaca8b85ad0a783411a05f04c8c7430fa4f3904609bf951dd0afe0eaee4f736",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/dnd-ask",
+    "sha256": "9fac90a68da87a1a90f35e08235458420f9146f712d857db5ab89f0726f19288",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/dnd-copy",
+    "sha256": "1a4b262fa73db4e4aa7def848c7087b62fa538cb74a8fba7cd7dd1c367948249",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/dnd-link",
+    "sha256": "deb5fe247ec09262a6252c6a20df319015442d6d8c3f4129e66eebf4a73d3de8",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/dnd-move",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/dnd-no-drop",
+    "sha256": "990d42adbafe5d98d075283f6abd27075ea0fb1a4c7552b62a132ff0c3d621cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/dnd-none",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/dnd_no_drop",
+    "sha256": "990d42adbafe5d98d075283f6abd27075ea0fb1a4c7552b62a132ff0c3d621cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/dot_box_mask",
+    "sha256": "aa916a2c23aabc7570c64461b16b2f60da97c41e9ff3c7b2aae12b39a053ac12",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/dotbox",
+    "sha256": "aa916a2c23aabc7570c64461b16b2f60da97c41e9ff3c7b2aae12b39a053ac12",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/double_arrow",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/down-arrow",
+    "sha256": "545aa08ca937faca31340abe5091e57abd07cfa4e43cdaf39287043e2b33a57d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/draft",
+    "sha256": "17559f694544bfed37a66b22a2b878f635a68facd8ecbcab98e2082f0d0f3c6e",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/draft_large",
+    "sha256": "af78f240047adb46fd4b0cbcc13230b4146c2b3ef91c804d721cfca5e7b7e5a2",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/draft_small",
+    "sha256": "af78f240047adb46fd4b0cbcc13230b4146c2b3ef91c804d721cfca5e7b7e5a2",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/draped_box",
+    "sha256": "aa916a2c23aabc7570c64461b16b2f60da97c41e9ff3c7b2aae12b39a053ac12",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/e-resize",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/e29285e634086352946a0e7090d73106",
+    "sha256": "deb5fe247ec09262a6252c6a20df319015442d6d8c3f4129e66eebf4a73d3de8",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/ew-resize",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/fcf1c3c7cd4491d801f1e1c78f100000",
+    "sha256": "202b256a9a63c0ad30639a7e1d9ae8f7ff38f8c2fc18fe4c13a1fbf6b045e0d0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/fcf21c00b30f7e3f83fe0dfd12e71cff",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/fd_double_arrow",
+    "sha256": "202b256a9a63c0ad30639a7e1d9ae8f7ff38f8c2fc18fe4c13a1fbf6b045e0d0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/fleur",
+    "sha256": "e35a2724014ccfc44442b268f9a7f71e6fe0f593034b118229345204b64c64cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/forbidden",
+    "sha256": "58fe4d4efe0a6c09d53c3bbbec9794ccebc7a93a762d6d5f5c94ffd58b061423",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/grab",
+    "sha256": "f0e4b866d3b8943aa1f1a607e6ec8c9e1eb7e07fac181dbb25c7c3698a9dd704",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/grabbing",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/h_double_arrow",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/hand1",
+    "sha256": "f0e4b866d3b8943aa1f1a607e6ec8c9e1eb7e07fac181dbb25c7c3698a9dd704",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/hand2",
+    "sha256": "deb5fe247ec09262a6252c6a20df319015442d6d8c3f4129e66eebf4a73d3de8",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/help",
+    "sha256": "9fac90a68da87a1a90f35e08235458420f9146f712d857db5ab89f0726f19288",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/ibeam",
+    "sha256": "4dc452b5375182a7c36608705e7f2a2d27d3bbdc5a9f6045a789cb023ca68cd0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/icon",
+    "sha256": "aa916a2c23aabc7570c64461b16b2f60da97c41e9ff3c7b2aae12b39a053ac12",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/left-arrow",
+    "sha256": "25c93536ff528732d42af8c0d0cf548f25dd2da7316cc4c0b182954165e8b085",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/left_ptr",
+    "sha256": "e952f537537094b4e93daace60c920e24be9d15153e8a29c151a792facbc4433",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/left_ptr_help",
+    "sha256": "9fac90a68da87a1a90f35e08235458420f9146f712d857db5ab89f0726f19288",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/left_ptr_watch",
+    "sha256": "6e4dbbce60fb9fd85f8c783f0a7cb231df3d03ca50104dbd7c507d8c5d735ee2",
+    "bytes": 10409296
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/left_side",
+    "sha256": "34d62668ac996a489925597b8b6e6ce8d3328b6fab47b8188502fcdca09bffb8",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/link",
+    "sha256": "deb5fe247ec09262a6252c6a20df319015442d6d8c3f4129e66eebf4a73d3de8",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/move",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/n-resize",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/ne-resize",
+    "sha256": "202b256a9a63c0ad30639a7e1d9ae8f7ff38f8c2fc18fe4c13a1fbf6b045e0d0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/nesw-resize",
+    "sha256": "202b256a9a63c0ad30639a7e1d9ae8f7ff38f8c2fc18fe4c13a1fbf6b045e0d0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/no-drop",
+    "sha256": "990d42adbafe5d98d075283f6abd27075ea0fb1a4c7552b62a132ff0c3d621cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/not-allowed",
+    "sha256": "58fe4d4efe0a6c09d53c3bbbec9794ccebc7a93a762d6d5f5c94ffd58b061423",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/ns-resize",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/nw-resize",
+    "sha256": "af394c7eaa211167e7d5303ca3e1ba67819f2dff204ba30fcbc94c52212ece14",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/nwse-resize",
+    "sha256": "af394c7eaa211167e7d5303ca3e1ba67819f2dff204ba30fcbc94c52212ece14",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/openhand",
+    "sha256": "f0e4b866d3b8943aa1f1a607e6ec8c9e1eb7e07fac181dbb25c7c3698a9dd704",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/pencil",
+    "sha256": "17559f694544bfed37a66b22a2b878f635a68facd8ecbcab98e2082f0d0f3c6e",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/pirate",
+    "sha256": "b01c86c97c96fdae745d3b0823059fb56cde9704ae0c1a761ef3dd9630d41480",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/plus",
+    "sha256": "99c0239461008dcc50b5d3f43b0f1fe4d860176731e564102c6f5272044b79b4",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/pointer",
+    "sha256": "deb5fe247ec09262a6252c6a20df319015442d6d8c3f4129e66eebf4a73d3de8",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/pointer_move",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/pointing_hand",
+    "sha256": "deb5fe247ec09262a6252c6a20df319015442d6d8c3f4129e66eebf4a73d3de8",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/progress",
+    "sha256": "6e4dbbce60fb9fd85f8c783f0a7cb231df3d03ca50104dbd7c507d8c5d735ee2",
+    "bytes": 10409296
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/question_arrow",
+    "sha256": "9fac90a68da87a1a90f35e08235458420f9146f712d857db5ab89f0726f19288",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/right-arrow",
+    "sha256": "e7e9dba45fefafb3094eda71726c9e09b6a003014220be7317a0678b02b3a123",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/right_ptr",
+    "sha256": "af78f240047adb46fd4b0cbcc13230b4146c2b3ef91c804d721cfca5e7b7e5a2",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/right_side",
+    "sha256": "590629dfa4101f1ab5cb20fa40eb79cf20dcff935eca2f6b94dad5319749fd02",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/row-resize",
+    "sha256": "a78ea696089c3bdec55ea3561a9887e11811bfb1fe0348ebad494065e8bcb33d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/s-resize",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/sb_down_arrow",
+    "sha256": "545aa08ca937faca31340abe5091e57abd07cfa4e43cdaf39287043e2b33a57d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/sb_h_double_arrow",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/sb_left_arrow",
+    "sha256": "25c93536ff528732d42af8c0d0cf548f25dd2da7316cc4c0b182954165e8b085",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/sb_right_arrow",
+    "sha256": "e7e9dba45fefafb3094eda71726c9e09b6a003014220be7317a0678b02b3a123",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/sb_up_arrow",
+    "sha256": "8d5fd8dbebb11e94e6aef3439e77917abf132856e3855c22136c6f067125379e",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/sb_v_double_arrow",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/se-resize",
+    "sha256": "af394c7eaa211167e7d5303ca3e1ba67819f2dff204ba30fcbc94c52212ece14",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/size-hor",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/size-ver",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/size_all",
+    "sha256": "e35a2724014ccfc44442b268f9a7f71e6fe0f593034b118229345204b64c64cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/size_bdiag",
+    "sha256": "202b256a9a63c0ad30639a7e1d9ae8f7ff38f8c2fc18fe4c13a1fbf6b045e0d0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/size_fdiag",
+    "sha256": "af394c7eaa211167e7d5303ca3e1ba67819f2dff204ba30fcbc94c52212ece14",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/size_hor",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/size_ver",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/split_h",
+    "sha256": "521e4da204aa577a1ce23d2f92448854494bfe2d8a34b0134f94a4b67191560a",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/split_v",
+    "sha256": "a78ea696089c3bdec55ea3561a9887e11811bfb1fe0348ebad494065e8bcb33d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/sw-resize",
+    "sha256": "202b256a9a63c0ad30639a7e1d9ae8f7ff38f8c2fc18fe4c13a1fbf6b045e0d0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/target",
+    "sha256": "aa916a2c23aabc7570c64461b16b2f60da97c41e9ff3c7b2aae12b39a053ac12",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/tcross",
+    "sha256": "ffaca8b85ad0a783411a05f04c8c7430fa4f3904609bf951dd0afe0eaee4f736",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/text",
+    "sha256": "4dc452b5375182a7c36608705e7f2a2d27d3bbdc5a9f6045a789cb023ca68cd0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/top_left_arrow",
+    "sha256": "e952f537537094b4e93daace60c920e24be9d15153e8a29c151a792facbc4433",
+    "bytes": 40624
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/top_left_corner",
+    "sha256": "b61e9a85282e1a7736037eb76c0eb73e98c1c90d50d696e1c10eba5d38fc3ec3",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/top_right_corner",
+    "sha256": "c3315bbbf4ec8d42774f19a1b312b22d1a7664f828dd7338b366018320fe2866",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/top_side",
+    "sha256": "a96c8290c751dc678ec1eeaefcf8f41fb824503d5130943bc330afef2ea3bec8",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/up-arrow",
+    "sha256": "8d5fd8dbebb11e94e6aef3439e77917abf132856e3855c22136c6f067125379e",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/v_double_arrow",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/vertical-text",
+    "sha256": "c3ff6a2f4060dc85ab7a33a9940d1f920dfb686328edceeab08395486cb2adbe",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/w-resize",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/wait",
+    "sha256": "c1ec9fc6f20498cb990e3cf014ab502f97e9ba9f6b9fd6d411aa821eb74437d1",
+    "bytes": 10409296
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/watch",
+    "sha256": "c1ec9fc6f20498cb990e3cf014ab502f97e9ba9f6b9fd6d411aa821eb74437d1",
+    "bytes": 10409296
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/wayland-cursor",
+    "sha256": "093ff9283d789c7498fa5ef57c34308d1975d5f3fe9a4a6ab965538b02a0e619",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/whats_this",
+    "sha256": "9fac90a68da87a1a90f35e08235458420f9146f712d857db5ab89f0726f19288",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/x-cursor",
+    "sha256": "71b34f533eee0cf39dde4e333a37a56f7bc4085619e0b8ca87ab238dfe0f31ec",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/xterm",
+    "sha256": "4dc452b5375182a7c36608705e7f2a2d27d3bbdc5a9f6045a789cb023ca68cd0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/zoom-in",
+    "sha256": "2745b88e5f3bd5d80e7fcf035b95c48b99c2d8f875558ea83aeb6bffd3f274e9",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/cursors/zoom-out",
+    "sha256": "a6d511c99ada54ff37392e0a10287f57e3b21d0ef546ce660d8395f14529ae72",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Chibi/index.theme",
+    "sha256": "470d7e6b43aadd4893e7312306db008b82bf41a8d5d6026cee2bb3c06fb9e2e5",
+    "bytes": 130
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursor.theme",
+    "sha256": "1ea5b12ada2dc1df797307161ed5ad2b6f98692c73259806cd05d11310e29aec",
+    "bytes": 62
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/00000000000000020006000e7e9ffc3f",
+    "sha256": "6e4dbbce60fb9fd85f8c783f0a7cb231df3d03ca50104dbd7c507d8c5d735ee2",
+    "bytes": 10409296
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/00008160000006810000408080010102",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/028006030e0e7ebffc7f7070c0600140",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/03b6e0fcb3499374a867c041f52298f0",
+    "sha256": "990d42adbafe5d98d075283f6abd27075ea0fb1a4c7552b62a132ff0c3d621cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/08e8e1c95fe2fc01f976f1e063a24ccd",
+    "sha256": "6e4dbbce60fb9fd85f8c783f0a7cb231df3d03ca50104dbd7c507d8c5d735ee2",
+    "bytes": 10409296
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/1081e37283d90000800003c07f3ef6bf",
+    "sha256": "1a4b262fa73db4e4aa7def848c7087b62fa538cb74a8fba7cd7dd1c367948249",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/14fef782d02440884392942c1120523",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/2870a09082c103050810ffdffffe0204",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/3085a0e285430894940527032f8b26df",
+    "sha256": "bcb93f383a835dd1d475ffbffccb384547f8443397836e443e39ebbc4d94e334",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/3ecb610c1bf2410f44200f48c40d3599",
+    "sha256": "6e4dbbce60fb9fd85f8c783f0a7cb231df3d03ca50104dbd7c507d8c5d735ee2",
+    "bytes": 10409296
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/4498f0e0c1937ffe01fd06f973665830",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/5c6cd98b3f3ebcb1f9c7f1c204630408",
+    "sha256": "9fac90a68da87a1a90f35e08235458420f9146f712d857db5ab89f0726f19288",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/6407b0e94181790501fd1e167b474872",
+    "sha256": "1a4b262fa73db4e4aa7def848c7087b62fa538cb74a8fba7cd7dd1c367948249",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/640fb0e74195791501fd1ed57b41487f",
+    "sha256": "bcb93f383a835dd1d475ffbffccb384547f8443397836e443e39ebbc4d94e334",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/9081237383d90e509aa00f00170e968f",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/9d800788f1b08800ae810202380a0822",
+    "sha256": "14dd291f0d75612cf95617e36148fe8203488ba03ab1ff76ad8c605728878b9e",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/X_cursor",
+    "sha256": "71b34f533eee0cf39dde4e333a37a56f7bc4085619e0b8ca87ab238dfe0f31ec",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/a2a266d0498c3104214a47bd64ab0fc8",
+    "sha256": "bcb93f383a835dd1d475ffbffccb384547f8443397836e443e39ebbc4d94e334",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/alias",
+    "sha256": "bcb93f383a835dd1d475ffbffccb384547f8443397836e443e39ebbc4d94e334",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/all-scroll",
+    "sha256": "e35a2724014ccfc44442b268f9a7f71e6fe0f593034b118229345204b64c64cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/arrow",
+    "sha256": "c69722cfcced03d2306d2c3c0402bc448f83c557e58678e39e26cc1e95f709eb",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/b66166c04f8c3109214a4fbd64a50fc8",
+    "sha256": "1a4b262fa73db4e4aa7def848c7087b62fa538cb74a8fba7cd7dd1c367948249",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/bd_double_arrow",
+    "sha256": "af394c7eaa211167e7d5303ca3e1ba67819f2dff204ba30fcbc94c52212ece14",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/bottom_left_corner",
+    "sha256": "dbc5512aae5c6674a7f80760188e94d2cd40edb6e7e78331c665d349d0339e28",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/bottom_right_corner",
+    "sha256": "bf9ea60ad75e8db0e9b7fae4d5a24a76af66c5ef6332fed3f950820210abe441",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/bottom_side",
+    "sha256": "6c2b0b12d4c305324586ec1cc7aa88196c7985ee249e9f67b2dcb3f6a063352b",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/c7088f0f3e6c8088236ef8e1e3e70000",
+    "sha256": "af394c7eaa211167e7d5303ca3e1ba67819f2dff204ba30fcbc94c52212ece14",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/cell",
+    "sha256": "99c0239461008dcc50b5d3f43b0f1fe4d860176731e564102c6f5272044b79b4",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/center_ptr",
+    "sha256": "3320518345bcf9f578329bac42f20be70809660341af34e8535078d3977ef987",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/circle",
+    "sha256": "990d42adbafe5d98d075283f6abd27075ea0fb1a4c7552b62a132ff0c3d621cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/closedhand",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/col-resize",
+    "sha256": "521e4da204aa577a1ce23d2f92448854494bfe2d8a34b0134f94a4b67191560a",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/color-picker",
+    "sha256": "719ff4fb9ba75a5720902cd8156668133222fb67d7abc99bd48c160342ad8ba7",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/context-menu",
+    "sha256": "afd21f58f3caf2a24a62b8f27975f2de0cae32615e32245106b59880b5f74260",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/copy",
+    "sha256": "1a4b262fa73db4e4aa7def848c7087b62fa538cb74a8fba7cd7dd1c367948249",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/cross",
+    "sha256": "ffaca8b85ad0a783411a05f04c8c7430fa4f3904609bf951dd0afe0eaee4f736",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/cross_reverse",
+    "sha256": "ffaca8b85ad0a783411a05f04c8c7430fa4f3904609bf951dd0afe0eaee4f736",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/crossed_circle",
+    "sha256": "58fe4d4efe0a6c09d53c3bbbec9794ccebc7a93a762d6d5f5c94ffd58b061423",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/crosshair",
+    "sha256": "ffaca8b85ad0a783411a05f04c8c7430fa4f3904609bf951dd0afe0eaee4f736",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/d9ce0ab605698f320427677b458ad60b",
+    "sha256": "9fac90a68da87a1a90f35e08235458420f9146f712d857db5ab89f0726f19288",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/default",
+    "sha256": "c69722cfcced03d2306d2c3c0402bc448f83c557e58678e39e26cc1e95f709eb",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/diamond_cross",
+    "sha256": "ffaca8b85ad0a783411a05f04c8c7430fa4f3904609bf951dd0afe0eaee4f736",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/dnd-ask",
+    "sha256": "9fac90a68da87a1a90f35e08235458420f9146f712d857db5ab89f0726f19288",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/dnd-copy",
+    "sha256": "1a4b262fa73db4e4aa7def848c7087b62fa538cb74a8fba7cd7dd1c367948249",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/dnd-link",
+    "sha256": "bcb93f383a835dd1d475ffbffccb384547f8443397836e443e39ebbc4d94e334",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/dnd-move",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/dnd-no-drop",
+    "sha256": "990d42adbafe5d98d075283f6abd27075ea0fb1a4c7552b62a132ff0c3d621cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/dnd-none",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/dnd_no_drop",
+    "sha256": "990d42adbafe5d98d075283f6abd27075ea0fb1a4c7552b62a132ff0c3d621cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/dot_box_mask",
+    "sha256": "aa916a2c23aabc7570c64461b16b2f60da97c41e9ff3c7b2aae12b39a053ac12",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/dotbox",
+    "sha256": "aa916a2c23aabc7570c64461b16b2f60da97c41e9ff3c7b2aae12b39a053ac12",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/double_arrow",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/down-arrow",
+    "sha256": "545aa08ca937faca31340abe5091e57abd07cfa4e43cdaf39287043e2b33a57d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/draft",
+    "sha256": "17559f694544bfed37a66b22a2b878f635a68facd8ecbcab98e2082f0d0f3c6e",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/draft_large",
+    "sha256": "af78f240047adb46fd4b0cbcc13230b4146c2b3ef91c804d721cfca5e7b7e5a2",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/draft_small",
+    "sha256": "af78f240047adb46fd4b0cbcc13230b4146c2b3ef91c804d721cfca5e7b7e5a2",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/draped_box",
+    "sha256": "aa916a2c23aabc7570c64461b16b2f60da97c41e9ff3c7b2aae12b39a053ac12",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/e-resize",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/e29285e634086352946a0e7090d73106",
+    "sha256": "14dd291f0d75612cf95617e36148fe8203488ba03ab1ff76ad8c605728878b9e",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/ew-resize",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/fcf1c3c7cd4491d801f1e1c78f100000",
+    "sha256": "202b256a9a63c0ad30639a7e1d9ae8f7ff38f8c2fc18fe4c13a1fbf6b045e0d0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/fcf21c00b30f7e3f83fe0dfd12e71cff",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/fd_double_arrow",
+    "sha256": "202b256a9a63c0ad30639a7e1d9ae8f7ff38f8c2fc18fe4c13a1fbf6b045e0d0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/fleur",
+    "sha256": "e35a2724014ccfc44442b268f9a7f71e6fe0f593034b118229345204b64c64cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/forbidden",
+    "sha256": "58fe4d4efe0a6c09d53c3bbbec9794ccebc7a93a762d6d5f5c94ffd58b061423",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/grab",
+    "sha256": "f0e4b866d3b8943aa1f1a607e6ec8c9e1eb7e07fac181dbb25c7c3698a9dd704",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/grabbing",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/h_double_arrow",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/hand1",
+    "sha256": "f0e4b866d3b8943aa1f1a607e6ec8c9e1eb7e07fac181dbb25c7c3698a9dd704",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/hand2",
+    "sha256": "14dd291f0d75612cf95617e36148fe8203488ba03ab1ff76ad8c605728878b9e",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/help",
+    "sha256": "9fac90a68da87a1a90f35e08235458420f9146f712d857db5ab89f0726f19288",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/ibeam",
+    "sha256": "4dc452b5375182a7c36608705e7f2a2d27d3bbdc5a9f6045a789cb023ca68cd0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/icon",
+    "sha256": "aa916a2c23aabc7570c64461b16b2f60da97c41e9ff3c7b2aae12b39a053ac12",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/left-arrow",
+    "sha256": "25c93536ff528732d42af8c0d0cf548f25dd2da7316cc4c0b182954165e8b085",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/left_ptr",
+    "sha256": "c69722cfcced03d2306d2c3c0402bc448f83c557e58678e39e26cc1e95f709eb",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/left_ptr_help",
+    "sha256": "9fac90a68da87a1a90f35e08235458420f9146f712d857db5ab89f0726f19288",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/left_ptr_watch",
+    "sha256": "6e4dbbce60fb9fd85f8c783f0a7cb231df3d03ca50104dbd7c507d8c5d735ee2",
+    "bytes": 10409296
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/left_side",
+    "sha256": "34d62668ac996a489925597b8b6e6ce8d3328b6fab47b8188502fcdca09bffb8",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/link",
+    "sha256": "bcb93f383a835dd1d475ffbffccb384547f8443397836e443e39ebbc4d94e334",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/move",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/n-resize",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/ne-resize",
+    "sha256": "202b256a9a63c0ad30639a7e1d9ae8f7ff38f8c2fc18fe4c13a1fbf6b045e0d0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/nesw-resize",
+    "sha256": "202b256a9a63c0ad30639a7e1d9ae8f7ff38f8c2fc18fe4c13a1fbf6b045e0d0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/no-drop",
+    "sha256": "990d42adbafe5d98d075283f6abd27075ea0fb1a4c7552b62a132ff0c3d621cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/not-allowed",
+    "sha256": "58fe4d4efe0a6c09d53c3bbbec9794ccebc7a93a762d6d5f5c94ffd58b061423",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/ns-resize",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/nw-resize",
+    "sha256": "af394c7eaa211167e7d5303ca3e1ba67819f2dff204ba30fcbc94c52212ece14",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/nwse-resize",
+    "sha256": "af394c7eaa211167e7d5303ca3e1ba67819f2dff204ba30fcbc94c52212ece14",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/openhand",
+    "sha256": "f0e4b866d3b8943aa1f1a607e6ec8c9e1eb7e07fac181dbb25c7c3698a9dd704",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/pencil",
+    "sha256": "17559f694544bfed37a66b22a2b878f635a68facd8ecbcab98e2082f0d0f3c6e",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/pirate",
+    "sha256": "b01c86c97c96fdae745d3b0823059fb56cde9704ae0c1a761ef3dd9630d41480",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/plus",
+    "sha256": "99c0239461008dcc50b5d3f43b0f1fe4d860176731e564102c6f5272044b79b4",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/pointer",
+    "sha256": "14dd291f0d75612cf95617e36148fe8203488ba03ab1ff76ad8c605728878b9e",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/pointer_move",
+    "sha256": "0b484fd40aa8eecfd2b25ca64eefe8606c9cea63e40f65fb52ee80b4c44a965d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/pointing_hand",
+    "sha256": "14dd291f0d75612cf95617e36148fe8203488ba03ab1ff76ad8c605728878b9e",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/progress",
+    "sha256": "6e4dbbce60fb9fd85f8c783f0a7cb231df3d03ca50104dbd7c507d8c5d735ee2",
+    "bytes": 10409296
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/question_arrow",
+    "sha256": "9fac90a68da87a1a90f35e08235458420f9146f712d857db5ab89f0726f19288",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/right-arrow",
+    "sha256": "e7e9dba45fefafb3094eda71726c9e09b6a003014220be7317a0678b02b3a123",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/right_ptr",
+    "sha256": "af78f240047adb46fd4b0cbcc13230b4146c2b3ef91c804d721cfca5e7b7e5a2",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/right_side",
+    "sha256": "590629dfa4101f1ab5cb20fa40eb79cf20dcff935eca2f6b94dad5319749fd02",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/row-resize",
+    "sha256": "a78ea696089c3bdec55ea3561a9887e11811bfb1fe0348ebad494065e8bcb33d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/s-resize",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/sb_down_arrow",
+    "sha256": "545aa08ca937faca31340abe5091e57abd07cfa4e43cdaf39287043e2b33a57d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/sb_h_double_arrow",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/sb_left_arrow",
+    "sha256": "25c93536ff528732d42af8c0d0cf548f25dd2da7316cc4c0b182954165e8b085",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/sb_right_arrow",
+    "sha256": "e7e9dba45fefafb3094eda71726c9e09b6a003014220be7317a0678b02b3a123",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/sb_up_arrow",
+    "sha256": "8d5fd8dbebb11e94e6aef3439e77917abf132856e3855c22136c6f067125379e",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/sb_v_double_arrow",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/se-resize",
+    "sha256": "af394c7eaa211167e7d5303ca3e1ba67819f2dff204ba30fcbc94c52212ece14",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/size-hor",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/size-ver",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/size_all",
+    "sha256": "e35a2724014ccfc44442b268f9a7f71e6fe0f593034b118229345204b64c64cf",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/size_bdiag",
+    "sha256": "202b256a9a63c0ad30639a7e1d9ae8f7ff38f8c2fc18fe4c13a1fbf6b045e0d0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/size_fdiag",
+    "sha256": "af394c7eaa211167e7d5303ca3e1ba67819f2dff204ba30fcbc94c52212ece14",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/size_hor",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/size_ver",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/split_h",
+    "sha256": "521e4da204aa577a1ce23d2f92448854494bfe2d8a34b0134f94a4b67191560a",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/split_v",
+    "sha256": "a78ea696089c3bdec55ea3561a9887e11811bfb1fe0348ebad494065e8bcb33d",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/sw-resize",
+    "sha256": "202b256a9a63c0ad30639a7e1d9ae8f7ff38f8c2fc18fe4c13a1fbf6b045e0d0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/target",
+    "sha256": "aa916a2c23aabc7570c64461b16b2f60da97c41e9ff3c7b2aae12b39a053ac12",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/tcross",
+    "sha256": "ffaca8b85ad0a783411a05f04c8c7430fa4f3904609bf951dd0afe0eaee4f736",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/text",
+    "sha256": "4dc452b5375182a7c36608705e7f2a2d27d3bbdc5a9f6045a789cb023ca68cd0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/top_left_arrow",
+    "sha256": "c69722cfcced03d2306d2c3c0402bc448f83c557e58678e39e26cc1e95f709eb",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/top_left_corner",
+    "sha256": "b61e9a85282e1a7736037eb76c0eb73e98c1c90d50d696e1c10eba5d38fc3ec3",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/top_right_corner",
+    "sha256": "c3315bbbf4ec8d42774f19a1b312b22d1a7664f828dd7338b366018320fe2866",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/top_side",
+    "sha256": "a96c8290c751dc678ec1eeaefcf8f41fb824503d5130943bc330afef2ea3bec8",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/up-arrow",
+    "sha256": "8d5fd8dbebb11e94e6aef3439e77917abf132856e3855c22136c6f067125379e",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/v_double_arrow",
+    "sha256": "d7df6fdc8da07ca2307e6b79c0ccb6d1b1735b44dc426b83cc87f38352777d41",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/vertical-text",
+    "sha256": "c3ff6a2f4060dc85ab7a33a9940d1f920dfb686328edceeab08395486cb2adbe",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/w-resize",
+    "sha256": "a9d739086ae49ae770b579b3faa6181307ae330bbaffc76abb8febc657f65176",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/wait",
+    "sha256": "c1ec9fc6f20498cb990e3cf014ab502f97e9ba9f6b9fd6d411aa821eb74437d1",
+    "bytes": 10409296
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/watch",
+    "sha256": "c1ec9fc6f20498cb990e3cf014ab502f97e9ba9f6b9fd6d411aa821eb74437d1",
+    "bytes": 10409296
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/wayland-cursor",
+    "sha256": "093ff9283d789c7498fa5ef57c34308d1975d5f3fe9a4a6ab965538b02a0e619",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/whats_this",
+    "sha256": "9fac90a68da87a1a90f35e08235458420f9146f712d857db5ab89f0726f19288",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/x-cursor",
+    "sha256": "71b34f533eee0cf39dde4e333a37a56f7bc4085619e0b8ca87ab238dfe0f31ec",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/xterm",
+    "sha256": "4dc452b5375182a7c36608705e7f2a2d27d3bbdc5a9f6045a789cb023ca68cd0",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/zoom-in",
+    "sha256": "2745b88e5f3bd5d80e7fcf035b95c48b99c2d8f875558ea83aeb6bffd3f274e9",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/cursors/zoom-out",
+    "sha256": "a6d511c99ada54ff37392e0a10287f57e3b21d0ef546ce660d8395f14529ae72",
+    "bytes": 173504
+  },
+  {
+    "path": ".local/share/icons/Blacklight-Ultra/index.theme",
+    "sha256": "e3cbacafd9b7bbe2ffe0ffff8f46d404c2a9af83285a73ba1e860294509c6fc4",
+    "bytes": 91
+  }
+]

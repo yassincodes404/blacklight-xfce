@@ -1,0 +1,13 @@
+name: Verify configuration
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify checksums and configuration syntax
+        run: python3 tools/control.py verify
+      - name: Compile portable tools
+        run: python3 -m compileall -q tools

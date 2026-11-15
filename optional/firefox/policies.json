@@ -1,0 +1,78 @@
+{
+  "policies": {
+    "DisableTelemetry": true,
+    "DisableFirefoxStudies": true,
+    "HttpsOnlyMode": "enabled",
+    "PromptForDownloadLocation": true,
+    "DisableSecurityBypass": {
+      "InvalidCertificate": true,
+      "SafeBrowsing": true
+    },
+    "LocalNetworkAccess": {
+      "Enabled": true,
+      "BlockTrackers": true,
+      "EnablePrompting": true,
+      "Locked": true
+    },
+    "Permissions": {
+      "Camera": {
+        "BlockNewRequests": true,
+        "Locked": true
+      },
+      "Microphone": {
+        "BlockNewRequests": true,
+        "Locked": true
+      },
+      "Location": {
+        "BlockNewRequests": true,
+        "Locked": true
+      },
+      "Notifications": {
+        "BlockNewRequests": true,
+        "Locked": true
+      }
+    },
+    "Preferences": {
+      "browser.cache.disk.smart_size.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.cache.disk.capacity": {
+        "Value": 262144,
+        "Status": "locked"
+      },
+      "browser.cache.memory.capacity": {
+        "Value": 65536,
+        "Status": "locked"
+      },
+      "dom.quotaManager.temporaryStorage.fixedLimit": {
+        "Value": 1048576,
+        "Status": "locked"
+      },
+      "network.protocol-handler.external-default": {
+        "Value": false,
+        "Status": "locked"
+      },
+      "browser.safebrowsing.malware.enabled": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "browser.safebrowsing.phishing.enabled": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "browser.safebrowsing.downloads.enabled": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "dom.security.https_only_mode": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "browser.download.useDownloadDir": {
+        "Value": false,
+        "Status": "locked"
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+    "editor.fontFamily": "'JetBrains Mono', monospace",
+    "editor.fontLigatures": true,
+    "terminal.integrated.fontFamily": "JetBrains Mono",
+    "files.exclude": {
+        "**/__pycache__": true
+    },
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-27",
+            "path": "@HOME@/.local/opt/temurin-27",
+            "default": true
+        }
+    ],
+    "python.defaultInterpreterPath": "/usr/bin/python3",
+    "workbench.iconTheme": "material-icon-theme"
+}

@@ -1,0 +1,20 @@
+# Never publish machine state or credentials.
+private/
+.local-state/
+staging/
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+cookies.sqlite*
+key4.db
+logins.json
+rclone.conf
+known_hosts
+authorized_keys
+__pycache__/
+*.pyc
+*replica-private*
+*rollback*

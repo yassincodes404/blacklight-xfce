@@ -1,0 +1,170 @@
+/* ==========================================================================
+   Blacklight-Ultra Sleek Dark & White Monochrome UI (userChrome.css)
+   Matches XFCE #141414 / #161616 obsidian & crisp white desktop aesthetic
+   ========================================================================== */
+
+:root {
+    --lwt-accent-color: #101012 !important;
+    --lwt-text-color: #e6e6ec !important;
+    --toolbar-bgcolor: #141416 !important;
+    --toolbar-color: #e6e6ec !important;
+    --toolbar-field-background-color: #1c1c20 !important;
+    --toolbar-field-color: #f2f2f7 !important;
+    --toolbar-field-border-color: #2e2e34 !important;
+    --toolbar-field-focus-background-color: #202026 !important;
+    --toolbar-field-focus-color: #ffffff !important;
+    --toolbar-field-focus-border-color: #9696a2 !important;
+    --urlbar-box-bgcolor: #1c1c20 !important;
+    --urlbar-box-focus-bgcolor: #202026 !important;
+    --tab-selected-bgcolor: #222228 !important;
+    --tab-selected-textcolor: #ffffff !important;
+    --tab-min-height: 31px !important;
+    --tab-border-radius: 8px !important;
+    --arrowpanel-background: #141417 !important;
+    --arrowpanel-color: #eaeaf0 !important;
+    --arrowpanel-border-color: #2e2e35 !important;
+    --focus-outline-color: #ffffff !important;
+    --chrome-content-separator-color: #242429 !important;
+    font-family: "JetBrains Mono", monospace !important;
+}
+
+/* --- Titlebar & Tab Bar Container --- */
+#titlebar,
+#TabsToolbar {
+    background-color: #101012 !important;
+    color: #cfcfd6 !important;
+    border-bottom: 1px solid #202025 !important;
+}
+
+/* Hide clutter in tab bar */
+#firefox-view-button,
+.titlebar-spacer[type="pre-tabs"],
+#alltabs-button {
+    display: none !important;
+}
+
+/* --- Individual Tabs --- */
+.tabbrowser-tab {
+    padding: 2px 2px !important;
+}
+
+.tabbrowser-tab .tab-background {
+    border-radius: 8px !important;
+    margin-block: 3px !important;
+    background-color: transparent !important;
+    border: 1px solid transparent !important;
+    transition: background-color 120ms ease, border-color 120ms ease !important;
+}
+
+.tabbrowser-tab:hover:not([selected="true"]) .tab-background {
+    background-color: #1b1b20 !important;
+    border-color: #2a2a31 !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-background {
+    background-color: #222228 !important;
+    border: 1px solid #383842 !important;
+    box-shadow: inset 0 -2px 0 #ffffff !important;
+}
+
+.tabbrowser-tab .tab-label {
+    font-size: 8.8pt !important;
+    font-weight: 500 !important;
+    color: #9e9ea8 !important;
+}
+
+.tabbrowser-tab[selected="true"] .tab-label {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+/* Only show close button on active tab or hovered tab */
+.tabbrowser-tab:not([selected="true"]):not(:hover) .tab-close-button {
+    display: none !important;
+}
+
+.tab-close-button {
+    border-radius: 5px !important;
+    padding: 3px !important;
+}
+
+.tab-close-button:hover {
+    background-color: #34343d !important;
+}
+
+/* --- Navigation Bar & URL Bar --- */
+#nav-bar {
+    background-color: #141416 !important;
+    border-top: none !important;
+    border-bottom: 1px solid #242429 !important;
+    padding: 2px 6px !important;
+    box-shadow: none !important;
+}
+
+#urlbar-background {
+    background-color: #1c1c20 !important;
+    border: 1px solid #2e2e34 !important;
+    border-radius: 9px !important;
+    box-shadow: none !important;
+    transition: border-color 120ms ease, background-color 120ms ease !important;
+}
+
+#urlbar[focused="true"] > #urlbar-background {
+    background-color: #19191d !important;
+    border: 1px solid #9a9aa6 !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+}
+
+#urlbar-input {
+    font-family: "JetBrains Mono", monospace !important;
+    font-size: 9.2pt !important;
+    color: #f4f4f8 !important;
+}
+
+.urlbarView-row[selected] {
+    background-color: #292930 !important;
+    color: #ffffff !important;
+    border-radius: 6px !important;
+}
+
+/* Toolbar buttons */
+toolbar .toolbarbutton-1 > .toolbarbutton-icon,
+toolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
+    border-radius: 7px !important;
+}
+
+toolbar .toolbarbutton-1:hover > .toolbarbutton-icon,
+toolbar .toolbarbutton-1:hover > .toolbarbutton-badge-stack {
+    background-color: #27272e !important;
+}
+
+/* --- Menus & Popups --- */
+menupopup,
+panel {
+    --panel-background: #141417 !important;
+    --panel-color: #e8e8f0 !important;
+    --panel-border-color: #2f2f37 !important;
+    --panel-border-radius: 10px !important;
+}
+
+menuitem:hover,
+menu:hover {
+    background-color: #282830 !important;
+    color: #ffffff !important;
+}
+
+/* --- Findbar & Status Panel --- */
+findbar {
+    background-color: #141416 !important;
+    border-top: 1px solid #2b2b32 !important;
+    color: #e6e6ec !important;
+}
+
+#statuspanel-label {
+    background-color: #141416 !important;
+    color: #d4d4dc !important;
+    border: 1px solid #2e2e35 !important;
+    border-radius: 6px !important;
+    font-family: "JetBrains Mono", monospace !important;
+    font-size: 8pt !important;
+}

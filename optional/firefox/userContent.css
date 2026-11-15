@@ -1,0 +1,61 @@
+/* ==========================================================================
+   Blacklight-Ultra Minimal Dark & White New Tab & Internal Pages
+   ========================================================================== */
+
+@-moz-document url("about:home"), url("about:newtab"), url("about:privatebrowsing") {
+    body {
+        background-color: #111113 !important;
+        color: #eaeaf0 !important;
+        font-family: "JetBrains Mono", monospace !important;
+    }
+
+    /* Hide noisy logos, weather, and promotional banners */
+    .logo-and-wordmark,
+    .weatherWrapper,
+    .ds-onboarding-container,
+    .personalize-button {
+        display: none !important;
+    }
+
+    /* Minimal monochrome search box */
+    .search-wrapper .search-handoff-button,
+    .search-wrapper input {
+        background-color: #1a1a1e !important;
+        border: 1px solid #2e2e35 !important;
+        border-radius: 10px !important;
+        color: #f0f0f5 !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
+    }
+
+    .search-wrapper .search-handoff-button:hover,
+    .search-wrapper input:focus {
+        border-color: #8c8c98 !important;
+        background-color: #1f1f24 !important;
+    }
+
+    /* Pinned Top Sites tiles */
+    .top-site-outer .tile {
+        background-color: #18181c !important;
+        border: 1px solid #28282f !important;
+        border-radius: 10px !important;
+        box-shadow: none !important;
+        transition: border-color 120ms ease, transform 120ms ease !important;
+    }
+
+    .top-site-outer:hover .tile {
+        background-color: #222228 !important;
+        border-color: #555562 !important;
+        transform: translateY(-1px) !important;
+    }
+
+    .top-site-outer .title {
+        color: #d0d0d8 !important;
+        font-size: 8.5pt !important;
+    }
+}
+
+@-moz-document url("about:blank") {
+    html, body {
+        background-color: #111113 !important;
+    }
+}

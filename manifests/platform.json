@@ -1,0 +1,14 @@
+{
+  "distribution": "Ubuntu 26.04.1 LTS / Xubuntu desktop",
+  "desktop": "XFCE 4.20",
+  "session": "X11",
+  "capture_date": "2026-11-15",
+  "reference_resolution": [
+    1920,
+    1080
+  ],
+  "cursor_size": 28,
+  "panel_height_setting": 36,
+  "panel_icon_size": 16,
+  "snapshot_type": "appearance and configuration; not an OS image"
+}

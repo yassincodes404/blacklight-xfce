@@ -1,0 +1,13 @@
+[Unit]
+Description=Blacklight Desktop System Monitor Widget
+After=graphical-session.target
+
+[Service]
+Type=simple
+# Import DISPLAY from the current graphical session before starting.
+ExecStart=/usr/bin/python3 %h/.local/bin/sysmon-widget.py
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=default.target
