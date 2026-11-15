@@ -7,7 +7,7 @@
 Galinia (gah-LEE-nyah) takes its name from the Greek phrase for “serene fire.”
 
 [![XFCE](https://img.shields.io/badge/XFCE-4.20-9bb6c7?style=flat-square)](https://xfce.org/)
-[![Session](https://img.shields.io/badge/session-X11-282b32?style=flat-square)](docs/RESTORE.md)
+[![Session](https://img.shields.io/badge/session-X11_%7C_labwc-282b32?style=flat-square)](docs/RESTORE.md)
 [![Configuration](https://img.shields.io/badge/configuration-versioned-282b32?style=flat-square)](docs/MAINTENANCE.md)
 [![Status](https://img.shields.io/badge/status-control_repository-282b32?style=flat-square)](#a-foundation-for-whats-next)
 
@@ -66,7 +66,7 @@ python3 tools/control.py render \
   --wallpaper "$HOME/Pictures/your-wallpaper.jpg"
 ```
 
-**Reference platform:** Ubuntu 26.04.1 / XFCE 4.20 / X11 / 1920×1080. Other combinations are not yet tested. The public profile bundles the exact icons, font and original pointer artwork. Wallpapers and inherited cursor roles with unverified redistribution terms are documented separately. A private owner archive preserves the complete original customization payload. See [what is exact, portable or external](docs/ASSETS.md).
+**Reference platform:** Ubuntu 26.04.1 / XFCE 4.20 / X11 / 1920×1080. The shared desktop profile also supports XFCE’s labwc Wayland session. See the [session notes](docs/RESTORE.md#x11-and-labwc). The public profile bundles the exact icons, font and original pointer artwork. Wallpapers and inherited cursor roles with unverified redistribution terms are documented separately. A private owner archive preserves the complete original customization payload. See [what is exact, portable or external](docs/ASSETS.md).
 
 ## One place to keep improving it
 

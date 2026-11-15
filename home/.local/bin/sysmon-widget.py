@@ -283,6 +283,9 @@ class SysMonWidget(Gtk.Window):
         visual = self.get_screen().get_rgba_visual()
         if visual:
             self.set_visual(visual)
+        self.wayland = "Wayland" in Gdk.Display.get_default().__gtype__.name
+        if self.wayland:
+            self.configure_layer()
         self.connect("realize", self.realized)
         self.collector = SystemCollector()
         self.pool = ThreadPoolExecutor(max_workers=1)
@@ -310,7 +313,47 @@ class SysMonWidget(Gtk.Window):
         self.tick()
         GLib.timeout_add_seconds(2, self.tick)
 
+    @staticmethod
+    def native_pointer(widget):
+        pointer = ctypes.pythonapi.PyCapsule_GetPointer
+        pointer.argtypes = [ctypes.py_object, ctypes.c_char_p]
+        pointer.restype = ctypes.c_void_p
+        return pointer(widget.__gpointer__, None)
+
+    def configure_layer(self):
+        layer = ctypes.CDLL("libgtk-layer-shell.so.0")
+        if not layer.gtk_layer_is_supported():
+            raise RuntimeError("The compositor does not support Wayland layer shell")
+        window = self.native_pointer(self)
+        layer.gtk_layer_init_for_window.argtypes = [ctypes.c_void_p]
+        layer.gtk_layer_init_for_window(window)
+        layer.gtk_layer_set_layer.argtypes = [ctypes.c_void_p, ctypes.c_int]
+        layer.gtk_layer_set_layer(window, 1)  # Bottom, above wallpaper and behind apps.
+        layer.gtk_layer_set_anchor.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_int]
+        layer.gtk_layer_set_margin.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_int]
+        for edge, margin in [(1, 24), (2, 24)]:  # Right, top.
+            layer.gtk_layer_set_anchor(window, edge, 1)
+            layer.gtk_layer_set_margin(window, edge, margin)
+        layer.gtk_layer_set_keyboard_mode.argtypes = [ctypes.c_void_p, ctypes.c_int]
+        layer.gtk_layer_set_keyboard_mode(window, 0)
+
     def realized(self, *_):
+        if self.wayland:
+            cairo = ctypes.CDLL("libcairo.so.2")
+            gdk = ctypes.CDLL("libgdk-3.so.0")
+            cairo.cairo_region_create.restype = ctypes.c_void_p
+            cairo.cairo_region_destroy.argtypes = [ctypes.c_void_p]
+            gdk.gdk_window_input_shape_combine_region.argtypes = [
+                ctypes.c_void_p, ctypes.c_void_p, ctypes.c_int, ctypes.c_int
+            ]
+            region = cairo.cairo_region_create()
+            try:
+                gdk.gdk_window_input_shape_combine_region(
+                    self.native_pointer(self.get_window()), region, 0, 0
+                )
+            finally:
+                cairo.cairo_region_destroy(region)
+            return
         # Empty input region lets desktop clicks pass through the text.
         x = ctypes.CDLL("libX11.so.6")
         fix = ctypes.CDLL("libXfixes.so.3")

@@ -51,6 +51,8 @@ def render(args):
         if node.get('name','').startswith('monitor'):node.set('name','monitor'+args.monitor)
         if node.get('name')=='last-image':node.set('value',str(args.wallpaper.expanduser()))
     tree.write(desktop,encoding='UTF-8',xml_declaration=True)
+    shared = out / '.config/blacklight-rice/wallpaper'
+    shared.write_text(str(args.wallpaper.expanduser()) + '\n')
     print(f'Staged home: {out}\nNo live settings changed. Read docs/RESTORE.md before copying anything.')
 
 def capture(args):

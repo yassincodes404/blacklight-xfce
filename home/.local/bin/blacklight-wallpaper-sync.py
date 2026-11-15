@@ -8,6 +8,7 @@ desktop widget to the active wallpaper.
 
 import colorsys
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -46,33 +47,22 @@ def hls_to_rgb255(h, l, s):
     return [clamp(r * 255), clamp(g * 255), clamp(b * 255)]
 
 
+SHARED_WALLPAPER = PALETTE_DIR / "wallpaper"
+DEFAULT_WALLPAPER = HOME / ".local/share/backgrounds/Galinia/galinia-dusk.png"
+
+
 def get_active_wallpaper() -> Path:
-    try:
-        out = subprocess.check_output(
-            ["xfconf-query", "-c", "xfce4-desktop", "-l", "-v"],
-            text=True,
-            stderr=subprocess.DEVNULL,
-        )
-        candidates = []
-        for line in out.splitlines():
-            if "last-image" in line:
-                parts = line.split(None, 1)
-                if len(parts) == 2:
-                    prop, val = parts[0].strip(), parts[1].strip()
-                    p = Path(val)
-                    if p.is_file():
-                        score = 0
-                        if "monitorHDMI" in prop:
-                            score += 10
-                        if "workspace0" in prop:
-                            score += 5
-                        candidates.append((score, p))
-        if candidates:
-            candidates.sort(key=lambda x: x[0], reverse=True)
-            return candidates[0][1]
-    except Exception:
-        pass
-    return (HOME / ".local/share/backgrounds/Blacklight-Ultra/default.png")
+    if SHARED_WALLPAPER.is_file():
+        selected = Path(SHARED_WALLPAPER.read_text().strip())
+        if selected.is_file():
+            return selected
+    return DEFAULT_WALLPAPER
+
+
+def share_wallpaper(channel, wallpaper):
+    for prop, current in channel.get_properties("/backdrop").items():
+        if prop.endswith("/last-image") and current != str(wallpaper):
+            channel.set_string(prop, str(wallpaper))
 
 
 def extract_palette_from_wallpaper(img_path: Path) -> dict:
@@ -110,9 +100,14 @@ def extract_palette_from_wallpaper(img_path: Path) -> dict:
     # Only treat wallpaper as colored if >= 4.5% of the image has distinct color
     # (prevents tiny floor notes or compression artifacts on black wallpapers from turning windows brown/yellow)
     has_color = len(vivid_samples) >= int(n * 0.045)
+    # The supplied wallpaper concentrates its color in the small flame mark.
+    branded = img_path == DEFAULT_WALLPAPER or img_path == DEFAULT_WALLPAPER.with_suffix(".svg")
+    has_color = has_color or branded
     is_mono = not has_color
 
-    if has_color:
+    if branded:
+        dom_hue, dom_sat = 0.075, 0.75
+    elif has_color:
         bins = [0.0] * 24
         hue_sum = [0.0] * 24
         sat_sum = [0.0] * 24
@@ -963,6 +958,28 @@ def update_terminal_palette(pal: dict):
         )
 
 
+def update_labwc_theme(pal):
+    theme = HOME / ".local/share/themes/Galinia/openbox-3"
+    theme.mkdir(parents=True, exist_ok=True)
+    properties = {
+        "border.width": "1",
+        "window.titlebar.padding.height": "4",
+        "window.active.title.bg.color": pal["bg_0"],
+        "window.inactive.title.bg.color": pal["bg_1"],
+        "window.active.border.color": pal["bg_3"],
+        "window.inactive.border.color": pal["bg_1"],
+        "window.active.label.text.color": pal["fg_hex"],
+        "window.inactive.label.text.color": pal["fg_hex"],
+        "window.active.button.unpressed.image.color": pal["accent_hex"],
+        "window.inactive.button.unpressed.image.color": pal["fg_hex"],
+    }
+    atomic_write(theme / "themerc", "".join(
+        f"{key}: {value}\n" for key, value in properties.items()
+    ))
+    if os.environ.get("XDG_SESSION_TYPE") == "wayland" and os.environ.get("LABWC_PID"):
+        subprocess.run(["labwc", "--reconfigure"], check=True, timeout=5)
+
+
 def sync_now() -> dict:
     wp = get_active_wallpaper()
     pal = extract_palette_from_wallpaper(wp)
@@ -971,6 +988,7 @@ def sync_now() -> dict:
     patch_base_gtk_theme(pal)
     write_user_gtk_css(pal)
     update_xfwm4_theme(pal)
+    update_labwc_theme(pal)
     update_terminal_palette(pal)
     reload_live_desktop()
     print(f"Synced system theme to wallpaper: {wp.name} (mono={pal['is_mono']}, bg={pal['bg_0']}, accent={pal['accent_hex']})", flush=True)
@@ -988,6 +1006,7 @@ def watch_loop():
         try:
             wp = get_active_wallpaper()
             signature = (str(wp), wp.stat().st_mtime_ns)
+            share_wallpaper(channel, wp)
             if signature != last[0]:
                 sync_now()
                 last[0] = signature
@@ -996,8 +1015,11 @@ def watch_loop():
         return False
 
     def changed(channel, prop, value):
-        if not prop.endswith("/last-image"):
+        if not prop.endswith("/last-image") or not isinstance(value, str) or not Path(value).is_file():
             return
+        if Path(value) != get_active_wallpaper():
+            PALETTE_DIR.mkdir(parents=True, exist_ok=True)
+            atomic_write(SHARED_WALLPAPER, value + "\n")
         if pending[0]:
             GLib.source_remove(pending[0])
         pending[0] = GLib.timeout_add(350, refresh)

@@ -41,3 +41,20 @@ This is the complete captured customization payload, not a promise of pixel-iden
 - `optional/code`: editor settings and extension identifiers. The Java path is an optional reference toolchain, not a prerequisite for the desktop.
 - The Firefox Snap cursor wrapper adjusts the cursor search path after Snap's command chain. It does not disable Snap confinement. Copy the staged `.local/share/icons/Blacklight-Chibi` and `default` directories into `~/snap/firefox/common/.icons/` as well; keep the pointer alias symlinks inside the copied theme.
 - Do not replicate personal Drive mounts, Tailscale identities, SSH credentials, firmware options or firewall rules from screenshots. Those are not desktop styling dependencies.
+
+## X11 and labwc
+
+Galinia shares the XFCE panel, GTK and terminal colors, and one wallpaper
+across both sessions. Changing the wallpaper in XFCE settings updates
+the shared selection and the saved monitor entries. Galinia Dusk is the
+default. labwc uses a generated decoration theme with the same palette as
+XFWM. The system monitor uses native Wayland layer shell under labwc and
+XFixes under X11. Both use the same metrics, layout and palette.
+
+For Wayland, install labwc and the GTK 3 layer-shell runtime library
+(libgtk-layer-shell.so.0). The XFCE autostart entry refreshes the
+service environment at login so the monitor can follow session changes.
+The compositor reads its cursor settings when it starts.
+
+XFWM and labwc draw their own decorations, and screenshot and global
+shortcut support depend on the compositor and application.
