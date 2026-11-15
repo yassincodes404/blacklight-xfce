@@ -8,24 +8,34 @@
   <rect width="1280" height="310" rx="24" fill="url(#background)"/>
   <g transform="translate(166 66) scale(1.85)">
 <defs>
-  <linearGradient id="copper" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
-    <stop stop-color="#ffdda5"/><stop offset=".41" stop-color="#c4804f"/>
-    <stop offset=".68" stop-color="#8c4e34"/><stop offset="1" stop-color="#ffc285"/>
+  <linearGradient id="fire" x1="0" y1="1" x2=".75" y2="0">
+    <stop stop-color="#a52f21"/><stop offset=".36" stop-color="#ed5228"/>
+    <stop offset=".72" stop-color="#ff9e42"/><stop offset="1" stop-color="#ffdf91"/>
   </linearGradient>
-  <linearGradient id="ember" x1="0" y1="0" x2=".35" y2="1">
-    <stop stop-color="#fff0bf"/><stop offset=".48" stop-color="#ffc07b"/><stop offset="1" stop-color="#df7845"/>
+  <linearGradient id="heat" x1="0" y1="1" x2=".6" y2="0">
+    <stop stop-color="#ff823c"/><stop offset="1" stop-color="#fff2bc"/>
   </linearGradient>
 </defs>
-<circle cx="48" cy="48" r="42" fill="none" stroke="url(#copper)" stroke-width="8"/>
-<circle cx="48" cy="48" r="45.6" fill="none" stroke="#ffe0ab" stroke-opacity=".62" stroke-width=".7"/>
-<circle cx="48" cy="48" r="38.4" fill="none" stroke="#643721" stroke-opacity=".68" stroke-width=".7"/>
-<g fill="none" stroke="#fff0c8" stroke-width=".42" stroke-opacity=".36">
-  <circle cx="48" cy="48" r="40.7" stroke-dasharray="21 1 7 2"/>
-  <circle cx="48" cy="48" r="42.6" stroke-dasharray="3 1 26 4" stroke-dashoffset="12"/>
-  <circle cx="48" cy="48" r="44.1" stroke-dasharray="12 2 5 1" stroke-dashoffset="5"/>
-</g>
-<path d="M48 18 C51 31 68 35 68 52 C68 63 60 70 48 70 C36 70 28 63 28 53 C28 45 33 39 39 35 C37 42 39 47 43 49 C50 42 53 31 48 18Z" fill="url(#ember)"/>
-<path d="M48 47 C49 53 58 56 58 62 C58 67 54 70 48 70 C42 70 38 67 38 62 C38 56 43 52 48 47Z" fill="#ffe2a9"/>
+<path fill="url(#fire)" fill-rule="evenodd" d="
+  M49 16 C57 13 57 7 54 1 C68 8 70 15 69 23
+  C75 24 79 20 78 16 C88 26 86 31 86 37
+  C91 38 94 34 94 30 C97 46 93 51 91 59
+  C93 72 81 85 69 90 C52 98 32 94 18 82
+  C10 75 6 66 6 58 C3 52 1 46 4 36
+  C6 42 9 43 12 42 C10 33 14 25 22 19
+  C19 26 21 30 25 30 C27 20 36 18 35 8
+  C42 12 43 17 42 21 C45 20 47 18 49 16 Z
+  M48 29 C30 29 17 43 17 59 C17 75 31 86 48 86
+  C67 86 81 73 81 57 C81 41 67 29 48 29 Z"/>
+<path fill="url(#heat)" d="
+  M12 59 C12 46 20 38 31 32 C37 28 38 24 38 20
+  C43 24 41 28 39 30 C26 33 17 45 17 59
+  C17 75 31 86 48 86 C62 86 73 79 78 69
+  C74 82 62 89 47 89 C26 89 12 76 12 59 Z
+  M46 29 C57 25 63 19 61 11 C67 18 65 24 61 28
+  C75 33 83 44 83 54 C80 43 68 29 46 29 Z"/>
+<path d="M19 68 C25 82 42 89 57 85 M67 33 C73 37 77 42 79 47"
+  fill="none" stroke="#ffdb86" stroke-width="1.25" stroke-linecap="round" opacity=".75"/>
   </g>
   <text x="402" y="158" fill="#fff3e5" font-family="DejaVu Sans, sans-serif" font-weight="bold" font-size="92" letter-spacing="11">GALINIA</text>
   <text x="410" y="213" fill="#edbb91" font-family="DejaVu Sans, sans-serif" font-size="25" letter-spacing="3">XFCE DESKTOP CUSTOMIZATION</text>
