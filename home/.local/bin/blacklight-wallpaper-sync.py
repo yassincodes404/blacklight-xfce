@@ -661,6 +661,24 @@ placessidebar list:backdrop {{
 }}
 
 /* Inactive windows keep the same surfaces instead of reverting to base gray. */
+/* Thunar reads these CSS colors to multiply-tint selected folder
+   pixmaps. Paint the selection as an image so the tint stays transparent. */
+.thunar .standard-view iconview.view:active,
+.thunar .standard-view exo-icon-view.view:active,
+exo-icon-view.view:active {{
+    background-color: transparent;
+}}
+.thunar .standard-view iconview.view:selected,
+.thunar .standard-view iconview.view:selected:backdrop,
+.thunar .standard-view exo-icon-view.view:selected,
+.thunar .standard-view exo-icon-view.view:selected:backdrop,
+exo-icon-view.view:selected,
+exo-icon-view.view:selected:backdrop {{
+    background-color: transparent;
+    background-image: image({pal['bg_3']});
+    color: {pal['accent_hex']};
+}}
+
 window.background:backdrop, dialog.background:backdrop {{
     background-color: {pal['bg_0']}; color: {pal['fg_hex']};
 }}
