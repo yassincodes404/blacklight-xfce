@@ -31,5 +31,7 @@
   ".config/xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml",
   ".config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml",
   ".config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml",
-  ".config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml"
+  ".config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml",
+  ".local/share/applications/firefox_firefox.desktop",
+  ".local/share/applications/org.flameshot.Flameshot.desktop"
 ]

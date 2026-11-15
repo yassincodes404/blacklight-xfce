@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Flameshot
+Comment=Select and annotate a screenshot
+Exec=@HOME@/.local/bin/flameshot gui
+Icon=flameshot
+Terminal=false
+Categories=Graphics;Utility;

@@ -39,5 +39,5 @@ This is the complete captured customization payload, not a promise of pixel-iden
 
 - `optional/firefox`: browser chrome CSS and privacy/storage policy snapshots. Copy styling into your chosen profile, never into somebody else's randomized profile name. Policies affect camera/microphone, local networking and app launching; review separately from appearance.
 - `optional/code`: editor settings and extension identifiers. The Java path is an optional reference toolchain, not a prerequisite for the desktop.
-- The Firefox Snap cursor wrapper adjusts the cursor search path after Snap's command chain. It does not disable Snap confinement.
+- The Firefox Snap cursor wrapper adjusts the cursor search path after Snap's command chain. It does not disable Snap confinement. Copy the staged `.local/share/icons/Blacklight-Chibi` and `default` directories into `~/snap/firefox/common/.icons/` as well; keep the pointer alias symlinks inside the copied theme.
 - Do not replicate personal Drive mounts, Tailscale identities, SSH credentials, firmware options or firewall rules from screenshots. Those are not desktop styling dependencies.

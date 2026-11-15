@@ -52,7 +52,13 @@
     ".local/share/fonts/Blacklight-Ultra",
     ".local/share/backgrounds/Blacklight-Ultra",
     "snap/firefox/common/.mozilla/firefox/@FIREFOX_PROFILE@/chrome",
-    "snap/firefox/common/.mozilla/firefox/@FIREFOX_PROFILE@/user.js"
+    "snap/firefox/common/.mozilla/firefox/@FIREFOX_PROFILE@/user.js",
+    ".local/share/applications/firefox_firefox.desktop",
+    ".local/share/applications/org.flameshot.Flameshot.desktop",
+    ".icons",
+    ".local/opt/flameshot/Flameshot.AppImage",
+    "snap/firefox/common/.icons",
+    ".config/mimeapps.list"
   ],
   "excludes": [
     "credentials",
