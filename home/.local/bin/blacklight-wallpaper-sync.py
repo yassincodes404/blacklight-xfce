@@ -474,16 +474,17 @@ button.suggested-action {{
 notebook > header {{
     background-color: {pal['bg_1']};
     border-color: {pal['border_hex']};
-    padding: 2px 4px 0;
+    padding: 0 4px;
 }}
 
 notebook > header > tabs > tab {{
     color: {pal['sub_hex']};
     background-color: transparent;
     background-image: none;
-    padding: 6px 14px;
+    padding: 3px 11px;
+    min-height: 23px;
     margin: 0 2px;
-    border-radius: 7px 7px 0 0;
+    border-radius: 5px 5px 0 0;
     border: none;
     box-shadow: none;
 }}
@@ -740,6 +741,17 @@ def write_user_gtk_css(pal: dict):
     USER_GTK3_CSS.parent.mkdir(parents=True, exist_ok=True)
     # A few legacy utilities load their own application-priority notebook CSS.
     gtk3_compat = f"""
+headerbar, .titlebar {{
+    min-height: 28px;
+    padding: 0 6px;
+}}
+headerbar button.titlebutton, .titlebar button.titlebutton {{
+    min-width: 24px;
+    min-height: 24px;
+    padding: 0 3px;
+    margin: 0;
+    border-radius: 6px;
+}}
 notebook, notebook > header, notebook > stack, notebook > stack:not(:only-child) {{
     background: {pal['bg_0']};
     border-color: {pal['border_hex']};
@@ -749,7 +761,7 @@ notebook > header > tabs > tab {{
     color: {pal['sub_hex']};
 }}
 notebook > header > tabs > tab:checked {{
-    background: {pal['bg_2']};
+    background: transparent;
     color: {pal['accent_hex']};
     box-shadow: inset 0 -2px {pal['accent_hex']};
 }}
@@ -788,6 +800,25 @@ headerbar,
     background-image: none;
     color: {pal['fg_hex']};
     border-bottom: 1px solid {pal['border_hex']};
+}}
+
+headerbar > windowhandle > box {{
+    min-height: 30px;
+    padding: 0 6px;
+}}
+headerbar windowcontrols button {{
+    min-width: 24px;
+    min-height: 24px;
+    padding: 0 3px;
+    border-radius: 6px;
+}}
+notebook > header > tabs > tab {{
+    min-height: 23px;
+    padding: 3px 11px;
+}}
+notebook > header > tabs > tab:checked {{
+    background: transparent;
+    box-shadow: inset 0 -2px {pal['accent_hex']};
 }}
 
 popover.background > contents {{
@@ -1015,7 +1046,9 @@ def update_labwc_theme(pal):
     theme.mkdir(parents=True, exist_ok=True)
     properties = {
         "border.width": "1",
-        "window.titlebar.padding.height": "4",
+        "window.titlebar.padding.height": "2",
+        "window.button.height": "24",
+        "window.button.width": "27",
         "window.active.title.bg.color": pal["bg_0"],
         "window.inactive.title.bg.color": pal["bg_0"],
         "window.active.title.bg": "Solid",

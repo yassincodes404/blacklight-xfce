@@ -32,6 +32,25 @@ headerbar,
     border-bottom: 1px solid #2a2a2f;
 }
 
+headerbar > windowhandle > box {
+    min-height: 30px;
+    padding: 0 6px;
+}
+headerbar windowcontrols button {
+    min-width: 24px;
+    min-height: 24px;
+    padding: 0 3px;
+    border-radius: 6px;
+}
+notebook > header > tabs > tab {
+    min-height: 23px;
+    padding: 3px 11px;
+}
+notebook > header > tabs > tab:checked {
+    background: transparent;
+    box-shadow: inset 0 -2px #f2f2f8;
+}
+
 popover.background > contents {
     background-color: #101112;
     border: 1px solid #2a2a2f;

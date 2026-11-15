@@ -278,16 +278,17 @@ button.suggested-action {
 notebook > header {
     background-color: #101112;
     border-color: #2a2a2f;
-    padding: 2px 4px 0;
+    padding: 0 4px;
 }
 
 notebook > header > tabs > tab {
     color: #a6a6b4;
     background-color: transparent;
     background-image: none;
-    padding: 6px 14px;
+    padding: 3px 11px;
+    min-height: 23px;
     margin: 0 2px;
-    border-radius: 7px 7px 0 0;
+    border-radius: 5px 5px 0 0;
     border: none;
     box-shadow: none;
 }
