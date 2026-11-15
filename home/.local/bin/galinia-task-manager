@@ -1,4 +1,5 @@
 #!/bin/sh
+export GTK_THEME=Galinia-Task
 if command -v xfce4-taskmanager >/dev/null 2>&1; then
     exec xfce4-taskmanager "$@"
 fi

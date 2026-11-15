@@ -1,0 +1,21 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<channel name="xfce4-taskmanager" version="1.0">
+  <property name="window-maximized" type="bool" value="false"/>
+  <property name="window-width" type="int" value="900"/>
+  <property name="window-height" type="int" value="570"/>
+  <property name="interface" type="empty">
+    <property name="show-all-processes" type="bool" value="false"/>
+    <property name="show-legend" type="bool" value="false"/>
+    <property name="full-command-line" type="bool" value="false"/>
+    <property name="show-application-icons" type="bool" value="true"/>
+    <property name="show-filter" type="bool" value="true"/>
+  </property>
+  <property name="columns" type="empty">
+    <property name="column-group-rss" type="bool" value="false"/>
+    <property name="column-group-cpu" type="bool" value="false"/>
+    <property name="column-pid" type="bool" value="true"/>
+    <property name="column-rss" type="bool" value="true"/>
+    <property name="column-cpu" type="bool" value="true"/>
+  </property>
+</channel>

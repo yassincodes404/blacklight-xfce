@@ -1,0 +1,30 @@
+@import url("../../Blacklight-Ultra/gtk-3.0/gtk.css");
+
+window.background {
+    background: @theme_bg_color;
+}
+headerbar {
+    padding: 2px 10px;
+}
+searchentry {
+    border-radius: 11px;
+    min-height: 34px;
+}
+treeview.view {
+    background: @theme_bg_color;
+    color: @theme_fg_color;
+    -GtkTreeView-vertical-separator: 11;
+}
+treeview.view header button:not(.flat) {
+    background: @theme_bg_color;
+    color: @theme_fg_color;
+    border: none;
+    border-bottom: 1px solid @borders;
+    border-radius: 0;
+    padding: 5px 9px;
+    font-weight: 600;
+}
+treeview.view header button:not(.flat):hover,
+treeview.view:hover {
+    background: @theme_base_color;
+}

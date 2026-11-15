@@ -1,0 +1,6 @@
+[Unit]
+Description=Galinia App Search
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/python3 %h/.local/share/galinia/app-search.py --gapplication-service

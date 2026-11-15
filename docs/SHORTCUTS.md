@@ -33,3 +33,11 @@ For an unresponsive app, select its process in Task Manager and try
 Terminate first. Use Kill only if Terminate fails. Install
 xfce4-taskmanager to enable this shortcut. Snap confinement may prevent
 an ordinary Task Manager from sending signals to a Snap app.
+
+Galinia uses a separate GTK style for Task Manager and defaults to a
+compact table with task, PID, memory and CPU. The gear menu can restore
+the extra columns and full commands.
+
+The XFCE session startup entry preloads app search. Super + Space reuses
+the same search window and the app list is refreshed when applications
+are installed or removed.
