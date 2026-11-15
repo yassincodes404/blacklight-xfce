@@ -71,3 +71,9 @@ connector entries XFCE 4.20 uses to draw the desktop. Desktop Settings can
 write a monitor model entry while xfdesktop reads a connector entry such as
 HDMI-A-1. The service mirrors the selected image to both. Connector
 discovery uses connected DRM outputs exposed in /sys/class/drm.
+
+The desktop uses Noto Sans for interface text and JetBrains Mono for
+monospace text. Install the Noto core fonts if they are absent. Settings
+Manager launched from its desktop entry can center its search field using
+a small GTK 3 module. The launcher compiles the module into the user cache
+when a C compiler is available and otherwise opens stock Settings Manager.

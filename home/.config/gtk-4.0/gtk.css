@@ -1,10 +1,10 @@
 /* Blacklight Wallpaper-Adaptive System Rice (GTK 4.0) */
-@define-color theme_fg_color #f0f0f5;
-@define-color theme_text_color #f0f0f5;
-@define-color theme_bg_color #0b0b0a;
-@define-color theme_base_color #121210;
-@define-color theme_selected_bg_color #282623;
-@define-color theme_selected_fg_color #f0d3a8;
+@define-color theme_fg_color #f0f0f6;
+@define-color theme_text_color #f0f0f6;
+@define-color theme_bg_color #0a0a0b;
+@define-color theme_base_color #101112;
+@define-color theme_selected_bg_color #232428;
+@define-color theme_selected_fg_color #f2f2f8;
 
 *,
 entry,
@@ -15,25 +15,26 @@ textview {
 
 window.background,
 dialog.background {
-    background-color: #0b0b0a;
-    color: #f0f0f5;
+    background-color: #0a0a0b;
+    color: #f0f0f6;
 }
 
 window.csd:not(.maximized):not(.fullscreen):not(.tiled) {
     border-radius: 10px;
-    border: 1px solid #302d2a;
+    border: 1px solid #2a2a2f;
 }
 
 headerbar,
 .titlebar {
-    background-color: #121210;
-    color: #f0f0f5;
-    border-bottom: 1px solid #302d2a;
+    background-color: #0a0a0b;
+    background-image: none;
+    color: #f0f0f6;
+    border-bottom: 1px solid #2a2a2f;
 }
 
 popover.background > contents {
-    background-color: #121210;
-    border: 1px solid #302d2a;
+    background-color: #101112;
+    border: 1px solid #2a2a2f;
     border-radius: 9px;
-    color: #f0f0f5;
+    color: #f0f0f6;
 }

@@ -12,7 +12,7 @@
   <theme>
     <name>Galinia</name>
     <cornerRadius>8</cornerRadius>
-    <font name="JetBrains Mono" size="9" weight="bold"/>
+    <font name="Noto Sans" size="10" weight="semibold"/>
     <titlebar><layout>:iconify,max,close</layout></titlebar>
   </theme>
 

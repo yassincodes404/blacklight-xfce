@@ -302,6 +302,22 @@ selection,
     box-shadow: none;
 }}
 
+/* Shared window surfaces, including legacy Xfce notebook pages and dialogs. */
+window.background, dialog.background, messagedialog.background,
+window.background:backdrop, dialog.background:backdrop,
+notebook, notebook > stack, notebook > stack:backdrop,
+notebook > stack > box, notebook > stack > grid,
+.dialog-vbox, .dialog-action-area {{
+    background-image: none;
+    background-color: {pal['bg_0']};
+    color: {pal['fg_hex']};
+}}
+
+#galinia-settings-search {{
+    min-height: 34px;
+    border-radius: 11px;
+}}
+
 /* --- 2. Entries, Search & Application Finder --- */
 entry,
 searchentry,
@@ -344,7 +360,8 @@ headerbar,
 .titlebar,
 toolbar,
 .primary-toolbar {{
-    background-color: {pal['bg_1']};
+    background-color: {pal['bg_0']};
+    background-image: none;
     color: {pal['fg_hex']};
     border-bottom: 1px solid {pal['border_hex']};
     box-shadow: none;
@@ -622,7 +639,7 @@ entry:backdrop {{
     border-color: {pal['border_hex']}; color: {pal['fg_hex']};
 }}
 headerbar:backdrop, toolbar:backdrop, .titlebar:backdrop {{
-    background-image: none; background-color: {pal['bg_1']};
+    background-image: none; background-color: {pal['bg_0']};
     color: {pal['fg_hex']};
 }}
 switch:backdrop {{
@@ -721,7 +738,23 @@ def patch_base_gtk_theme(pal: dict):
 def write_user_gtk_css(pal: dict):
     gtk3_css = build_custom_gtk3_css(pal)
     USER_GTK3_CSS.parent.mkdir(parents=True, exist_ok=True)
-    atomic_write(USER_GTK3_CSS, "/* Adaptive styling lives in the theme; avoid stale user-priority overrides. */\n")
+    # A few legacy utilities load their own application-priority notebook CSS.
+    gtk3_compat = f"""
+notebook, notebook > header, notebook > stack, notebook > stack:not(:only-child) {{
+    background: {pal['bg_0']};
+    border-color: {pal['border_hex']};
+    box-shadow: none;
+}}
+notebook > header > tabs > tab {{
+    color: {pal['sub_hex']};
+}}
+notebook > header > tabs > tab:checked {{
+    background: {pal['bg_2']};
+    color: {pal['accent_hex']};
+    box-shadow: inset 0 -2px {pal['accent_hex']};
+}}
+"""
+    atomic_write(USER_GTK3_CSS, gtk3_compat)
 
     gtk4_css = f"""/* Blacklight Wallpaper-Adaptive System Rice (GTK 4.0) */
 @define-color theme_fg_color {pal['fg_hex']};
@@ -751,7 +784,8 @@ window.csd:not(.maximized):not(.fullscreen):not(.tiled) {{
 
 headerbar,
 .titlebar {{
-    background-color: {pal['bg_1']};
+    background-color: {pal['bg_0']};
+    background-image: none;
     color: {pal['fg_hex']};
     border-bottom: 1px solid {pal['border_hex']};
 }}
@@ -983,7 +1017,11 @@ def update_labwc_theme(pal):
         "border.width": "1",
         "window.titlebar.padding.height": "4",
         "window.active.title.bg.color": pal["bg_0"],
-        "window.inactive.title.bg.color": pal["bg_1"],
+        "window.inactive.title.bg.color": pal["bg_0"],
+        "window.active.title.bg": "Solid",
+        "window.inactive.title.bg": "Solid",
+        "window.label.text.justify": "center",
+        "window.button.hover.bg.corner-radius": "8",
         "window.active.border.color": pal["bg_3"],
         "window.inactive.border.color": pal["bg_1"],
         "window.active.label.text.color": pal["fg_hex"],
