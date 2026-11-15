@@ -56,7 +56,7 @@
       </property>
       <property name="XF86Explorer" type="string" value="exo-open --launch FileManager" />
       <property name="&lt;Super&gt;m" type="string" value="exo-open --launch MailReader" />
-      <property name="&lt;Primary&gt;&lt;Shift&gt;Escape" type="string" value="xfce4-taskmanager" />
+      <property name="&lt;Primary&gt;&lt;Shift&gt;Escape" type="string" value="@HOME@/.local/bin/galinia-task-manager" />
       <property name="&lt;Alt&gt;&lt;Super&gt;s" type="string" value="orca" />
       <property name="XF86Calculator" type="string" value="mate-calc" />
       <property name="&lt;Super&gt;t" type="string" value="exo-open --launch TerminalEmulator" />

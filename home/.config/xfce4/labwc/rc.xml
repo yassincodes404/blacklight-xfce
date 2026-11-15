@@ -13,6 +13,7 @@
   </theme>
   <desktops number="1" />
   <keyboard>
+    <keybind key="C-S-Escape"><action name="Execute" command="sh -c &quot;~/.local/bin/galinia-task-manager&quot;"/></keybind>
     <default />
     <keybind key="Print">
       <action name="Execute" command="sh -c &quot;~/.local/bin/galinia-screenshot&quot;" />

@@ -1,0 +1,10 @@
+#!/bin/sh
+if command -v xfce4-taskmanager >/dev/null 2>&1; then
+    exec xfce4-taskmanager "$@"
+fi
+local_taskmanager="$HOME/.local/opt/galinia-taskmanager/usr/bin/xfce4-taskmanager"
+if [ -x "$local_taskmanager" ]; then
+    exec "$local_taskmanager" "$@"
+fi
+notify-send "Task Manager unavailable" "Install the xfce4-taskmanager package."
+exit 1
