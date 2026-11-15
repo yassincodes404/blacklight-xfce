@@ -38,9 +38,10 @@ Galinia Task Manager puts a wide process filter above a compact table.
 Its GTK layout module keeps the CPU and memory totals and hides the graphs.
 Build the shared utility module with a C compiler as described in RESTORE.md.
 
-The XFCE session startup entry preloads app search. Super + Space reuses
-the same search window and the app list is refreshed when applications
-are installed or removed.
+The XFCE session startup entry primes app search. Super + Space reuses
+the search window for up to one minute after it closes. After that the
+process exits and the next shortcut starts it on demand. The app index
+updates when installed applications change.
 
 The compact table displays executable names. Right-click a process and
 choose Copy command line to inspect the original command. Set

@@ -3,4 +3,6 @@ Description=Galinia App Search
 PartOf=graphical-session.target
 
 [Service]
+Type=dbus
+BusName=org.galinia.AppSearch
 ExecStart=/usr/bin/python3 %h/.local/share/galinia/app-search.py --gapplication-service

@@ -7,38 +7,71 @@ gi.require_version("Gdk", "3.0")
 from gi.repository import Gdk, Gio, GLib, Gtk, Pango
 
 APP_ID = "org.galinia.AppSearch"
+IDLE_SECONDS = 60
 
 
 class AppSearch(Gtk.Application):
     def __init__(self):
         super().__init__(application_id=APP_ID)
         self.window = None
+        self.idle_source = 0
+        self.index_dirty = True
 
     def do_startup(self):
         Gtk.Application.do_startup(self)
         self.hold()
         self.app_monitor = Gio.AppInfoMonitor.get()
-        self.app_monitor.connect("changed", self.reload_apps)
-        self.reload_apps()
-        self.build_window()
+        self.app_monitor.connect("changed", self.apps_changed)
+        self.schedule_idle_exit()
 
     def do_activate(self):
-        if self.window.get_visible():
-            self.window.hide()
+        if self.window is not None and self.window.get_visible():
+            self.hide_window()
             return
-        self.entry.set_text("")
-        self.refresh()
+        if self.idle_source:
+            GLib.source_remove(self.idle_source)
+            self.idle_source = 0
+        if self.index_dirty:
+            self.reload_apps()
+        if self.window is None:
+            self.build_window()
+        elif self.entry.get_text():
+            self.entry.set_text("")
+        else:
+            self.refresh()
         self.window.show_all()
         self.entry.grab_focus()
         self.window.present()
 
-    def reload_apps(self, *_):
-        self.apps = sorted(
-            (app for app in Gio.AppInfo.get_all() if app.should_show()),
-            key=lambda app: app.get_display_name().casefold(),
-        )
+    def schedule_idle_exit(self):
+        if not self.idle_source:
+            self.idle_source = GLib.timeout_add_seconds(IDLE_SECONDS, self.exit_when_idle)
+
+    def exit_when_idle(self):
+        self.idle_source = 0
+        self.quit()
+        return GLib.SOURCE_REMOVE
+
+    def apps_changed(self, *_):
+        self.index_dirty = True
         if self.window is not None and self.window.get_visible():
+            self.reload_apps()
             self.refresh()
+
+    def reload_apps(self):
+        self.apps = {}
+        self.search_index = []
+        for app in Gio.AppInfo.get_all():
+            if not app.should_show():
+                continue
+            label = app.get_display_name()
+            name = label.casefold()
+            keywords = app.get_keywords() if hasattr(app, "get_keywords") else []
+            terms = " ".join([name, app.get_description() or "",
+                              app.get_executable() or "", *(keywords or [])]).casefold()
+            self.apps.setdefault(label, app)
+            self.search_index.append((name, terms, app))
+        self.index_dirty = False
 
     def build_window(self):
         self.window = Gtk.ApplicationWindow(application=self, title="Search apps")
@@ -118,10 +151,10 @@ class AppSearch(Gtk.Application):
             self.window.get_screen(), self.css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
         self.refresh()
-        self.window.realize()
 
     def hide_window(self, *_):
         self.window.hide()
+        self.schedule_idle_exit()
         return True
 
     def refresh(self, *_):
@@ -132,16 +165,13 @@ class AppSearch(Gtk.Application):
         if not query:
             favorites = ("Thunar", "Firefox", "Xfce Terminal", "Settings Manager", "ArtCraft Launcher")
             for rank, name in enumerate(favorites):
-                app = next((app for app in self.apps if app.get_display_name() == name), None)
+                app = self.apps.get(name)
                 if app is not None:
                     matches.append((rank, name, app))
         else:
-            for app in self.apps:
-                name = app.get_display_name().casefold()
-                keywords = app.get_keywords() if hasattr(app, "get_keywords") else []
-                haystack = " ".join([name, app.get_description() or "",
-                                     app.get_executable() or "", *(keywords or [])]).casefold()
-                if all(word in haystack for word in query.split()):
+            words = query.split()
+            for name, terms, app in self.search_index:
+                if all(word in terms for word in words):
                     rank = 0 if name.startswith(query) else 1 if query in name else 2
                     matches.append((rank, name, app))
         for _, _, app in sorted(matches, key=lambda item: item[:2])[:6]:
@@ -164,7 +194,7 @@ class AppSearch(Gtk.Application):
 
     def key_pressed(self, _, event):
         if event.keyval == Gdk.KEY_Escape:
-            self.window.hide()
+            self.hide_window()
             return True
         if event.keyval in (Gdk.KEY_Return, Gdk.KEY_KP_Enter):
             self.launch_selected()
@@ -189,7 +219,7 @@ class AppSearch(Gtk.Application):
             context = self.window.get_display().get_app_launch_context()
             context.set_timestamp(Gtk.get_current_event_time())
             if row.app.launch([], context):
-                self.window.hide()
+                self.hide_window()
         except GLib.Error as error:
             self.message.set_text(f"Could not open {row.app.get_display_name()}: {error.message}")
             self.body.set_visible_child_name("message")

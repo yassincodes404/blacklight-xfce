@@ -1,5 +1,10 @@
 #!/bin/sh
-if gapplication launch org.galinia.AppSearch 2>/dev/null; then
+app=org.galinia.AppSearch
+if gapplication launch "$app" 2>/dev/null; then
+    exit 0
+fi
+if systemctl --user start galinia-search.service 2>/dev/null &&
+    gapplication launch "$app" 2>/dev/null; then
     exit 0
 fi
 exec /usr/bin/python3 "$HOME/.local/share/galinia/app-search.py"
