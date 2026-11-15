@@ -7,8 +7,7 @@
   </defs>
   <rect width="1280" height="310" rx="24" fill="url(#background)"/>
   <g transform="translate(166 66) scale(1.85)">
-    <rect width="96" height="96" rx="24" fill="#17191f"/><path d="M 48,15 C 50,28 71,32 71,52 C 71,65 61,74 48,74 C 35,74 25,66 25,54 C 25,44 31,38 37,34 C 35,42 37,47 42,49 C 50,42 53,28 48,15 Z" fill="#f6af62"/><path d="M 48,48 C 52,55 59,56 59,64 C 59,70 54,74 48,74 C 42,74 37,70 37,64 C 37,59 42,54 48,48 Z" fill="#ffdba1"/>
-    <rect x=".5" y=".5" width="95" height="95" rx="24" fill="none" stroke="#f6af62" stroke-opacity=".3"/>
+    <circle cx="48" cy="48" r="46" fill="#17191f" stroke="#f6af62" stroke-width="2"/><path d="M 48,15 C 50,28 71,32 71,52 C 71,65 61,74 48,74 C 35,74 25,66 25,54 C 25,44 31,38 37,34 C 35,42 37,47 42,49 C 50,42 53,28 48,15 Z" fill="#f6af62"/><path d="M 48,48 C 52,55 59,56 59,64 C 59,70 54,74 48,74 C 42,74 37,70 37,64 C 37,59 42,54 48,48 Z" fill="#ffdba1"/>
   </g>
   <text x="402" y="158" fill="#fff3e5" font-family="DejaVu Sans, sans-serif" font-weight="bold" font-size="92" letter-spacing="11">GALINIA</text>
   <text x="410" y="213" fill="#edbb91" font-family="DejaVu Sans, sans-serif" font-size="25" letter-spacing="3">XFCE DESKTOP CUSTOMIZATION</text>
