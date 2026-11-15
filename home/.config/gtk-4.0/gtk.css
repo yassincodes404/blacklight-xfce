@@ -1,10 +1,10 @@
 /* Blacklight Wallpaper-Adaptive System Rice (GTK 4.0) */
-@define-color theme_fg_color #f0f0f6;
-@define-color theme_text_color #f0f0f6;
-@define-color theme_bg_color #0a0a0b;
-@define-color theme_base_color #101112;
-@define-color theme_selected_bg_color #232428;
-@define-color theme_selected_fg_color #f2f2f8;
+@define-color theme_fg_color #f0f0f5;
+@define-color theme_text_color #f0f0f5;
+@define-color theme_bg_color #0b0a0a;
+@define-color theme_base_color #121011;
+@define-color theme_selected_bg_color #282324;
+@define-color theme_selected_fg_color #ebadb5;
 
 *,
 entry,
@@ -15,21 +15,21 @@ textview {
 
 window.background,
 dialog.background {
-    background-color: #0a0a0b;
-    color: #f0f0f6;
+    background-color: #0b0a0a;
+    color: #f0f0f5;
 }
 
 window.csd:not(.maximized):not(.fullscreen):not(.tiled) {
     border-radius: 10px;
-    border: 1px solid #2a2a2f;
+    border: 1px solid #302a2a;
 }
 
 headerbar,
 .titlebar {
-    background-color: #0a0a0b;
+    background-color: #0b0a0a;
     background-image: none;
-    color: #f0f0f6;
-    border-bottom: 1px solid #2a2a2f;
+    color: #f0f0f5;
+    border-bottom: 1px solid #302a2a;
 }
 
 headerbar > windowhandle > box {
@@ -48,12 +48,19 @@ notebook > header > tabs > tab {
 }
 notebook > header > tabs > tab:checked {
     background: transparent;
-    box-shadow: inset 0 -2px #f2f2f8;
+    box-shadow: inset 0 -2px #ebadb5;
+}
+
+/* Keep editor and menu surfaces stable when focus moves to another window. */
+menubar, menubar:backdrop, popover.menubar:backdrop,
+textview, textview:backdrop, textview text, textview text:backdrop {
+    background-image: none;
+    background-color: #0b0a0a;
 }
 
 popover.background > contents {
-    background-color: #101112;
-    border: 1px solid #2a2a2f;
+    background-color: #121011;
+    border: 1px solid #302a2a;
     border-radius: 9px;
-    color: #f0f0f6;
+    color: #f0f0f5;
 }

@@ -631,6 +631,35 @@ scrollbar slider:hover {{
     background-color: {pal['sub_hex']};
 }}
 
+/* Adwaita paints these child surfaces gray on backdrop independently
+   of window.background. Keep each surface on the same palette on blur. */
+menubar, .menubar, menubar:backdrop, .menubar:backdrop,
+textview text, textview text:backdrop,
+.thunar .standard-view, .thunar .standard-view:backdrop,
+.thunar .standard-view .view, .thunar .standard-view .view:backdrop,
+exo-icon-view.view, exo-icon-view.view:backdrop {{
+    background-image: none;
+    background-color: {pal['bg_0']};
+}}
+.view:backdrop, iconview:backdrop,
+.view text:backdrop, iconview text:backdrop {{
+    background-image: none;
+    background-color: transparent;
+}}
+.thunar .standard-view .view:backdrop, exo-icon-view.view:backdrop {{
+    background-color: {pal['bg_0']};
+}}
+.sidebar .view:backdrop, .thunar .sidebar treeview.view:backdrop,
+placessidebar list:backdrop {{
+    background-color: {pal['bg_1']};
+}}
+.view:selected:backdrop, iconview:selected:backdrop, row:selected:backdrop,
+.thunar .standard-view .view:selected:backdrop,
+.thunar .sidebar treeview.view:selected:backdrop {{
+    background-color: {pal['bg_3']};
+    color: {pal['accent_hex']};
+}}
+
 /* Inactive windows keep the same surfaces instead of reverting to base gray. */
 window.background:backdrop, dialog.background:backdrop {{
     background-color: {pal['bg_0']}; color: {pal['fg_hex']};
@@ -819,6 +848,13 @@ notebook > header > tabs > tab {{
 notebook > header > tabs > tab:checked {{
     background: transparent;
     box-shadow: inset 0 -2px {pal['accent_hex']};
+}}
+
+/* Keep editor and menu surfaces stable when focus moves to another window. */
+menubar, menubar:backdrop, popover.menubar:backdrop,
+textview, textview:backdrop, textview text, textview text:backdrop {{
+    background-image: none;
+    background-color: {pal['bg_0']};
 }}
 
 popover.background > contents {{
