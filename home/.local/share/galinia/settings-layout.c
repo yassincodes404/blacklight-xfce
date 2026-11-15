@@ -46,8 +46,91 @@ static int hide_graph(void *widget)
     return 0;
 }
 
+typedef struct List {
+    void *data;
+    struct List *next, *prev;
+} List;
+
+extern GType g_type_from_name(const char *);
+extern GType gtk_cell_renderer_text_get_type(void);
+extern void *g_object_get_data(void *, const char *);
+extern void g_object_set_data(void *, const char *, void *);
+extern void g_object_get(void *, const char *, ...);
+extern void g_object_set(void *, const char *, ...);
+extern List *gtk_tree_view_get_columns(void *);
+extern List *gtk_cell_layout_get_cells(void *);
+extern void gtk_tree_view_column_set_title(void *, const char *);
+extern void gtk_tree_view_column_set_min_width(void *, int);
+extern void gtk_tree_view_column_set_cell_data_func(
+    void *, void *, void (*)(void *, void *, void *, void *, void *),
+    void *, void (*)(void *));
+extern char *g_strndup(const char *, unsigned long);
+extern char *g_path_get_basename(const char *);
+extern void g_free(void *);
+extern void g_list_free(List *);
+extern unsigned long strcspn(const char *, const char *);
+
+enum { TASK_NAME, TASK_PID, TASK_MEMORY, TASK_CPU, TASK_OTHER };
+
+static void style_process_cell(void *column, void *cell, void *model,
+                               void *iter, void *kind)
+{
+    (void)column;
+    (void)model;
+    (void)iter;
+    int name = kind == (void *)(long)TASK_NAME;
+    g_object_set(cell, "cell-background-set", 0, "foreground-set", 0,
+                 "xpad", 10u, "ypad", 2u, "weight", name ? 500 : 400, 0);
+    if (name && !g_getenv("GALINIA_TASK_FULL_COMMANDS")) {
+        char *text = 0;
+        g_object_get(cell, "text", &text, 0);
+        if (text && *text) {
+            char *executable = g_strndup(text, strcspn(text, " \t"));
+            char *short_name = g_path_get_basename(executable);
+            g_object_set(cell, "text", short_name, 0);
+            g_free(short_name);
+            g_free(executable);
+        }
+        g_free(text);
+    } else if (!name) {
+        g_object_set(cell, "family", "JetBrains Mono", "size-points", 9.0,
+                     "foreground", "#afb5c2", 0);
+    }
+}
+
+static void style_process_table(GtkWidget *widget)
+{
+    if (g_object_get_data(widget, "galinia-process-style"))
+        return;
+    g_object_set_data(widget, "galinia-process-style", widget);
+    List *columns = gtk_tree_view_get_columns(widget);
+    for (List *item = columns; item; item = item->next) {
+        void *column = item->data;
+        long id = (long)g_object_get_data(column, "column-id");
+        int kind = TASK_OTHER;
+        switch (id) {
+        case 0: kind = TASK_NAME; gtk_tree_view_column_set_title(column, "Process"); break;
+        case 1: kind = TASK_PID; gtk_tree_view_column_set_min_width(column, 84); break;
+        case 6: kind = TASK_MEMORY; gtk_tree_view_column_set_title(column, "Memory");
+                gtk_tree_view_column_set_min_width(column, 110); break;
+        case 9: kind = TASK_CPU; gtk_tree_view_column_set_min_width(column, 80); break;
+        }
+        List *cells = gtk_cell_layout_get_cells(column);
+        for (List *cell = cells; cell; cell = cell->next) {
+            if (g_type_check_instance_is_a(cell->data, gtk_cell_renderer_text_get_type()))
+                gtk_tree_view_column_set_cell_data_func(
+                    column, cell->data, style_process_cell, (void *)(long)kind, 0);
+        }
+        g_list_free(cells);
+    }
+    g_list_free(columns);
+}
+
 static void style_task_widget(GtkWidget *widget)
 {
+    GType process_tree = g_type_from_name("XtmProcessTreeView");
+    if (process_tree && g_type_check_instance_is_a(widget, process_tree))
+        style_process_table(widget);
     const char *id = gtk_buildable_get_name(widget);
     if (g_strcmp0(id, "graph-hbox") == 0) {
         /* Defer until GTK has finished mapping this widget. */

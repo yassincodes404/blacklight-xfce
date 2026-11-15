@@ -13,7 +13,8 @@ searchentry {
 treeview.view {
     background: @theme_bg_color;
     color: @theme_fg_color;
-    -GtkTreeView-vertical-separator: 11;
+    border-radius: 0;
+    -GtkTreeView-vertical-separator: 8;
 }
 treeview.view header button:not(.flat) {
     background: @theme_bg_color;
@@ -37,4 +38,11 @@ treeview.view:hover {
 #galinia-task-summary {
     padding: 7px 12px;
     border-bottom: 1px solid @borders;
+}
+
+treeview.view:selected {
+    background: @theme_selected_bg_color;
+}
+#galinia-task-summary label {
+    font-size: 12px;
 }

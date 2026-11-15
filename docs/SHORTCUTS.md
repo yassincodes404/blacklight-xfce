@@ -41,3 +41,8 @@ Build the shared utility module with a C compiler as described in RESTORE.md.
 The XFCE session startup entry preloads app search. Super + Space reuses
 the same search window and the app list is refreshed when applications
 are installed or removed.
+
+The compact table displays executable names. Right-click a process and
+choose Copy command line to inspect the original command. Set
+GALINIA_TASK_FULL_COMMANDS=1 when launching galinia-task-manager to show
+the native command text in the table.
