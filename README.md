@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="docs/banner.svg" alt="Blacklight XFCE — quiet by design" width="100%">
+<img src="docs/banner.svg" alt="Galinia — XFCE desktop customization" width="100%">
 
-**A quiet, wallpaper-adaptive XFCE desktop.**
+**Wallpaper-adaptive XFCE customization for Ubuntu and Xubuntu.**
 
-One continuous bar. Deep charcoal surfaces. Crisp icons. A little character.
+Galinia (gah-LEE-nyah) takes its name from the Greek phrase for “serene fire.”
 
 [![XFCE](https://img.shields.io/badge/XFCE-4.20-9bb6c7?style=flat-square)](https://xfce.org/)
 [![Session](https://img.shields.io/badge/session-X11-282b32?style=flat-square)](docs/RESTORE.md)
@@ -15,11 +15,11 @@ One continuous bar. Deep charcoal surfaces. Crisp icons. A little character.
 
 </div>
 
-![Blacklight desktop with a full-width top bar and text-only system monitor](docs/screenshots/01-desktop.png)
+![Galinia desktop with a full-width top bar and text-only system monitor](docs/screenshots/01-desktop.png)
 
 ## The desktop
 
-Blacklight keeps XFCE familiar and gives the whole workspace a consistent visual language. The panel spans the screen. Windows settle underneath it. Controls stay readable. The wallpaper supplies the accent, while the working surfaces remain dark and calm.
+Galinia keeps XFCE familiar and gives the whole workspace a consistent visual language. The panel spans the screen. Windows settle underneath it. Controls stay readable. The wallpaper supplies the accent, while the working surfaces remain dark and calm.
 
 | Detail | What you get |
 |---|---|
@@ -32,14 +32,14 @@ Blacklight keeps XFCE familiar and gives the whole workspace a consistent visual
 
 ## Room to work
 
-![Blacklight workspace showing consistent windows, controls and typography](docs/screenshots/02-workspace.png)
+![Galinia workspace showing consistent windows, controls and typography](docs/screenshots/02-workspace.png)
 
-The screenshots are captured from the real XFCE desktop. The workspace image uses two staged demonstration windows with sample project text, not a fabricated terminal session. The hostname was temporarily replaced by the project name for the showcase; personal windows, account data and notifications are not part of the presentation.
+The screenshots are captured from the real XFCE desktop and show its original Blacklight branding. The workspace image uses two staged demonstration windows with sample project text, not a fabricated terminal session. The hostname was temporarily replaced by the project name for the showcase; personal windows, account data and notifications are not part of the presentation.
 
 <details>
 <summary><strong>Another mood: monochrome</strong></summary>
 
-![Blacklight with a monochrome cloud wallpaper and neutral accents](docs/screenshots/03-monochrome.png)
+![Galinia with a monochrome cloud wallpaper and neutral accents](docs/screenshots/03-monochrome.png)
 
 The layout stays the same. The palette follows the wallpaper.
 
@@ -47,7 +47,7 @@ The layout stays the same. The palette follows the wallpaper.
 
 ## Reproduce it
 
-**This is the control repository, not a one-command installer yet.** It captures the configuration that makes this desktop look and behave as shown, with pinned assets and a clear boundary around personal state.
+**Galinia is currently available as a configuration repository.** The planned installer will apply this desktop setup to an existing Xubuntu installation or to Ubuntu with XFCE. The repository contains the configuration, pinned assets and manual staging tools.
 
 ```sh
 git clone https://github.com/yassincodes404/blacklight-xfce.git
@@ -98,7 +98,7 @@ Capture uses an allowlist and a separate output folder. It never copies browser 
 - [ ] An installer with dependency checks, opt-ins and rollback
 - [ ] Multi-monitor and scaling profiles
 
-The aim is a desktop people can understand, maintain and make their own—not a script that silently replaces their system.
+The Galinia flame is available as a [standalone SVG](docs/logo.svg).
 
 ---
 
