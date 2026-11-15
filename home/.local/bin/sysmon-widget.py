@@ -341,12 +341,18 @@ class SysMonWidget(Gtk.Window):
         if self.wayland:
             cairo = ctypes.CDLL("libcairo.so.2")
             gdk = ctypes.CDLL("libgdk-3.so.0")
-            cairo.cairo_region_create.restype = ctypes.c_void_p
+            # GTK 3 may send a null Wayland input region for an empty Cairo region.
+            # A rectangle outside the surface gives the compositor no hit area.
+            class Rectangle(ctypes.Structure):
+                _fields_ = [(name, ctypes.c_int) for name in ("x", "y", "width", "height")]
+
+            cairo.cairo_region_create_rectangle.argtypes = [ctypes.POINTER(Rectangle)]
+            cairo.cairo_region_create_rectangle.restype = ctypes.c_void_p
             cairo.cairo_region_destroy.argtypes = [ctypes.c_void_p]
             gdk.gdk_window_input_shape_combine_region.argtypes = [
                 ctypes.c_void_p, ctypes.c_void_p, ctypes.c_int, ctypes.c_int
             ]
-            region = cairo.cairo_region_create()
+            region = cairo.cairo_region_create_rectangle(ctypes.byref(Rectangle(-2, -2, 1, 1)))
             try:
                 gdk.gdk_window_input_shape_combine_region(
                     self.native_pointer(self.get_window()), region, 0, 0
