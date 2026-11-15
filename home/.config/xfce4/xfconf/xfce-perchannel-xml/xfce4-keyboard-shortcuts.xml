@@ -49,7 +49,7 @@
       <property name="&lt;Super&gt;l" type="string" value="xflock4" />
       <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="exo-open --launch TerminalEmulator" />
       <property name="XF86Music" type="string" value="rhythmbox" />
-      <property name="Print" type="string" value="@HOME@/.local/bin/flameshot gui" />
+      <property name="Print" type="string" value="@HOME@/.local/bin/galinia-screenshot" />
       <property name="&lt;Primary&gt;&lt;Alt&gt;Escape" type="string" value="xkill" />
       <property name="&lt;Alt&gt;F2" type="string" value="xfrun4">
         <property name="startup-notify" type="bool" value="true" />
@@ -63,10 +63,10 @@
       <property name="XF86HomePage" type="string" value="exo-open --launch WebBrowser" />
       <property name="&lt;Primary&gt;&lt;Alt&gt;f" type="string" value="exo-open --launch FileManager" />
       <property name="HomePage" type="string" value="exo-open --launch WebBrowser" />
-      <property name="&lt;Alt&gt;Print" type="string" value="@HOME@/.local/bin/flameshot gui" />
+      <property name="&lt;Alt&gt;Print" type="string" value="@HOME@/.local/bin/galinia-screenshot" />
       <property name="&lt;Super&gt;F1" type="string" value="xfce4-find-cursor" />
       <property name="&lt;Primary&gt;&lt;Alt&gt;l" type="string" value="xflock4" />
-      <property name="&lt;Shift&gt;Print" type="string" value="@HOME@/.local/bin/flameshot gui" />
+      <property name="&lt;Shift&gt;Print" type="string" value="@HOME@/.local/bin/galinia-screenshot" />
       <property name="XF86Mail" type="string" value="exo-open --launch MailReader" />
       <property name="&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal" />
       <property name="&lt;Super&gt;e" type="string" value="exo-open --launch FileManager" />

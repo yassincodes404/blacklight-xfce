@@ -14,10 +14,9 @@ import sys
 from pathlib import Path
 
 import gi
-gi.require_version("Gdk", "3.0")
 gi.require_version("GdkPixbuf", "2.0")
 gi.require_version("Xfconf", "0")
-from gi.repository import Gdk, GdkPixbuf, GLib, Xfconf
+from gi.repository import GdkPixbuf, GLib, Xfconf
 
 HOME = Path.home()
 PALETTE_DIR = HOME / ".config/blacklight-rice"
@@ -59,10 +58,12 @@ def get_active_wallpaper() -> Path:
     return DEFAULT_WALLPAPER
 
 
-def share_wallpaper(channel, wallpaper):
+def share_wallpaper(channel, wallpaper, mirrored):
     for prop, current in channel.get_properties("/backdrop").items():
         if prop.endswith("/last-image") and current != str(wallpaper):
-            channel.set_string(prop, str(wallpaper))
+            mirrored[prop] = str(wallpaper)
+            if not channel.set_string(prop, str(wallpaper)):
+                mirrored.pop(prop, None)
 
 
 def extract_palette_from_wallpaper(img_path: Path) -> dict:
@@ -1000,13 +1001,14 @@ def watch_loop():
     channel = Xfconf.Channel.get("xfce4-desktop")
     pending = [0]
     last = [None]
+    mirrored = {}
 
     def refresh():
         pending[0] = 0
         try:
             wp = get_active_wallpaper()
             signature = (str(wp), wp.stat().st_mtime_ns)
-            share_wallpaper(channel, wp)
+            share_wallpaper(channel, wp, mirrored)
             if signature != last[0]:
                 sync_now()
                 last[0] = signature
@@ -1016,6 +1018,8 @@ def watch_loop():
 
     def changed(channel, prop, value):
         if not prop.endswith("/last-image") or not isinstance(value, str) or not Path(value).is_file():
+            return
+        if mirrored.pop(prop, None) == value:
             return
         if Path(value) != get_active_wallpaper():
             PALETTE_DIR.mkdir(parents=True, exist_ok=True)

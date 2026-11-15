@@ -58,3 +58,10 @@ The compositor reads its cursor settings when it starts.
 
 XFWM and labwc draw their own decorations, and screenshot and global
 shortcut support depend on the compositor and application.
+
+On labwc, Print, Alt+Print and Shift+Print open a native drag selector.
+Install the packages grim, slurp and wl-clipboard. Captures go to the
+Screenshots folder under your configured Pictures directory and are copied
+to the clipboard. Escape cancels selection. X11 still opens Flameshot.
+For a persistent manual wallpaper selection, leave wallpaper cycling off
+in XFCE Desktop Settings.
