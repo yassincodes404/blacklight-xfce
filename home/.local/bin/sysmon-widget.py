@@ -286,7 +286,10 @@ class SysMonWidget(Gtk.Window):
         self.wayland = "Wayland" in Gdk.Display.get_default().__gtype__.name
         if self.wayland:
             self.configure_layer()
-        self.connect("realize", self.realized)
+        if self.wayland:
+            self.connect("map", lambda *_: GLib.timeout_add(250, self.clear_wayland_input))
+        else:
+            self.connect("realize", self.realized)
         self.collector = SystemCollector()
         self.pool = ThreadPoolExecutor(max_workers=1)
         self.pending = None
@@ -337,29 +340,34 @@ class SysMonWidget(Gtk.Window):
         layer.gtk_layer_set_keyboard_mode.argtypes = [ctypes.c_void_p, ctypes.c_int]
         layer.gtk_layer_set_keyboard_mode(window, 0)
 
-    def realized(self, *_):
-        if self.wayland:
-            cairo = ctypes.CDLL("libcairo.so.2")
-            gdk = ctypes.CDLL("libgdk-3.so.0")
-            # GTK 3 may send a null Wayland input region for an empty Cairo region.
-            # A rectangle outside the surface gives the compositor no hit area.
-            class Rectangle(ctypes.Structure):
-                _fields_ = [(name, ctypes.c_int) for name in ("x", "y", "width", "height")]
+    def clear_wayland_input(self):
+        # GTK's null input region means the entire surface accepts input.
+        # Send an actual empty wl_region so clicks reach xfdesktop.
+        gdk = ctypes.CDLL("libgdk-3.so.0")
+        wl = ctypes.CDLL("libwayland-client.so.0")
+        for getter in (gdk.gdk_wayland_window_get_wl_surface,
+                       gdk.gdk_wayland_display_get_wl_compositor):
+            getter.argtypes = [ctypes.c_void_p]
+            getter.restype = ctypes.c_void_p
+        surface = gdk.gdk_wayland_window_get_wl_surface(self.native_pointer(self.get_window()))
+        compositor = gdk.gdk_wayland_display_get_wl_compositor(
+            self.native_pointer(Gdk.Display.get_default())
+        )
+        marshal = wl.wl_proxy_marshal_flags
+        marshal.argtypes = [ctypes.c_void_p, ctypes.c_uint32, ctypes.c_void_p,
+                            ctypes.c_uint32, ctypes.c_uint32]
+        marshal.restype = ctypes.c_void_p
+        wl.wl_proxy_get_version.argtypes = [ctypes.c_void_p]
+        wl.wl_proxy_get_version.restype = ctypes.c_uint32
+        version = wl.wl_proxy_get_version
+        interface = ctypes.addressof(ctypes.c_byte.in_dll(wl, "wl_region_interface"))
+        region = marshal(compositor, 1, interface, version(compositor), 0, None)
+        marshal(surface, 5, None, version(surface), 0, ctypes.c_void_p(region))
+        marshal(region, 0, None, version(region), 1)
+        marshal(surface, 6, None, version(surface), 0)
+        return False
 
-            cairo.cairo_region_create_rectangle.argtypes = [ctypes.POINTER(Rectangle)]
-            cairo.cairo_region_create_rectangle.restype = ctypes.c_void_p
-            cairo.cairo_region_destroy.argtypes = [ctypes.c_void_p]
-            gdk.gdk_window_input_shape_combine_region.argtypes = [
-                ctypes.c_void_p, ctypes.c_void_p, ctypes.c_int, ctypes.c_int
-            ]
-            region = cairo.cairo_region_create_rectangle(ctypes.byref(Rectangle(-2, -2, 1, 1)))
-            try:
-                gdk.gdk_window_input_shape_combine_region(
-                    self.native_pointer(self.get_window()), region, 0, 0
-                )
-            finally:
-                cairo.cairo_region_destroy(region)
-            return
+    def realized(self, *_):
         # Empty input region lets desktop clicks pass through the text.
         x = ctypes.CDLL("libX11.so.6")
         fix = ctypes.CDLL("libXfixes.so.3")
