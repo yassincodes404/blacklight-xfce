@@ -45,6 +45,8 @@ The layout stays the same. The palette follows the wallpaper.
 
 </details>
 
+Press **Super + Space** to search installed apps. See the [shared keyboard shortcuts](docs/SHORTCUTS.md).
+
 ## Reproduce it
 
 **Galinia is currently available as a configuration repository.** The planned installer will apply this desktop setup to an existing Xubuntu installation or to Ubuntu with XFCE. The repository contains the configuration, pinned assets and manual staging tools.

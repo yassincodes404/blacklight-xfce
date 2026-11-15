@@ -1,42 +1,40 @@
-<?xml version="1.0"?>
-<!--
-  This is a very simple config file with many options missing. For a
-  complete set of options with comments, see Labwc docs/rc.xml.all
--->
+<?xml version='1.0' encoding='UTF-8'?>
 <labwc_config>
-
   <placement>
     <policy>automatic</policy>
   </placement>
-
   <theme>
     <name>Galinia</name>
     <cornerRadius>8</cornerRadius>
-    <font name="Noto Sans" size="10" weight="semibold"/>
-    <titlebar><layout>:iconify,max,close</layout></titlebar>
+    <font name="Noto Sans" size="10" weight="semibold" />
+    <titlebar>
+      <layout>:iconify,max,close</layout>
+    </titlebar>
   </theme>
-
   <desktops number="1" />
-
   <keyboard>
-    <default/>
-    <keybind key="Print"><action name="Execute" command="sh -c &quot;~/.local/bin/galinia-screenshot&quot;"/></keybind>
-    <keybind key="A-Print"><action name="Execute" command="sh -c &quot;~/.local/bin/galinia-screenshot&quot;"/></keybind>
-    <keybind key="S-Print"><action name="Execute" command="sh -c &quot;~/.local/bin/galinia-screenshot&quot;"/></keybind>
+    <default />
+    <keybind key="Print">
+      <action name="Execute" command="sh -c &quot;~/.local/bin/galinia-screenshot&quot;" />
+    </keybind>
+    <keybind key="A-Print">
+      <action name="Execute" command="sh -c &quot;~/.local/bin/galinia-screenshot&quot;" />
+    </keybind>
+    <keybind key="S-Print">
+      <action name="Execute" command="sh -c &quot;~/.local/bin/galinia-screenshot&quot;" />
+    </keybind>
     <!-- Use a different terminal emulator -->
     <keybind key="W-Return">
-      <action name="Execute" command="xfce4-terminal"/>
+      <action name="Execute" command="exo-open --launch TerminalEmulator" />
     </keybind>
     <!--
       Remove a previously defined keybind
       A shorter alternative is <keybind key="W-F4" />
     -->
     <keybind key="W-F4">
-      <action name="None"/>
+      <action name="None" />
     </keybind>
-
     <numlock>on</numlock>
-
     <!--
        Suggested Xfce key bindings.
     -->
@@ -58,10 +56,53 @@
     <keybind key="W-Tab">
       <action name="ToggleMaximize" />
     </keybind>
+    <keybind key="W-e">
+      <action name="Execute" command="exo-open --launch FileManager" />
+    </keybind>
+    <keybind key="W-w">
+      <action name="Execute" command="exo-open --launch WebBrowser" />
+    </keybind>
+    <keybind key="W-s">
+      <action name="Execute" command="sh -c '~/.local/bin/galinia-settings'" />
+    </keybind>
+    <keybind key="W-a">
+      <action name="Execute" command="sh -c '~/.local/bin/artcraft-launcher'" />
+    </keybind>
+    <keybind key="W-space">
+      <action name="Execute" command="sh -c '~/.local/bin/galinia-search'" />
+    </keybind>
+    <keybind key="W-l">
+      <action name="Execute" command="xflock4" />
+    </keybind>
+    <keybind key="W-Left">
+      <action name="SnapToEdge" direction="left" />
+    </keybind>
+    <keybind key="W-Right">
+      <action name="SnapToEdge" direction="right" />
+    </keybind>
+    <keybind key="W-Up">
+      <action name="SnapToEdge" direction="up" />
+    </keybind>
+    <keybind key="W-Down">
+      <action name="SnapToEdge" direction="down" />
+    </keybind>
+    <keybind key="W-S-Up">
+      <action name="ToggleMaximize" />
+    </keybind>
+    <keybind key="W-S-f">
+      <action name="ToggleFullscreen" />
+    </keybind>
+    <keybind key="A-F4">
+      <action name="Close" />
+    </keybind>
   </keyboard>
-
   <snapping>
     <range>10</range>
   </snapping>
-
+  <windowRules>
+    <windowRule identifier="galinia-search" serverDecoration="no" skipTaskbar="yes" skipWindowSwitcher="yes" />
+    <windowRule identifier="galinia-search">
+      <action name="AutoPlace" policy="center" />
+    </windowRule>
+  </windowRules>
 </labwc_config>

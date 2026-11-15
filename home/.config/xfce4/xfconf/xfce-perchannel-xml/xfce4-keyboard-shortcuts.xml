@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <channel name="xfce4-keyboard-shortcuts" version="1.0">
   <property name="commands" type="empty">
     <property name="default" type="empty">
@@ -73,6 +73,10 @@
       <property name="XF86WWW" type="string" value="exo-open --launch WebBrowser" />
       <property name="XF86Display" type="string" value="xfce4-display-settings --minimal" />
       <property name="override" type="bool" value="true" />
+      <property name="&lt;Super&gt;Return" type="string" value="exo-open --launch TerminalEmulator" />
+      <property name="&lt;Super&gt;s" type="string" value="@HOME@/.local/bin/galinia-settings" />
+      <property name="&lt;Super&gt;a" type="string" value="@HOME@/.local/bin/artcraft-launcher" />
+      <property name="&lt;Super&gt;space" type="string" value="@HOME@/.local/bin/galinia-search" />
     </property>
   </property>
   <property name="xfwm4" type="empty">
@@ -218,6 +222,8 @@
       <property name="&lt;Alt&gt;F11" type="string" value="fullscreen_key" />
       <property name="&lt;Alt&gt;F6" type="string" value="maximize_vert_key" />
       <property name="override" type="bool" value="true" />
+      <property name="&lt;Super&gt;&lt;Shift&gt;Up" type="string" value="maximize_window_key" />
+      <property name="&lt;Super&gt;&lt;Shift&gt;f" type="string" value="fullscreen_key" />
     </property>
   </property>
   <property name="providers" type="array">
