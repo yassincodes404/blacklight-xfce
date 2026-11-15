@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <labwc_config>
   <placement>
-    <policy>automatic</policy>
+    <policy>center</policy>
   </placement>
   <theme>
     <name>Galinia</name>
