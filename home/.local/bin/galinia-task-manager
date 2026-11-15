@@ -1,5 +1,9 @@
 #!/bin/sh
-export GTK_THEME=Galinia-Task
+export GTK_THEME=Galinia-Task GALINIA_TASK_LAYOUT=1
+layout="$HOME/.local/share/galinia/load-layout.sh"
+if [ -r "$layout" ]; then
+    . "$layout"
+fi
 if command -v xfce4-taskmanager >/dev/null 2>&1; then
     exec xfce4-taskmanager "$@"
 fi

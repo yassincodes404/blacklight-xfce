@@ -28,3 +28,13 @@ treeview.view header button:not(.flat):hover,
 treeview.view:hover {
     background: @theme_base_color;
 }
+
+#galinia-task-toolbar {
+    background: @theme_bg_color;
+    border: none;
+    padding: 6px 12px;
+}
+#galinia-task-summary {
+    padding: 7px 12px;
+    border-bottom: 1px solid @borders;
+}
