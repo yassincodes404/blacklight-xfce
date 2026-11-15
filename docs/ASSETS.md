@@ -27,3 +27,5 @@ Other credits:
 Original project scripts, pointer artwork and documentation are offered under GPL-2.0-or-later (see LICENSE), except where a file carries a different upstream notice. Third-party artifacts retain their own licenses; screenshots and external artwork are excluded from that grant.
 
 The bundled legacy Metacity XML escapes a raw `<` in version attributes so it parses correctly. XFCE uses the unchanged XFWM theme.
+
+The original Galinia ring-of-fire logo and Galinia Dusk wallpaper are licensed under GPL-2.0-or-later, with editable SVG sources included.

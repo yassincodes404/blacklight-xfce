@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <channel name="xfce4-desktop" version="1.0">
   <property name="desktop-icons" type="empty">
     <property name="style" type="int" value="0" />
@@ -19,7 +19,7 @@
     <property name="screen0" type="empty">
       <property name="monitorHDMI-0" type="empty">
         <property name="workspace0" type="empty">
-          <property name="last-image" type="string" value="@HOME@/.local/share/backgrounds/Blacklight-Ultra/dharmx_minimal_a_cartoon_of_a_island_with_a_bridge_and_trees.jpg" />
+          <property name="last-image" type="string" value="@HOME@/.local/share/backgrounds/Galinia/galinia-dusk.png" />
           <property name="image-style" type="int" value="5" />
           <property name="backdrop-cycle-enable" type="bool" value="false" />
           <property name="backdrop-cycle-timer" type="uint" value="2" />

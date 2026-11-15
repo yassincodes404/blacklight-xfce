@@ -1,0 +1,15 @@
+@import url("resource:///org/gtk/libgtk/theme/Adwaita/gtk-contained-dark.css");
+#login_window, #shutdown_dialog, #restart_dialog {
+ background: #191c24; color: #f4eee7; border: 1px solid #4b4036;
+ border-radius: 18px; padding: 26px;
+}
+entry { min-height: 36px; padding: 7px 12px; border-radius: 10px; background: #11151d; color: #f8f1e7; border: 1px solid #535560; box-shadow: none; caret-color: #ffc17d; }
+entry:focus { border-color: #efb579; box-shadow: 0 0 0 2px alpha(#efb579, 0.18); }
+button { min-height: 34px; padding: 6px 16px; border-radius: 10px; background: #2a303b; color: #f4eee7; border: 1px solid #484d59; box-shadow: none; text-shadow: none; }
+button:hover { background: #363d49; border-color: #c29a72; }
+button:focus { outline-color: #ffd8a5; outline-width: 2px; outline-offset: 2px; }
+#login_button { background: #efb579; color: #211a14; font-weight: bold; }
+#login_button:hover { background: #ffd09b; }
+button:disabled { color: #9a9ca3; background: #252932; }
+#user_combobox { font-size: 16px; }
+#panel_window { background: #12151c; color: #e9dfd3; }

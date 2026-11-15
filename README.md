@@ -94,7 +94,7 @@ Capture uses an allowlist and a separate output folder. It never copies browser 
 - [x] Safe staging and allowlisted configuration capture
 - [x] Offline payload verification
 - [ ] Clean-VM reproduction tests
-- [ ] A licensed, redistributable default wallpaper collection
+- [x] Original Galinia Dusk wallpaper with editable SVG source
 - [ ] An installer with dependency checks, opt-ins and rollback
 - [ ] Multi-monitor and scaling profiles
 
@@ -103,3 +103,11 @@ The Galinia flame is available as a [standalone SVG](docs/logo.svg).
 ---
 
 Built on the work of XFCE, GTK, Papirus, JetBrains Mono and the original theme authors. [Credits & licenses](docs/ASSETS.md) · [Contributing](CONTRIBUTING.md) · [Security boundaries](SECURITY.md)
+
+## Galinia identity
+
+The ring of fire is Galinia’s primary emblem. Galinia Dusk is supplied at 3840 × 2160 and as a scalable SVG. Use XFCE’s zoomed layout for other aspect ratios.
+
+![Galinia Dusk](home/.local/share/backgrounds/Galinia/galinia-dusk.png)
+
+Original artwork and code use GPL-2.0-or-later. See [NOTICE](NOTICE) for scope. Optional LightDM styling provides rounded fields, amber focus borders and a clear login button.

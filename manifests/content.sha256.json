@@ -19,7 +19,7 @@
   "home/.config/xfce4/terminal/colorschemes/Blacklight-Ultra.theme": "de3b23aba6683d5982c0634dc3bcde6cc24bd425b288c762a35fa1b7bc0d3ca9",
   "home/.config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml": "29d1c314be8437745bf3450c17daece789e3372d4dbdd129417120e0e0c7739d",
   "home/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml": "ac388e73835568455bf6f684ec1de2204f13bd8dd911c811fda95f0db9a4b107",
-  "home/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml": "05f75c1fb194fe8ac29f37e2a77f4f6cf62d6a2c26d71ada88aa40d400ced618",
+  "home/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml": "f036b0b2610d8f1d26e7e081b25e47ba45645cbaaea0ab821e61b8ff635355ac",
   "home/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml": "926147a79bbe41c74db85fb6e162ee6af004f0cace068390c7fa8fc440cc170d",
   "home/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml": "88d378e1f9240787b2a78af6ef39aea847a79773e2c2b2ddccf15579b00e50cd",
   "home/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml": "d23f0c4b1d2d0183a48122c98d20456da76d2a8fb88c61242c3e7901d120912b",
@@ -27,6 +27,7 @@
   "home/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml": "2ef0cca69a9414e2a5f4ef3c53e18ae364e0da0385d0c9196d95eecda81d11d3",
   "home/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml": "d2562988b57e7204ebb46bc03d7285006f80a0945d8b318370b21dd710556c47",
   "home/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml": "83debb7c7dbaf9a9ccc0635d2fc22cc74378192605680fa2c7fb3ab044cf7a53",
+  "home/.face": "43366d0160f2d1aeaebc8ac413d1d3f2feaa0f480e73ff5dddb7159234300aef",
   "home/.gtkrc-2.0": "5c3aae18dc768bd1950b4bc5f06238613ceaa2b6712922f192ae8ab3a12e5aa2",
   "home/.icons/Blacklight-Chibi": "symlink:../.local/share/icons/Blacklight-Chibi",
   "home/.icons/default": "symlink:../.local/share/icons/default",
@@ -36,6 +37,8 @@
   "home/.local/bin/sysmon-widget.py": "0637f47f0dc9c699522666e92902e3e8ee66a5ddeedf23127fa9121153f009c6",
   "home/.local/share/applications/firefox_firefox.desktop": "a4d8f1a606747b3f5d978c0a769aad2501b8cf2f66e0873400da22e7611b17ed",
   "home/.local/share/applications/org.flameshot.Flameshot.desktop": "bc16b82c124b2a549570c6a072410e3a3898f3635fc9dbee4d696e79530aae98",
+  "home/.local/share/backgrounds/Galinia/galinia-dusk.png": "0457ce462c087f43754f1418838fac7df6ed3dc95d3cab0e47bf20dd471e3ebf",
+  "home/.local/share/backgrounds/Galinia/galinia-dusk.svg": "b63e001d0dec5845e8c926ea1bba01287c4727eb0ffc183dcd118cb53e385712",
   "home/.local/share/icons/Blacklight-Chibi/cursors/arrow": "symlink:left_ptr",
   "home/.local/share/icons/Blacklight-Chibi/cursors/default": "symlink:left_ptr",
   "home/.local/share/icons/Blacklight-Chibi/cursors/hand1": "symlink:hand2",
@@ -45,6 +48,7 @@
   "home/.local/share/icons/Blacklight-Chibi/cursors/pointer": "symlink:hand2",
   "home/.local/share/icons/Blacklight-Chibi/index.theme": "bd02a22636939f844b400b59b506dc6042447da25db8b13cda19e0a03c01e6dc",
   "home/.local/share/icons/default/index.theme": "6417d7c5d3d2151646649d00b4f19d5efac8c4e63b298f61394d33bec6d58b44",
+  "home/.local/share/icons/hicolor/scalable/apps/galinia.svg": "b6eb7d81420dab33c90151fc6b142459adcce676497e80568357a6ea7597ea97",
   "home/.local/share/themes/Blacklight-Ultra/COPYING": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643",
   "home/.local/share/themes/Blacklight-Ultra/INSTALL_GDM_THEME.md": "4b9270a5262ccd930ddc6fa0191f3a8e7805bfde9a91306ba7a5436b79d25685",
   "home/.local/share/themes/Blacklight-Ultra/chrome/chrome-scrollbar.crx": "0d6e48d4c4654474ff562e9f1c665408c6ad4824f53bc310f68798a297cdde66",
@@ -574,5 +578,8 @@
   "optional/firefox/policies.json": "729eb5bda9a27baa37efa7fddb00443b279b19dd4750b88d057e9b1764660c7c",
   "optional/firefox/user.js": "945afdf64613952db6f28c714b46e42ad43847d6146b2e8bbd6707a4ce1aebb7",
   "optional/firefox/userChrome.css": "716bc1951489fb29ef1fedf78602a0e038fb3156a1450e2e836237c3ff05f5dd",
-  "optional/firefox/userContent.css": "c937d3f024d7a57218781b1bc51bc631ce6b69d43d2b7cb80451f0085ca30418"
+  "optional/firefox/userContent.css": "c937d3f024d7a57218781b1bc51bc631ce6b69d43d2b7cb80451f0085ca30418",
+  "optional/lightdm/90-galinia.conf": "86267eb320d2c9eaf877c3e7a58332d23aecc4f720944bad426c4a352632bfef",
+  "optional/lightdm/Galinia-Greeter/gtk-3.0/gtk.css": "71e41e72dadc63f48c31552ba05d6355a5cacdb224deff15a6ecc80f045defae",
+  "optional/lightdm/README.md": "50b42349d9237b2cb215c2630473b2d6a3ffc8141a4cc5b6e9438787a080639b"
 }
