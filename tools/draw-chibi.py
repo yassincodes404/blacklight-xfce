@@ -40,6 +40,39 @@ def draw_pointer(kind, size):
     return im.resize((size,size), Image.Resampling.LANCZOS)
 
 
+def draw_loading(kind, size, frame):
+    """Draw a small amber orbit with an outlined, moving leading edge."""
+    im = Image.new('RGBA', (128, 128))
+    if kind == 'left_ptr_watch':
+        im.alpha_composite(draw_pointer('left_ptr', 100))
+        center, radius = (103, 101), 15
+    else:
+        center, radius = (64, 64), 35
+    x, y = center
+    bounds = (x - radius, y - radius, x + radius, y + radius)
+    d = ImageDraw.Draw(im)
+    angle = frame * 30
+    d.ellipse((x - radius - 7, y - radius - 7, x + radius + 7, y + radius + 7),
+              fill='#211720', outline=ink, width=3)
+    d.ellipse(bounds, outline='#875751', width=3)
+    d.arc(bounds, start=angle, end=angle + 135, fill='#d47d59', width=5)
+    d.arc(bounds, start=angle + 95, end=angle + 153, fill='#ffc788', width=6)
+    return im.resize((size, size), Image.Resampling.LANCZOS)
+
+
+def write_loading(output):
+    for kind, hotspot in [('wait', (16, 16)), ('left_ptr_watch', (2, 2))]:
+        lines = []
+        for size in (24, 28, 32, 36, 48, 64):
+            for frame in range(12):
+                name = f'{kind}-{size}-{frame}.png'
+                draw_loading(kind, size, frame).save(output / name)
+                lines.append(f'{size} {round(hotspot[0]*size/32)} {round(hotspot[1]*size/32)} {name} 55')
+        config = output / f'{kind}.conf'
+        config.write_text('\n'.join(lines) + '\n')
+        subprocess.run(['xcursorgen', config.name, kind], cwd=output, check=True)
+
+
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,required=True);args=parser.parse_args()
     args.output.mkdir(parents=True,exist_ok=True)
@@ -50,4 +83,7 @@ def main():
             lines.append(f'{size} {round(hotspot[0]*size/32)} {round(hotspot[1]*size/32)} {name}')
         conf=args.output/f'{kind}.conf';conf.write_text('\n'.join(lines)+'\n')
         subprocess.run(['xcursorgen',conf.name,kind],cwd=args.output,check=True)
+    write_loading(args.output)
+
+
 if __name__=='__main__':main()
