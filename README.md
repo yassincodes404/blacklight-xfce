@@ -47,6 +47,8 @@ The layout stays the same. The palette follows the wallpaper.
 
 Press **Super + Space** to search installed apps. See the [shared keyboard shortcuts](docs/SHORTCUTS.md).
 
+Galinia uses gThumb for images, Celluloid for video, and Amberol for local audio. See [default media apps](docs/RESTORE.md#default-media-apps).
+
 ## Reproduce it
 
 **Galinia is currently available as a configuration repository.** The planned installer will apply this desktop setup to an existing Xubuntu installation or to Ubuntu with XFCE. The repository contains the configuration, pinned assets and manual staging tools.

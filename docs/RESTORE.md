@@ -77,3 +77,16 @@ monospace text. Install the Noto core fonts if they are absent. Settings
 Manager launched from its desktop entry can center its search field using
 a small GTK 3 module. The launcher compiles the module into the user cache
 when a C compiler is available and otherwise opens stock Settings Manager.
+
+## Default media apps
+
+On Ubuntu or Xubuntu, install the three default Galinia media apps:
+
+```sh
+sudo apt install gthumb celluloid amberol
+```
+
+The staged `.config/mimeapps.list` maps common images to gThumb, videos to
+Celluloid, and local audio to Amberol. With an existing profile, merge
+those entries into the existing `[Default Applications]` section so other
+file associations and URL handlers stay available.

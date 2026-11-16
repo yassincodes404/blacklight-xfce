@@ -660,6 +660,23 @@ placessidebar list:backdrop {{
     color: {pal['accent_hex']};
 }}
 
+/* Exo/xfdesktop temporarily add the rubberband class to the view
+   itself. Give that draw pass its own fill instead of the file surface. */
+rubberband, .rubberband, .view.rubberband,
+.content-view rubberband, .content-view .rubberband,
+treeview.view rubberband, flowbox rubberband,
+.thunar .standard-view .view.rubberband,
+.thunar .standard-view .view.rubberband:backdrop,
+.thunar .standard-view iconview.view.rubberband:selected:backdrop,
+.thunar .standard-view exo-icon-view.view.rubberband:selected:backdrop {{
+    background-image: none;
+    background-color: alpha({pal['accent_hex']}, 0.17);
+    border: 1px solid alpha({pal['accent_hex']}, 0.82);
+    border-radius: 3px;
+    box-shadow: none;
+    transition: none;
+}}
+
 /* Inactive windows keep the same surfaces instead of reverting to base gray. */
 /* Thunar reads these CSS colors to multiply-tint selected folder
    pixmaps. Paint the selection as an image so the tint stays transparent. */
@@ -873,6 +890,14 @@ menubar, menubar:backdrop, popover.menubar:backdrop,
 textview, textview:backdrop, textview text, textview text:backdrop {{
     background-image: none;
     background-color: {pal['bg_0']};
+}}
+
+rubberband {{
+    background-color: alpha({pal['accent_hex']}, 0.17);
+    border: 1px solid alpha({pal['accent_hex']}, 0.82);
+    border-radius: 3px;
+    box-shadow: none;
+    transition: none;
 }}
 
 popover.background > contents {{
