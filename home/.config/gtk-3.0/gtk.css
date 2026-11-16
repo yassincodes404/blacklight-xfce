@@ -10,6 +10,32 @@ headerbar button.titlebutton, .titlebar button.titlebutton {
     margin: 0;
     border-radius: 6px;
 }
+/* Thunar uses ACTIVE or SELECTED on the view to tint icons. The class
+   matches both Exo icon views and GTK tree views, regardless of node name. */
+.standard-view .view:active,
+.standard-view .view:selected,
+.standard-view .view:selected:active,
+.standard-view .view:selected:backdrop {
+    background-color: transparent;
+}
+.standard-view .view:selected,
+.standard-view .view:selected:active,
+.standard-view .view:selected:backdrop {
+    background-image: image(#232428);
+    color: #f2f2f8;
+}
+.standard-view .view.rubberband,
+.standard-view .view.rubberband:active,
+.standard-view .view.rubberband:selected,
+.standard-view .view.rubberband:selected:active,
+.standard-view .view.rubberband:selected:backdrop {
+    background-color: alpha(#f2f2f8, 0.17);
+    background-image: none;
+    border: 1px solid alpha(#f2f2f8, 0.82);
+    border-radius: 0;
+    box-shadow: none;
+    transition: none;
+}
 notebook, notebook > header, notebook > stack, notebook > stack:not(:only-child) {
     background: #0a0a0b;
     border-color: #2a2a2f;

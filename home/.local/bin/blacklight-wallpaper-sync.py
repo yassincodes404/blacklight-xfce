@@ -680,24 +680,6 @@ treeview.view rubberband, flowbox rubberband,
 }}
 
 /* Inactive windows keep the same surfaces instead of reverting to base gray. */
-/* Thunar reads these CSS colors to multiply-tint selected folder
-   pixmaps. Paint the selection as an image so the tint stays transparent. */
-.thunar .standard-view iconview.view:active,
-.thunar .standard-view exo-icon-view.view:active,
-exo-icon-view.view:active {{
-    background-color: transparent;
-}}
-.thunar .standard-view iconview.view:selected,
-.thunar .standard-view iconview.view:selected:backdrop,
-.thunar .standard-view exo-icon-view.view:selected,
-.thunar .standard-view exo-icon-view.view:selected:backdrop,
-exo-icon-view.view:selected,
-exo-icon-view.view:selected:backdrop {{
-    background-color: transparent;
-    background-image: image({pal['bg_3']});
-    color: {pal['accent_hex']};
-}}
-
 window.background:backdrop, dialog.background:backdrop {{
     background-color: {pal['bg_0']}; color: {pal['fg_hex']};
 }}
@@ -817,6 +799,32 @@ headerbar button.titlebutton, .titlebar button.titlebutton {{
     padding: 0 3px;
     margin: 0;
     border-radius: 6px;
+}}
+/* Thunar uses ACTIVE or SELECTED on the view to tint icons. The class
+   matches both Exo icon views and GTK tree views, regardless of node name. */
+.standard-view .view:active,
+.standard-view .view:selected,
+.standard-view .view:selected:active,
+.standard-view .view:selected:backdrop {{
+    background-color: transparent;
+}}
+.standard-view .view:selected,
+.standard-view .view:selected:active,
+.standard-view .view:selected:backdrop {{
+    background-image: image({pal['bg_3']});
+    color: {pal['accent_hex']};
+}}
+.standard-view .view.rubberband,
+.standard-view .view.rubberband:active,
+.standard-view .view.rubberband:selected,
+.standard-view .view.rubberband:selected:active,
+.standard-view .view.rubberband:selected:backdrop {{
+    background-color: alpha({pal['accent_hex']}, 0.17);
+    background-image: none;
+    border: 1px solid alpha({pal['accent_hex']}, 0.82);
+    border-radius: 0;
+    box-shadow: none;
+    transition: none;
 }}
 notebook, notebook > header, notebook > stack, notebook > stack:not(:only-child) {{
     background: {pal['bg_0']};
