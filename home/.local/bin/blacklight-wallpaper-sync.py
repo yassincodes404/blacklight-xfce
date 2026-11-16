@@ -666,6 +666,7 @@ rubberband, .rubberband, .view.rubberband,
 .content-view rubberband, .content-view .rubberband,
 treeview.view rubberband, flowbox rubberband,
 .thunar .standard-view .view.rubberband,
+.thunar .standard-view .view.rubberband:active,
 .thunar .standard-view .view.rubberband:backdrop,
 .thunar .standard-view iconview.view.rubberband:selected:backdrop,
 .thunar .standard-view exo-icon-view.view.rubberband:selected:backdrop {{
