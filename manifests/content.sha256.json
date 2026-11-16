@@ -10,7 +10,7 @@
   "home/.config/gtk-3.0/settings.ini": "b52f8dfdb5220fb7cb6a3f972f759643b5899d62f96ae01090fc83410c4bf315",
   "home/.config/gtk-4.0/gtk.css": "754581ad8b154e50dce484958095f49ad47a67e214d48fef67c9cef8fc860b88",
   "home/.config/gtk-4.0/settings.ini": "b52f8dfdb5220fb7cb6a3f972f759643b5899d62f96ae01090fc83410c4bf315",
-  "home/.config/mimeapps.list": "efdbb7bc430d7ff1f9ff68dd3b5499d32f4cdd07f585d38d575c62183e59358c",
+  "home/.config/mimeapps.list": "f2fe0149dbb54f4cd8f687ac216c1d1fc9623f18eea0c6d13a40c4e04c6ada7b",
   "home/.config/systemd/user/blacklight-wallpaper-sync.service": "e76a9dd98197ab50c58cf911e486c9ef948689c94008980d5bf900fafa3ef6ce",
   "home/.config/systemd/user/blacklight-wallpaper-sync.service.d/resource-priority.conf": "80d8527315b95a51d14f159927781735d99591b0494648fd57100bd783074dd3",
   "home/.config/systemd/user/blacklight-wallpaper-sync.service.d/security.conf": "d37a3fb710507d41092fe67e1cc2f9d65d963fffcec097eb799ccaee51729680",

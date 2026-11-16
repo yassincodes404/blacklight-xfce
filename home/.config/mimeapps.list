@@ -39,3 +39,10 @@ application/x-zip-compressed=org.gnome.FileRoller.desktop
 application/x-tar=org.gnome.FileRoller.desktop
 application/x-compressed-tar=org.gnome.FileRoller.desktop
 application/x-xz-compressed-tar=org.gnome.FileRoller.desktop
+
+[Added Associations]
+application/zip=org.gnome.FileRoller.desktop;
+application/x-zip-compressed=org.gnome.FileRoller.desktop;
+application/x-tar=org.gnome.FileRoller.desktop;
+application/x-compressed-tar=org.gnome.FileRoller.desktop;
+application/x-xz-compressed-tar=org.gnome.FileRoller.desktop;

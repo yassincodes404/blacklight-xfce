@@ -96,3 +96,14 @@ and Thunar’s Create Archive / Extract Here context menu. Galinia’s MIME
 profile routes common archive types to File Roller. The included launcher
 uses GTK’s OpenGL renderer for File Roller. Keep ~/.local/bin on the
 session PATH so Thunar’s archive commands use that launcher too.
+
+When merging an existing MIME profile, merge the archive entries under
+`[Added Associations]` as well as `[Default Applications]`. Thunar
+discovers archive tools through the registered associations. After copying
+the launcher, refresh the local desktop cache:
+
+```sh
+update-desktop-database ~/.local/share/applications
+```
+
+Relaunch Thunar if it was running before the archive plugin was installed.
