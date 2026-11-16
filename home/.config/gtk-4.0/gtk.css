@@ -61,7 +61,7 @@ textview, textview:backdrop, textview text, textview text:backdrop {
 rubberband {
     background-color: alpha(#f2f2f8, 0.17);
     border: 1px solid alpha(#f2f2f8, 0.82);
-    border-radius: 3px;
+    border-radius: 0;
     box-shadow: none;
     transition: none;
 }

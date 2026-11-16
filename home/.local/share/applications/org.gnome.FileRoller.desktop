@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Archive Manager
+Comment=Create and extract archives with File Roller
+Exec="@HOME@/.local/bin/file-roller" %U
+TryExec=/usr/bin/file-roller
+Icon=org.gnome.FileRoller
+Terminal=false
+Categories=GTK;Utility;Archiving;Compression;
+MimeType=application/zip;application/x-zip-compressed;application/x-tar;application/x-compressed-tar;application/x-xz-compressed-tar;
+StartupNotify=true
+DBusActivatable=false

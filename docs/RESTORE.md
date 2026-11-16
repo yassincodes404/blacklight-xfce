@@ -90,3 +90,9 @@ The staged `.config/mimeapps.list` maps common images to gThumb, videos to
 Celluloid, and local audio to Amberol. With an existing profile, merge
 those entries into the existing `[Default Applications]` section so other
 file associations and URL handlers stay available.
+
+Install `file-roller` and `thunar-archive-plugin` for ZIP and TAR archives
+and Thunar’s Create Archive / Extract Here context menu. Galinia’s MIME
+profile routes common archive types to File Roller. The included launcher
+uses GTK’s OpenGL renderer for File Roller. Keep ~/.local/bin on the
+session PATH so Thunar’s archive commands use that launcher too.

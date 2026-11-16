@@ -661,7 +661,8 @@ placessidebar list:backdrop {{
 }}
 
 /* Exo/xfdesktop temporarily add the rubberband class to the view
-   itself. Give that draw pass its own fill instead of the file surface. */
+   itself. Keep the outline square: Exo only repaints a one-pixel edge
+   where old and new rectangles overlap. Rounded edges leave stale pixels. */
 rubberband, .rubberband, .view.rubberband,
 .content-view rubberband, .content-view .rubberband,
 treeview.view rubberband, flowbox rubberband,
@@ -673,7 +674,7 @@ treeview.view rubberband, flowbox rubberband,
     background-image: none;
     background-color: alpha({pal['accent_hex']}, 0.17);
     border: 1px solid alpha({pal['accent_hex']}, 0.82);
-    border-radius: 3px;
+    border-radius: 0;
     box-shadow: none;
     transition: none;
 }}
@@ -896,7 +897,7 @@ textview, textview:backdrop, textview text, textview text:backdrop {{
 rubberband {{
     background-color: alpha({pal['accent_hex']}, 0.17);
     border: 1px solid alpha({pal['accent_hex']}, 0.82);
-    border-radius: 3px;
+    border-radius: 0;
     box-shadow: none;
     transition: none;
 }}
