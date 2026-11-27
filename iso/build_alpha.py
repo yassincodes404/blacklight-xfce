@@ -172,6 +172,14 @@ def main():
     if not initrd.is_file():
         raise ValueError('No rebuilt initramfs matching the original signed live kernel')
     shutil.copy2(initrd,casper/'initrd')
+    # Casper embeds a freshly generated media UUID in each rebuilt initramfs.
+    # The ISO must advertise that same UUID or boot falls back to netboot.
+    unpacked=work/'initrd-unpacked'
+    run('unmkinitramfs',initrd,unpacked)
+    uuids=list(unpacked.rglob('conf/uuid.conf'))
+    if len(uuids)!=1:raise ValueError('Cannot identify the rebuilt Casper media UUID')
+    media_uuid=work/'casper-uuid-generic'
+    shutil.copy2(uuids[0],media_uuid)
     base_manifest,live_manifest=manifest(base),manifest(live)
     (casper/'minimal.manifest').write_text(base_manifest)
     (casper/'minimal.manifest.full').write_text(base_manifest)
@@ -204,10 +212,10 @@ def main():
     # Rebuild media integrity metadata for replaced paths, retaining unchanged upstream entries.
     md5=work/'md5sum.txt'
     run('xorriso','-osirrox','on','-indev',iso,'-extract','/md5sum.txt',md5)
-    rows=[row for row in md5.read_text().splitlines() if not any('/'+part in row.split()[-1] for part in ['casper/','boot/grub/grub.cfg','.disk/info','md5sum.txt','boot.catalog'])]
-    for file in sorted(casper.rglob('*'))+[grub,info]:
+    rows=[row for row in md5.read_text().splitlines() if not any('/'+part in row.split()[-1] for part in ['casper/','boot/grub/grub.cfg','.disk/info','.disk/casper-uuid-generic','md5sum.txt','boot.catalog'])]
+    for file in sorted(casper.rglob('*'))+[grub,info,media_uuid]:
         if not file.is_file():continue
-        name='./casper/'+str(file.relative_to(casper)) if file.is_relative_to(casper) else './boot/grub/grub.cfg' if file==grub else './.disk/info'
+        name='./casper/'+str(file.relative_to(casper)) if file.is_relative_to(casper) else './boot/grub/grub.cfg' if file==grub else './.disk/casper-uuid-generic' if file==media_uuid else './.disk/info'
         h=hashlib.md5()
         with file.open('rb') as stream:
             for block in iter(lambda:stream.read(1024*1024),b''):h.update(block)
@@ -216,7 +224,7 @@ def main():
     result=out/'galinia-0.1-alpha1-amd64.iso'
     if result.exists():raise ValueError('Refusing to overwrite an existing ISO')
     run('xorriso','-indev',iso,'-outdev',result,'-boot_image','any','replay','-volid','GALINIA_ALPHA',
-        '-map',casper,'/casper','-map',grub,'/boot/grub/grub.cfg','-map',info,'/.disk/info','-map',md5,'/md5sum.txt','-commit')
+        '-map',casper,'/casper','-map',grub,'/boot/grub/grub.cfg','-map',info,'/.disk/info','-map',media_uuid,'/.disk/casper-uuid-generic','-map',md5,'/md5sum.txt','-commit')
     (out/'SHA256SUMS').write_text(digest(result)+'  '+result.name+'\n')
     (out/'build.json').write_text(json.dumps({'status':'unqualified-development','source':lock,
         'source_commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
