@@ -43,6 +43,28 @@ def process_check(label, names, running):
             'detail': 'one running instance' if count == 1 else f'{count} instances; review missing or duplicate startup entries'}
 
 
+
+def wayland_lock_result(providers, idle_active, pam_ready):
+    missing = [name for name, exists in providers.items() if not exists]
+    if missing or not pam_ready:
+        return {'name': 'Wayland locking', 'status': 'warn',
+                'detail': 'missing: ' + ', '.join(missing + ([] if pam_ready else ['Swaylock PAM configuration']))}
+    return {'name': 'Wayland locking', 'status': 'info' if idle_active else 'warn',
+            'detail': 'native providers ready; lock/unlock still requires a real password test' if idle_active
+                      else 'native providers installed but idle/lock service is not active'}
+
+
+def portal_capture_result(value):
+    try:
+        kind, number = value.strip().split()
+        sources = int(number) if kind == 'u' else 0
+    except (ValueError, AttributeError):
+        sources = 0
+    return {'name': 'Wayland screen sharing', 'status': 'info' if sources else 'warn',
+            'detail': 'backend advertises capture sources; browser capture still needs testing' if sources
+                      else 'no capture sources advertised or portal unavailable'}
+
+
 def collect():
     checks = []
     missing = install.package_status()
@@ -71,6 +93,17 @@ def collect():
             checks.append(process_check(label, names, running))
         if os.environ.get('XDG_SESSION_TYPE') != 'wayland':
             checks.append(process_check('Screen locker', ['xfce4-screensav', 'light-locker', 'xscreensaver'], running))
+        if os.environ.get('XDG_SESSION_TYPE') == 'wayland':
+            idle = unit_state('galinia-wayland-idle.service', user=True)
+            providers = {name: bool(shutil.which(name)) for name in ['swaylock', 'swayidle', 'wlopm']}
+            checks.append(wayland_lock_result(providers, idle.get('ActiveState') == 'active', Path('/etc/pam.d/swaylock').is_file()))
+            try:
+                capture = subprocess.run(['busctl', '--user', '--auto-start=no', 'get-property',
+                    'org.freedesktop.portal.Desktop', '/org/freedesktop/portal/desktop',
+                    'org.freedesktop.portal.ScreenCast', 'AvailableSourceTypes'], capture_output=True, text=True, timeout=5)
+                checks.append(portal_capture_result(capture.stdout))
+            except (OSError, subprocess.SubprocessError):
+                checks.append(portal_capture_result(''))
         if 'pulseaudio' in running and 'pipewire-pulse' in running:
             checks.append({'name': 'Audio providers', 'status': 'warn', 'detail': 'PulseAudio and PipeWire Pulse servers both running; inspect before changing either'})
         checks.append({'name': 'Audio/lock/hardware validation', 'status': 'info',

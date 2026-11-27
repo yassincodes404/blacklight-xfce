@@ -86,7 +86,10 @@ class PreferenceTests(unittest.TestCase):
         log = directory / 'calls'
         env = {**os.environ, 'PATH': str(directory) + ':' + os.environ['PATH'],
                'XDG_CONFIG_HOME': str(directory), 'TEST_CALL_LOG': str(log)}
-        subprocess.run(['sh', str(ROOT / 'home/.local/bin/galinia-session')], env=env, check=True)
+        activation = directory / 'dbus-update-activation-environment'
+        activation.write_text('#!/bin/sh\nexit 0\n'); activation.chmod(0o755)
+        env['XDG_SESSION_TYPE'] = 'x11'
+        subprocess.run(['sh', str(ROOT / 'home/.local/bin/galinia-session'), '--once'], env=env, check=True)
         calls = log.read_text()
         self.assertIn('stop sysmon-widget.service', calls)
         self.assertNotIn('restart sysmon-widget.service', calls)

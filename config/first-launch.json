@@ -98,7 +98,11 @@
       "libgtk-layer-shell0",
       "slurp",
       "swappy",
-      "wl-clipboard"
+      "wl-clipboard",
+      "swaylock",
+      "swayidle",
+      "wlopm",
+      "xdg-desktop-portal-wlr"
     ],
     "extras": [
       "libreoffice",

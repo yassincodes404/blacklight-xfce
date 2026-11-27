@@ -249,12 +249,13 @@ selection,
     color: {pal['accent_hex']};
 }}
 
-/* --- One full-width wallpaper-adaptive main bar --- */
+/* --- Transparent main bar; keep foreground widgets fully opaque --- */
 .xfce4-panel.background {{
     padding: 0 6px;
-    background-color: {pal['bg_1']};
+    background-image: none;
+    background-color: transparent;
     border: none;
-    border-bottom: 1px solid {pal['border_hex']};
+    border-bottom: none;
     border-radius: 0;
     box-shadow: none;
     color: {pal['fg_hex']};
@@ -314,12 +315,13 @@ selection,
     color: {pal['fg_hex']};
 }}
 
-/* External plugin windows need the same opaque surface as the full bar. */
+/* Plugin containers must not paint opaque rectangles over the transparent bar. */
 #XfcePanelWindowWrapper,
 #XfcePanelWindowWrapper.xfce4-panel,
 .xfce4-panel .systray,
 .xfce4-panel > box {{
-    background-color: {pal['bg_1']};
+    background-image: none;
+    background-color: transparent;
     color: {pal['accent_hex']};
     border: none;
     border-radius: 0;

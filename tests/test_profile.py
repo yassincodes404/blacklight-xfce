@@ -50,7 +50,10 @@ class ProfileTests(unittest.TestCase):
             stub.write_text('#!/bin/sh\nprintf "%s\\n" "$*" >> "$CALL_LOG"\ncase "$*" in *"restart sysmon-widget.service"*) exit 1;; esac\nexit 0\n')
             stub.chmod(0o755)
             env={**os.environ,'PATH':str(directory)+':'+os.environ['PATH'],'CALL_LOG':str(log)}
-            result=subprocess.run(['sh',str(ROOT/'home/.local/bin/galinia-session')],env=env,capture_output=True,text=True)
+            activation=directory/'dbus-update-activation-environment'
+            activation.write_text('#!/bin/sh\nexit 0\n');activation.chmod(0o755)
+            env['XDG_SESSION_TYPE']='x11'
+            result=subprocess.run(['sh',str(ROOT/'home/.local/bin/galinia-session'),'--once'],env=env,capture_output=True,text=True,timeout=5)
             self.assertEqual(result.returncode,1)
             calls=log.read_text()
             self.assertIn('restart blacklight-wallpaper-sync.service',calls)

@@ -78,3 +78,9 @@ The latest completed ISO run (46037640446) was also reviewed: both BIOS and UEFI
 screenshot proves desktop arrival, and this observation window does not by
 itself prove a permanent boot hang. Extend the boot investigation and inspect
 guest logs before marking live boot passed.
+
+Follow-up implementation and its remaining qualification steps are recorded in
+[SESSION-LIFETIME.md](SESSION-LIFETIME.md). Starting the wlroots backend restored
+an advertised capture source; session lifecycle fixes were deployed and survived
+a subsequent reference-machine reboot. Interactive locking still requires the
+packaged providers and password verification.

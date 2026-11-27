@@ -1,0 +1,11 @@
+[Unit]
+Description=Galinia native Wayland idle and lock handling
+PartOf=galinia-session.target
+ConditionEnvironment=XDG_SESSION_TYPE=wayland
+
+[Service]
+ExecStart=%h/.local/bin/galinia-wayland-idle
+Restart=on-failure
+RestartSec=5
+# PAM's unix_chkpwd helper must retain the ability to authenticate the user.
+NoNewPrivileges=false

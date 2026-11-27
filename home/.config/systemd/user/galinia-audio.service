@@ -1,7 +1,7 @@
 [Unit]
 Description=Galinia desktop sound and music card
-After=graphical-session.target pipewire.service wireplumber.service
-PartOf=graphical-session.target
+After=pipewire.service wireplumber.service
+PartOf=galinia-session.target
 StartLimitIntervalSec=60
 StartLimitBurst=3
 

@@ -31,3 +31,18 @@ class HealthTests(unittest.TestCase):
     def test_unavailable_user_bus_is_reported_without_crashing(self):
         with patch.object(health.subprocess, 'run', return_value=types.SimpleNamespace(returncode=1)):
             self.assertEqual(health.unit_state('pipewire.service', user=True), {})
+
+    def test_missing_wayland_locker_is_visible(self):
+        result = health.wayland_lock_result({'swaylock': False, 'swayidle': True}, True, False)
+        self.assertEqual(result['status'], 'warn')
+        self.assertIn('swaylock', result['detail'])
+
+    def test_ready_locker_does_not_claim_authentication_was_tested(self):
+        result = health.wayland_lock_result({'swaylock': True}, True, True)
+        self.assertEqual(result['status'], 'info')
+        self.assertIn('real password test', result['detail'])
+
+    def test_portal_active_with_zero_sources_is_not_healthy(self):
+        for value in ['u 0', '', 'bad response']:
+            self.assertEqual(health.portal_capture_result(value)['status'], 'warn')
+        self.assertEqual(health.portal_capture_result('u 1')['status'], 'info')

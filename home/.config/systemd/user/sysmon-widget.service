@@ -1,7 +1,6 @@
 [Unit]
 Description=Galinia Desktop System Monitor
-After=graphical-session.target
-PartOf=graphical-session.target
+PartOf=galinia-session.target
 StartLimitIntervalSec=60
 StartLimitBurst=3
 

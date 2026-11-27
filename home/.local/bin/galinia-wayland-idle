@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+[ "${XDG_SESSION_TYPE:-}" = wayland ] || exit 0
+"$HOME/.local/bin/galinia-lock" --check
+# -w and swaylock's daemonize handshake wait until the compositor acknowledges
+# locking before the before-sleep command finishes. Respect the requested 40 min.
+exec swayidle -w \
+    timeout 2400 "\"$HOME/.local/bin/galinia-lock\" && wlopm --off '*'" \
+    resume "wlopm --on '*'" \
+    before-sleep "\"$HOME/.local/bin/galinia-lock\"" \
+    lock "\"$HOME/.local/bin/galinia-lock\""

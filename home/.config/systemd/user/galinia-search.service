@@ -1,6 +1,6 @@
 [Unit]
 Description=Galinia App Search
-PartOf=graphical-session.target
+PartOf=galinia-session.target
 
 [Service]
 Type=dbus
