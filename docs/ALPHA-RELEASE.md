@@ -7,10 +7,11 @@ in the ISO. The current desktop is never used as the root filesystem source.
 
 ## Automated image path
 
-`.github/workflows/iso-alpha.yml` runs on the pull request carrying the
-`build-iso` label, and supports manual dispatch once on the default branch.
+`.github/workflows/iso-alpha.yml` runs when the `build-iso` label is added to a pull request, and supports manual
+dispatch once on the default branch. It does not rebuild multi-gigabyte images
+on unrelated commits. To rebuild an updated branch, remove and re-add the label.
 It runs on an isolated root-capable runner, not the user's installed system.
-Remove the label to stop subsequent automatic builds.
+The source commit recorded in each artifact identifies exactly what was built.
 
 1. Authenticate the official SHA256SUMS signature with Ubuntu's archive keyring.
 2. Check the explicitly pinned ISO hash in `iso/source.lock.json`.

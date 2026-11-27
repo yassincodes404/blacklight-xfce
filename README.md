@@ -61,6 +61,8 @@ comfortable layouts, desktop, device and system settings. Kernel tuning is handl
 Kitty uses Catppuccin Mocha. The fixed desktop audio card provides volume and
 MPRIS playback controls; see [terminal and audio](docs/AUDIO-TERMINAL.md).
 The [alpha release workflow](docs/ALPHA-RELEASE.md) records build and test gates.
+The [website source](website/README.md) presents the desktop and its current
+qualification status without advertising an untested stable download.
 
 The [image-development guide](iso/README.md) describes the Xubuntu-based live
 image workflow. A rootless defaults-package builder supplies the Galinia session,
