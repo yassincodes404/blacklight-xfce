@@ -53,7 +53,7 @@
   "home/.gtkrc-2.0": "5c3aae18dc768bd1950b4bc5f06238613ceaa2b6712922f192ae8ab3a12e5aa2",
   "home/.icons/Blacklight-Chibi": "symlink:../.local/share/icons/Blacklight-Chibi",
   "home/.icons/default": "symlink:../.local/share/icons/default",
-  "home/.local/bin/blacklight-wallpaper-sync.py": "96888865f6d7f4db5f398ee994f472ab5b988f72f6a9da7b934d262fd71168c8",
+  "home/.local/bin/blacklight-wallpaper-sync.py": "67e50d6480e665b366f55e9df19ea7b085b066e7bc63f915459446ddec981f59",
   "home/.local/bin/file-roller": "a11df41c3493fb314da81cc84a6e330d20e81450d178ffc6dccd01030182fb7c",
   "home/.local/bin/firefox": "08a3b3ece46d800d9be0346bc31a9002a6a3cb521ed3290845777815111e8608",
   "home/.local/bin/flameshot": "1b4ddc828dcbfbf2ba8fa2878a13f8b551d4e07c959919aef310b90c3dc3a059",

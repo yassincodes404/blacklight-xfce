@@ -304,7 +304,19 @@ selection,
     margin: 3px 2px;
     padding: 0;
 }}
-.xfce4-panel.background .tasklist button:checked {{
+/* Focus/hover states must not restore the theme's filled task-button block. */
+.xfce4-panel.background .tasklist button:hover,
+.xfce4-panel.background .tasklist button:active,
+.xfce4-panel.background .tasklist button:checked,
+.xfce4-panel.background .tasklist button:focus {{
+    background-image: none;
+    background-color: transparent;
+    border: none;
+    outline-style: none;
+    box-shadow: none;
+}}
+.xfce4-panel.background .tasklist button:checked,
+.xfce4-panel.background .tasklist button:focus {{
     box-shadow: inset 0 -2px 0 {pal['accent_hex']};
 }}
 
