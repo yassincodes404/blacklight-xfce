@@ -132,6 +132,10 @@ def main():
     delta=work/'delta';delta.mkdir()
     run('rsync','-aHAXc','--compare-dest='+str(base),str(live)+'/',str(delta)+'/')
     whiteouts(base,live,delta)
+    with mounted(['-t','overlay','overlay','-o',f'lowerdir={delta}:{base}'],work/'verify-live') as rebuilt:
+        differences=subprocess.check_output(['rsync','-aHAXcn','--delete','--itemize-changes',str(live)+'/',str(rebuilt)+'/'],text=True)
+        unexpected=[line for line in differences.splitlines() if not line.endswith(' ./')]
+        if unexpected:raise ValueError('Reconstructed live layer differs: '+repr(unexpected[:20]))
     for root,name in [(base,'minimal'),(delta,'minimal.live')]:
         target=casper/(name+'.squashfs');target.unlink()
         run('mksquashfs',root,target,'-noappend','-comp','xz','-processors','2','-no-progress')

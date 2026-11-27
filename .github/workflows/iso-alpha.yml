@@ -30,8 +30,23 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: galinia-alpha-development
-          path: dist
+          name: galinia-alpha-evidence
+          path: |
+            dist/source
+            dist/defaults
+            dist/boot
+            dist/image/build.json
+            dist/image/SHA256SUMS
+            dist/image/packages.manifest
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
+      - name: Upload completed development ISO
+        if: always() && hashFiles('dist/image/SHA256SUMS') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: galinia-alpha-iso
+          path: dist/image/*.iso
           if-no-files-found: error
           retention-days: 7
           compression-level: 0

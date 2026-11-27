@@ -3,6 +3,7 @@
 import argparse
 from pathlib import Path
 import re
+import math
 import time
 
 import gi
@@ -22,23 +23,26 @@ class AudioCard(Gtk.Application):
             return
         self.window=Gtk.ApplicationWindow(application=self,title='Galinia Audio')
         win=self.window;win.set_name('galinia-audio');win.set_decorated(False);win.set_resizable(False)
+        win.set_app_paintable(True)
+        visual=win.get_screen().get_rgba_visual()
+        if visual:win.set_visual(visual)
         win.set_type_hint(Gdk.WindowTypeHint.UTILITY);win.set_skip_taskbar_hint(True);win.set_skip_pager_hint(True)
         win.set_keep_below(True);win.stick();win.set_focus_on_map(False)
         css=Gtk.CssProvider();css.load_from_data(b'''
-        #galinia-audio { background: #fafaf9; color: #181819; border: 1px solid #dadada; border-bottom: 3px solid #181819; border-radius: 16px; }
-        #galinia-audio .heading { color: #777779; font-size: 9px; font-weight: bold; letter-spacing: 2px; }
-        #galinia-audio .track { color: #161617; font-size: 16px; font-weight: bold; }
-        #galinia-audio .muted { color: #777779; font-size: 10px; }
-        #galinia-audio button { background: transparent; color: #181819; border: none; box-shadow: none; border-radius: 18px; padding: 7px; transition: background-color 120ms ease; }
-        #galinia-audio button:hover { background: #e8e8e7; }
-        #galinia-audio button:focus { outline: 1px solid #555; }
-        #galinia-audio .play { background: #181819; color: #fafaf9; }
-        #galinia-audio .play:hover { background: #39393b; }
-        #galinia-audio scale trough { background: #e0e0df; min-height: 3px; border-radius: 3px; }
-        #galinia-audio scale highlight { background: #181819; }
-        #galinia-audio scale slider { min-width: 8px; min-height: 8px; background: #181819; border: none; box-shadow: none; }
-        #galinia-audio progressbar trough { min-height: 3px; background: #e6e6e5; border: none; }
-        #galinia-audio progressbar progress { min-height: 3px; background: #181819; border: none; }
+        #galinia-audio { background: transparent; color: #f0f0f6; border: none; box-shadow: none; }
+        #galinia-audio .heading { color: #bcbcc8; font-size: 9px; font-weight: bold; letter-spacing: 2px; }
+        #galinia-audio .track { color: #f0f0f6; font-size: 16px; font-weight: bold; }
+        #galinia-audio .muted { color: #bcbcc8; font-size: 10px; }
+        #galinia-audio button { background: transparent; color: #f0f0f6; border: none; box-shadow: none; border-radius: 18px; padding: 7px; transition: background-color 120ms ease; }
+        #galinia-audio button:hover { background: rgba(255,255,255,.12); }
+        #galinia-audio button:focus { outline: 1px solid #bcbcc8; }
+        #galinia-audio .play { background: rgba(255,255,255,.16); color: #f0f0f6; }
+        #galinia-audio .play:hover { background: rgba(255,255,255,.25); }
+        #galinia-audio scale trough { background: rgba(255,255,255,.18); min-height: 3px; border-radius: 3px; }
+        #galinia-audio scale highlight { background: #f0f0f6; }
+        #galinia-audio scale slider { min-width: 8px; min-height: 8px; background: #f0f0f6; border: none; box-shadow: none; }
+        #galinia-audio progressbar trough { min-height: 3px; background: rgba(255,255,255,.18); border: none; }
+        #galinia-audio progressbar progress { min-height: 3px; background: #f0f0f6; border: none; }
         ''')
         Gtk.StyleContext.add_provider_for_screen(win.get_screen(),css,800)
         box=Gtk.Box(orientation=Gtk.Orientation.VERTICAL,spacing=8,margin=16);box.set_size_request(320,-1);win.add(box)
@@ -49,6 +53,8 @@ class AudioCard(Gtk.Application):
         details=Gtk.Box(orientation=Gtk.Orientation.VERTICAL,spacing=6)
         details.pack_start(self.label('01 / NOW PLAYING','heading'),False,False,2)
         self.title=self.label('Nothing playing','track');self.artist=self.label('Open your music player','muted')
+        self.title.set_width_chars(20);self.title.set_max_width_chars(20)
+        self.artist.set_width_chars(28);self.artist.set_max_width_chars(28)
         details.pack_start(self.title,False,False,0);details.pack_start(self.artist,False,False,0)
         row.pack_start(details,True,True,0);box.pack_start(row,False,False,0)
         self.progress=Gtk.ProgressBar();self.progress.set_fraction(0);box.pack_start(self.progress,False,False,2)
@@ -70,6 +76,7 @@ class AudioCard(Gtk.Application):
         volume.pack_end(settings,False,False,0);box.pack_start(volume,False,False,0)
         win.add_events(Gdk.EventMask.VISIBILITY_NOTIFY_MASK)
         win.connect('visibility-notify-event',self.visibility)
+        win.get_screen().connect('monitors-changed',self.position)
         win.connect('destroy',self.shutdown);win.connect('realize',self.position)
         win.show_all()
         if self.preview:
@@ -221,15 +228,25 @@ class AudioCard(Gtk.Application):
         self.play.set_sensitive(can and self.prop(proxy,'CanPause' if status=='Playing' else 'CanPlay',False))
 
     def record_frame(self,angle):
-        svg=f'''<svg xmlns="http://www.w3.org/2000/svg" width="84" height="84">
-        <rect width="84" height="84" rx="10" fill="#181819"/>
-        <circle cx="42" cy="42" r="29" fill="#252526"/>
-        <g fill="none" stroke="#333334" stroke-width=".7"><circle cx="42" cy="42" r="22"/><circle cx="42" cy="42" r="26"/></g>
-        <circle cx="42" cy="42" r="9" fill="#fafaf9"/>
-        <path d="M 65.5,33.4 A 25,25 0 0,1 65.5,50.6" transform="rotate({angle} 42 42)" fill="none" stroke="#99999a" stroke-width="1.1"/>
-        </svg>'''
-        loader=GdkPixbuf.PixbufLoader.new_with_type('svg');loader.write(svg.encode());loader.close()
-        return loader.get_pixbuf()
+        # Rasterize this tiny procedural graphic once. Subsequent frames copy
+        # 28 KiB and update only the glint; no repeated SVG renderer or decoder.
+        if not hasattr(self,'record_pixels'):
+            pixels=bytearray(84*84*4);glints=[]
+            for y in range(84):
+                for x in range(84):
+                    dx,dy=x-41.5,y-41.5;radius=math.hypot(dx,dy);offset=(y*84+x)*4
+                    alpha=max(0.,min(1.,29.5-radius))*.12
+                    groove=max(0.,1.-min(abs(radius-22),abs(radius-26)))*.10
+                    alpha=max(alpha,groove) if radius<29.5 else 0.
+                    if radius<9.5:alpha=max(alpha,min(1.,9.5-radius))
+                    pixels[offset:offset+4]=bytes((250,250,249,round(alpha*255)))
+                    if abs(radius-25)<1.1:glints.append((offset,math.atan2(dy,dx),min(1.,1.1-abs(radius-25))))
+            self.record_pixels,self.record_glints=pixels,glints
+        pixels=bytearray(self.record_pixels);radians=math.radians(angle)
+        for offset,direction,coverage in self.record_glints:
+            if math.cos(direction-radians)>.94:
+                pixels[offset:offset+4]=bytes((220,220,225,round((.12+.4*coverage)*255)))
+        return GdkPixbuf.Pixbuf.new_from_bytes(GLib.Bytes.new(bytes(pixels)),GdkPixbuf.Colorspace.RGB,True,8,84,84,84*4)
 
     def current_position(self):
         return max(0.,self.position_base+(time.monotonic()-self.position_time if self.is_playing else 0.))

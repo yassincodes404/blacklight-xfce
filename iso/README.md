@@ -5,6 +5,10 @@ kernel, signed boot components, firmware and update repositories. This folder
 contains the customization recipe; no bootable Galinia ISO has been built or
 qualified yet. Do not rename a defaults package or source archive as an ISO.
 
+The [automated alpha pipeline](../docs/ALPHA-RELEASE.md) now verifies a pinned
+source image and builds/observes it on an isolated CI runner. Build success
+alone does not satisfy the qualification checklist below.
+
 ## Build the defaults package without root
 
 On Ubuntu/Xubuntu with python3-gi, gir1.2-gdkpixbuf-2.0, librsvg2-common and

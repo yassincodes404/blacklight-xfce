@@ -1,15 +1,16 @@
 # Terminal and desktop audio
 
 Kitty ships a pinned MIT-licensed Catppuccin Mocha theme with JetBrains Mono,
-12-pixel padding and a bottom powerline tab bar when multiple tabs are open.
+a pure black background, 12-pixel padding and a bottom powerline tab bar when multiple tabs are open.
 The fixed-theme comment in kitty.conf opts it out of wallpaper palette updates.
 Existing terminal windows reload with Kitty's supported SIGUSR1 mechanism.
-The previous live config is backed up before replacement. Shell startup files,
+The previous live config is backed up before replacement. Fresh profiles select Kitty as the preferred terminal, matching the reference
+desktop. XFCE Terminal remains installed as a fallback. Shell startup files,
 prompts and history are not changed.
 
 The desktop sound/music card is fixed at the primary monitor's bottom-right
-work area. It has no pointer-motion or drag handler. Its white surface, black
-controls, record artwork and thin playback line follow the requested reference.
+work area. It has no pointer-motion or drag handler. Its transparent surface and light text match the system monitor, while record
+artwork, compact controls and a thin playback line follow the requested reference.
 Use Control Center → Appearance to hide/show it. Session startup respects that
 preference. Sound settings opens the maintained pavucontrol application.
 

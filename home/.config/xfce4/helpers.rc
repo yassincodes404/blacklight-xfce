@@ -1,1 +1,2 @@
-TerminalEmulator=debian-x-terminal-emulator
+TerminalEmulator=kitty
+TerminalEmulatorDismissed=true

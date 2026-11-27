@@ -169,7 +169,7 @@ class AppSearch(Gtk.Application):
         query = self.entry.get_text().strip().casefold()
         matches = []
         if not query:
-            favorites = ("thunar.desktop", "firefox.desktop", "xfce4-terminal.desktop",
+            favorites = ("thunar.desktop", "firefox.desktop", "kitty.desktop",
                          "galinia-control-center.desktop", "galinia-welcome.desktop")
             for rank, name in enumerate(favorites):
                 app = self.apps.get(name)

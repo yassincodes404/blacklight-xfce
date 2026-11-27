@@ -70,3 +70,9 @@ Publish source and license notices, supported scope, installation/recovery
 instructions, checksums and known issues with the qualified alpha. A website
 should link to that exact release. GitHub issue forms capture build identifiers,
 reproduction steps and hardware details without asking for credentials.
+
+GitHub Releases limits each asset to under 2 GiB. If the qualified ISO exceeds
+that limit, use a suitable direct-download mirror or verified split assets with
+clear reconstruction instructions; do not promise a single oversized release
+asset. CI stores the development ISO separately from small qualification evidence.
+Reference: https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases
