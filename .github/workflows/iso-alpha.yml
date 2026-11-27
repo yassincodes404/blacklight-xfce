@@ -1,0 +1,26 @@
+name: Qualify alpha image
+on:
+  pull_request:
+    types: [labeled, synchronize]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  image:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'build-iso')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install isolated image tools
+        run: sudo apt-get update && sudo apt-get install -y xorriso squashfs-tools ubuntu-keyring python3-gi gir1.2-gdkpixbuf-2.0 librsvg2-common
+      - name: Verify and inspect source
+        run: python3 iso/source_image.py --output "$RUNNER_TEMP/galinia-source" --report dist/source
+      - name: Upload source qualification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: galinia-source-inspection
+          path: dist
+          if-no-files-found: error
+          retention-days: 14
