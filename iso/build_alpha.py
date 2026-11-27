@@ -13,6 +13,8 @@ from pathlib import Path
 import shutil
 import stat
 import subprocess
+import tempfile
+import urllib.request
 
 HERE = Path(__file__).resolve().parent
 
@@ -36,7 +38,27 @@ def manifest(root):
     return subprocess.check_output(['chroot',str(root),'dpkg-query','-W','-f=${Package} ${Version}\n'],text=True)
 
 
+def prepare_browser_repo(root):
+    # The pinned minimal source has no Firefox payload. Use the same maintained
+    # native Mozilla package route as the reference machine, with scoped trust.
+    fingerprint='35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3'
+    with urllib.request.urlopen('https://packages.mozilla.org/apt/repo-signing-key.gpg',timeout=60) as response:
+        key=response.read()
+    keyring=root/'etc/apt/keyrings/packages.mozilla.org.asc';keyring.parent.mkdir(parents=True,exist_ok=True);keyring.write_bytes(key)
+    with tempfile.TemporaryDirectory(prefix='galinia-public-key-') as home:
+        listing=subprocess.check_output(['gpg','--homedir',home,'--batch','--show-keys','--with-colons',str(keyring)],text=True)
+    fingerprints=[row.split(':')[9] for row in listing.splitlines() if row.startswith('fpr:')]
+    if not fingerprints or fingerprints[0]!=fingerprint:
+        raise ValueError('Mozilla APT signing key fingerprint mismatch')
+    (root/'etc/apt/sources.list.d/galinia-mozilla.sources').write_text(
+        'Types: deb\nURIs: https://packages.mozilla.org/apt\nSuites: mozilla\nComponents: main\n'
+        'Signed-By: /etc/apt/keyrings/packages.mozilla.org.asc\n')
+    (root/'etc/apt/preferences.d/galinia-firefox').write_text(
+        'Package: firefox firefox-l10n-*\nPin: origin packages.mozilla.org\nPin-Priority: 1000\n')
+
+
 def customize(root, package, media):
+    prepare_browser_repo(root)
     policy = root / 'usr/sbin/policy-rc.d'
     if policy.exists():
         raise ValueError('Unexpected service policy in original image')
@@ -65,6 +87,8 @@ def customize(root, package, media):
         (root/'tmp/galinia-defaults.deb').unlink(missing_ok=True)
         (root/'tmp/galinia-customize.sh').unlink(missing_ok=True)
     run('chroot',root,'apt-get','clean')
+    if not (root/'usr/lib/firefox/firefox').is_file():
+        raise ValueError('The native Firefox payload is missing; a transitional package is insufficient')
     (root/'etc/machine-id').write_text('')
     (root/'var/lib/systemd/random-seed').unlink(missing_ok=True)
     for key in (root/'etc/ssh').glob('ssh_host_*'):
@@ -95,12 +119,15 @@ def main():
     parser.add_argument('--package',type=Path,required=True)
     parser.add_argument('--work',type=Path,required=True)
     parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--phase',choices=['all','prepare','installed','live','finish'],default='all')
     args=parser.parse_args()
     if os.geteuid()!=0 or os.environ.get('GALINIA_IMAGE_BUILD')!='1':
         raise ValueError('Requires GALINIA_IMAGE_BUILD=1 on an isolated root-capable image builder')
     source,work,out=args.source.resolve(),args.work.resolve(),args.output.resolve()
-    if work.exists():
+    if args.phase in ('all','prepare') and work.exists():
         raise ValueError('Use a new empty work path')
+    if args.phase not in ('all','prepare') and not (work/'.prepared').is_file():
+        raise ValueError('Prepare this image before continuing')
     lock=json.loads((HERE/'source.lock.json').read_text())
     iso=source/lock['filename']
     from source_image import digest
@@ -108,18 +135,30 @@ def main():
         raise ValueError('Unverified source image')
     if set(p.name for p in (source/'casper').glob('*.squashfs')) != {'minimal.squashfs','minimal.live.squashfs'}:
         raise ValueError('Only the pinned two-layer minimal image is supported')
-    work.mkdir();out.mkdir(parents=True,exist_ok=True)
-    casper=work/'casper';shutil.copytree(source/'casper',casper)
-    base,live=work/'base',work/'live'
-    for root in [base,live]:root.mkdir()
-    with mounted(['-o','loop,ro',source/'casper/minimal.squashfs'],work/'source-base') as oldbase:
-        with mounted(['-o','loop,ro',source/'casper/minimal.live.squashfs'],work/'source-live') as oldlive:
-            with mounted(['-t','overlay','overlay','-o',f'lowerdir={oldlive}:{oldbase}'],work/'source-merged') as merged:
-                run('rsync','-aHAX',str(oldbase)+'/',str(base)+'/')
-                run('rsync','-aHAX',str(merged)+'/',str(live)+'/')
-    with mounted(['-o','loop,ro',iso],work/'source-media') as media:
-        customize(base,args.package.resolve(),media)
-        customize(live,args.package.resolve(),media)
+    out.mkdir(parents=True,exist_ok=True)
+    casper=work/'casper';base,live=work/'base',work/'live'
+    if args.phase in ('all','prepare'):
+        work.mkdir();shutil.copytree(source/'casper',casper)
+        for root in [base,live]:root.mkdir()
+        with mounted(['-o','loop,ro',source/'casper/minimal.squashfs'],work/'source-base') as oldbase:
+            with mounted(['-o','loop,ro',source/'casper/minimal.live.squashfs'],work/'source-live') as oldlive:
+                with mounted(['-t','overlay','overlay','-o',f'lowerdir={oldlive}:{oldbase}'],work/'source-merged') as merged:
+                    run('rsync','-aHAX',str(oldbase)+'/',str(base)+'/')
+                    run('rsync','-aHAX',str(merged)+'/',str(live)+'/')
+        (work/'.prepared').write_text(digest(args.package))
+        if args.phase=='prepare':return
+    if (work/'.prepared').read_text()!=digest(args.package):
+        raise ValueError('Defaults package changed after preparation')
+    for phase,root in [('installed',base),('live',live)]:
+        if args.phase not in ('all',phase):continue
+        marker=work/('.'+phase)
+        if marker.exists():raise ValueError('This phase already completed; do not apply twice')
+        with mounted(['-o','loop,ro',iso],work/'source-media') as media:
+            customize(root,args.package.resolve(),media)
+        marker.write_text('complete\n')
+    if args.phase in ('installed','live'):return
+    if not all((work/('.'+phase)).is_file() for phase in ['installed','live']):
+        raise ValueError('Both installed and live root customization must succeed before packing')
     # Live-only Casper selection; all desktop defaults also exist in the installed root.
     with (live/'etc/casper.conf').open('a') as stream:
         stream.write('\nexport FLAVOUR="Galinia"\n')
@@ -138,7 +177,7 @@ def main():
         if unexpected:raise ValueError('Reconstructed live layer differs: '+repr(unexpected[:20]))
     for root,name in [(base,'minimal'),(delta,'minimal.live')]:
         target=casper/(name+'.squashfs');target.unlink()
-        run('mksquashfs',root,target,'-noappend','-comp','xz','-processors','2','-no-progress')
+        run('mksquashfs',root,target,'-noappend','-comp','zstd','-Xcompression-level','10','-processors','2','-no-progress')
         size=subprocess.check_output(['du','-sx','--block-size=1',str(root)],text=True).split()[0]
         (casper/(name+'.size')).write_text(size+'\n')
     # Retain the signed upstream live kernel. The rebuilt initramfs must match it.
@@ -175,6 +214,8 @@ def main():
     (out/'SHA256SUMS').write_text(digest(result)+'  '+result.name+'\n')
     (out/'build.json').write_text(json.dumps({'status':'unqualified-development','source':lock,
         'source_commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+        'browser_repository':'https://packages.mozilla.org/apt',
+        'browser_key_fingerprint':'35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3',
         'iso_sha256':digest(result),'package_sha256':digest(args.package),'base_manifest_sha256':digest(casper/'minimal.manifest'),
         'pending':['functional boot review','offline-browser','installation','hardware','updates','recovery']},indent=2)+'\n')
     shutil.copy2(casper/'minimal.manifest',out/'packages.manifest')

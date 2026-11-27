@@ -55,7 +55,7 @@ def stage_package(root, version):
     copy(ROOT / 'LICENSE', documentation / 'copyright')
     copy(ROOT / 'NOTICE', documentation / 'NOTICE')
     shutil.copytree(ROOT / 'LICENSES', documentation / 'licenses')
-    for name in ['FIRST-LAUNCH.md', 'IDENTITY.md', 'EVERYDAY.md', 'MEMORY.md', 'SHORTCUTS.md', 'ASSETS.md', 'CONTROL-CENTER.md', 'SYSTEM-BASELINE.md', 'AUDIO-TERMINAL.md', 'ALPHA-RELEASE.md']:
+    for name in ['FIRST-LAUNCH.md', 'IDENTITY.md', 'EVERYDAY.md', 'MEMORY.md', 'SHORTCUTS.md', 'ASSETS.md', 'CONTROL-CENTER.md', 'SYSTEM-BASELINE.md', 'AUDIO-TERMINAL.md', 'ALPHA-RELEASE.md', 'WINDOW-FRAMES.md']:
         copy(ROOT / 'docs' / name, documentation / name)
     # Let upstream packages own shared fonts/icons; avoid overwriting their files.
     dependencies = sorted(set(install.packages() + ['lightdm', 'lightdm-gtk-greeter', 'plymouth', 'grub-common',

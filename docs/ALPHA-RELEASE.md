@@ -19,6 +19,10 @@ Remove the label to stop subsequent automatic builds.
    mounted inside each chroot for its existing file:/cdrom APT source; network
    repositories still use their normal signature checks. Services are prevented
    from starting during image customization.
+Build phases are reported separately (preparation, installed root, live root,
+and packing). Root customization is checkpointed; a different defaults package
+cannot be substituted between phases.
+
 5. Reconstruct the live delta, including file deletions, and update package
    manifests, sizes, image identity and integrity metadata.
 6. Replay the source ISO's BIOS/EFI boot layout using xorriso, retaining its signed
@@ -60,9 +64,12 @@ second account, updates, profile recovery and lock/unlock. Test a designated
 reference machine for networking, playback/microphone, removable storage and
 suspend/resume. Record unknown hardware and known issues explicitly.
 
-The minimal source may require additional browser provisioning. A transitional
-Firefox .deb alone does not satisfy the offline-browser gate. Do not bypass the
-gate just to publish an image. Galinia defaults-package upgrades also need a
+The automated minimal-image path provisions native Firefox from Mozilla APT,
+verifying the documented primary signing-key fingerprint and using scoped
+Signed-By trust plus a Firefox-only repository pin. This matches the reference
+machine and avoids treating a Snap transitional .deb as a browser payload.
+The repository remains configured for subsequent APT updates. A payload check
+alone does not satisfy the offline-browser functional test; do not bypass it. Galinia defaults-package upgrades also need a
 qualified user-profile migration policy that preserves local edits before we
 promise ongoing installed-system support.
 

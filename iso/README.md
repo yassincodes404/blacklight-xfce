@@ -54,7 +54,9 @@ the distribution versions and record their resolved versions in the ISO manifest
 3. Preserve the upstream live installer, Casper configuration, Firefox Snap seed
    (when the base uses Snap), and installer removal manifests. Confirm Firefox
    is usable offline in the live session; a transitional APT package alone is
-   not evidence that a browser is installed in an image.
+   not evidence that a browser is installed in an image. The automated minimal
+   recipe instead provisions native Firefox from fingerprint-verified Mozilla
+   APT; its offline launch still requires functional qualification.
 4. In Cubic's boot configuration, change the visible labels to **Try or install
    Galinia OS** and **Galinia OS (safe graphics)**. Preserve the original kernel,
    initrd paths, Casper parameters, safe-graphics flags and boot entries. Do not

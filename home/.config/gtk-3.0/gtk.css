@@ -1,4 +1,9 @@
 
+headerbar .title, headerbar .subtitle,
+.titlebar .title, .titlebar .subtitle {
+    opacity: 0;
+    text-shadow: none;
+}
 headerbar, .titlebar {
     min-height: 28px;
     padding: 0 6px;

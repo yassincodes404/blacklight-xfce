@@ -813,6 +813,11 @@ def write_user_gtk_css(pal: dict):
     USER_GTK3_CSS.parent.mkdir(parents=True, exist_ok=True)
     # A few legacy utilities load their own application-priority notebook CSS.
     gtk3_compat = f"""
+headerbar .title, headerbar .subtitle,
+.titlebar .title, .titlebar .subtitle {{
+    opacity: 0;
+    text-shadow: none;
+}}
 headerbar, .titlebar {{
     min-height: 28px;
     padding: 0 6px;
@@ -900,6 +905,9 @@ headerbar,
     border-bottom: 1px solid {pal['border_hex']};
 }}
 
+headerbar windowtitle .title, headerbar windowtitle .subtitle {{
+    opacity: 0;
+}}
 headerbar > windowhandle > box {{
     min-height: 30px;
     padding: 0 6px;
@@ -953,8 +961,8 @@ def update_xfwm4_theme(pal: dict):
     if not XFWM4_DIR.exists():
         return
 
-    bg_act = pal["bg_0"]
-    bg_inact = pal["bg_0"]
+    bg_act = "#000000"
+    bg_inact = "#000000"
     frame_act = pal["border_hex"]
     frame_inact = pal["bg_2"]
     bot_line = bg_act
@@ -965,15 +973,15 @@ def update_xfwm4_theme(pal: dict):
 
     themerc = (
         f"# Blacklight-Ultra-Rounded (Sleek Obsidian Window Frame)\n"
-        f"active_text_color={fg_act}\n"
+        f"active_text_color=#000000\n"
         f"active_text_shadow_color=#000000\n"
-        f"inactive_text_color={fg_inact}\n"
+        f"inactive_text_color=#000000\n"
         f"inactive_text_shadow_color=#000000\n"
         f"title_shadow_active=false\n"
         f"title_shadow_inactive=false\n"
         f"full_width_title=true\n"
-        f"title_vertical_offset_active=0\n"
-        f"title_vertical_offset_inactive=0\n"
+        f"title_vertical_offset_active=-1000\n"
+        f"title_vertical_offset_inactive=-1000\n"
         f"button_offset=9\n"
         f"button_spacing=2\n"
         f"shadow_delta_height=0\n"
