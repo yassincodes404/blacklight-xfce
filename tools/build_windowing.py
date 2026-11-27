@@ -58,7 +58,7 @@ def main():
         oldmaint=re.search(r'^Maintainer: (.*)$',text,re.M).group(1)
         text=re.sub(r'^(Original-Maintainer|Origin):.*\n?', '', text, flags=re.M)
         text=re.sub(r'^Maintainer:.*$','Maintainer: Galinia Contributors <207205991+yassincodes404@users.noreply.github.com>\nOriginal-Maintainer: '+oldmaint,text,flags=re.M)
-        control.write_text(text+'\nOrigin: Galinia\n')
+        control.write_text(text.rstrip()+'\nOrigin: Galinia\n')
         doc=package/'usr/share/doc/libxfce4windowing-0-0/galinia-resolver';doc.mkdir(parents=True)
         for name in ['source.json','resolve-app.c']:shutil.copy2(ROOT/'packaging/windowing'/name,doc/name)
         sums=[]
