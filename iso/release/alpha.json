@@ -1,0 +1,14 @@
+{
+  "version": "0.1-alpha1",
+  "status": "unqualified-development",
+  "base": "Xubuntu 26.04.1 minimal amd64",
+  "desktop": "XFCE / X11",
+  "public_install_recommendation": false,
+  "required_checks": [
+    "source-authenticity", "bios-live-boot", "uefi-live-boot",
+    "galinia-first-login", "offline-browser", "screenshot-paste",
+    "vm-install", "installed-reboot", "second-account", "updates",
+    "profile-recovery", "lock-unlock", "reference-hardware",
+    "privacy-licenses"
+  ]
+}

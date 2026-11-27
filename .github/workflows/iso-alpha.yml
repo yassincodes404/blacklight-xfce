@@ -13,14 +13,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install isolated image tools
-        run: sudo apt-get update && sudo apt-get install -y xorriso squashfs-tools ubuntu-keyring python3-gi gir1.2-gdkpixbuf-2.0 librsvg2-common
+        run: sudo apt-get update && sudo apt-get install -y xorriso squashfs-tools ubuntu-keyring python3-gi gir1.2-gdkpixbuf-2.0 librsvg2-common python3-yaml rsync qemu-system-x86 ovmf python3-pil
+      - name: Reclaim unused tools on the disposable runner
+        run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
       - name: Verify and inspect source
         run: python3 iso/source_image.py --output "$RUNNER_TEMP/galinia-source" --report dist/source
+      - name: Build Galinia defaults
+        run: /usr/bin/python3 tools/build_defaults.py --output dist/defaults --version "0.1.0~alpha1.${GITHUB_SHA:0:8}"
+      - name: Build layered alpha ISO
+        run: sudo GALINIA_IMAGE_BUILD=1 /usr/bin/python3 iso/build_alpha.py --source "$RUNNER_TEMP/galinia-source" --package "$(realpath dist/defaults/*.deb)" --work "$RUNNER_TEMP/galinia-root" --output dist/image
       - name: Upload source qualification evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: galinia-source-inspection
+          name: galinia-alpha-development
           path: dist
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 7
+          compression-level: 0

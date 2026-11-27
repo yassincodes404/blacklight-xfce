@@ -1,0 +1,28 @@
+name: Galinia alpha bug
+description: Report a problem with a specific Galinia build
+labels: [bug]
+body:
+  - type: input
+    id: build
+    attributes:
+      label: Build version and source commit
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Test environment
+      description: VM or hardware model, CPU, RAM, graphics, BIOS or UEFI, live or installed. Omit serial numbers and personal identifiers.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected result and actual result
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Relevant logs or screenshots
+      description: Remove passwords, tokens, personal files and identifiers before attaching.
