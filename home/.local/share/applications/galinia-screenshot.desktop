@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Galinia Screenshot
-Comment=Select an area, save it and copy it for pasting
-Exec="@HOME@/.local/bin/galinia-screenshot"
-Icon=applets-screenshooter
-Terminal=false
-Categories=Graphics;Utility;

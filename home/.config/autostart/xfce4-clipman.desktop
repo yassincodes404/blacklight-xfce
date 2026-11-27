@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Clipboard Manager
+Comment=Keep copied text and images available
+Exec=xfce4-clipman
+TryExec=xfce4-clipman
+OnlyShowIn=XFCE;
+Terminal=false

@@ -1,12 +1,14 @@
 [Unit]
-Description=Blacklight Live Wallpaper Color Sync Daemon
+Description=Galinia Wallpaper Color Sync
 After=graphical-session.target
 PartOf=graphical-session.target
+StartLimitIntervalSec=60
+StartLimitBurst=3
 
 [Service]
 Type=simple
 ExecStart=/usr/bin/python3 %h/.local/bin/blacklight-wallpaper-sync.py --watch
-Restart=always
-RestartSec=2
+Restart=on-failure
+RestartSec=5
 
 # Started by galinia-session.desktop after importing the display environment.

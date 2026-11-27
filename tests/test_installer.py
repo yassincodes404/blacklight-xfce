@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import sys
 import tempfile
+import types
 import unittest
 from unittest.mock import patch
 
@@ -141,6 +142,29 @@ class InstallerTests(unittest.TestCase):
             installer.check_history(self.history)
         with self.assertRaisesRegex(ValueError, 'newer'):
             installer.check_history(self.history, '20261127T000000Z-11111111')
+
+    def test_retired_custom_screenshot_is_backed_up_removed_and_restorable(self):
+        relative = '.local/share/galinia/screenshot-region.py'
+        self.put(self.home, relative, 'old selector')
+        backup = installer.install_transaction(self.stage, self.home, self.history)
+        self.assertFalse((self.home / relative).exists())
+        self.assertFalse(installer.changes(self.stage, self.home))
+        installer.restore_transaction(backup, self.home)
+        self.assertEqual((self.home / relative).read_text(), 'old selector')
+
+    def test_package_check_only_simulates_without_elevation(self):
+        simulation = types.SimpleNamespace(returncode=0, stdout='Inst example\n', stderr='')
+        with patch.object(installer, 'package_status', return_value=['flameshot']), patch.object(installer.subprocess, 'run', return_value=simulation) as run:
+            installer.provision_packages(apply=False)
+            self.assertEqual(run.call_count, 1)
+            self.assertEqual(run.call_args.args[0][:4], ['apt-get', '--simulate', '--no-remove', 'install'])
+
+    def test_package_conflict_stops_before_any_elevation(self):
+        failure = types.SimpleNamespace(returncode=100, stdout='', stderr='conflicting audio providers')
+        with patch.object(installer, 'package_status', return_value=['pipewire-pulse']), patch.object(installer.subprocess, 'run', return_value=failure) as run:
+            with self.assertRaisesRegex(ValueError, 'cannot resolve'):
+                installer.provision_packages(apply=True)
+            self.assertEqual(run.call_count, 1)
 
 
 if __name__ == '__main__':

@@ -40,6 +40,28 @@ def package_status():
     return [name for name in packages() if name not in installed]
 
 
+def provision_packages(apply=False):
+    """Check/prepare dependencies independently of desktop-profile replacement."""
+    missing = package_status()
+    print('Missing baseline packages:', ', '.join(missing) or 'none')
+    if not missing:
+        return
+    result = subprocess.run(['apt-get', '--simulate', '--no-remove', 'install', *missing],
+                            capture_output=True, text=True, timeout=120)
+    if result.returncode:
+        raise ValueError('APT cannot resolve the baseline without removals. Review repository availability and package conflicts:\n' + result.stderr.strip())
+    actions = sum(line.startswith('Inst ') for line in result.stdout.splitlines())
+    print(f'APT simulation passed: {actions} package install/upgrade actions; removals prohibited.')
+    if not apply:
+        print('Read-only check. To install packages without replacing desktop settings, use: python3 tools/install.py packages --apply')
+        return
+    subprocess.run(['sudo', 'apt-get', '--no-remove', 'install', *missing], check=True)
+    remaining = package_status()
+    if remaining:
+        raise ValueError('Baseline remains incomplete: ' + ', '.join(remaining))
+    print('Baseline packages installed. Log out and in to load new upstream desktop applets. No profile files were replaced.')
+
+
 def platform_check():
     info = {}
     for line in Path('/etc/os-release').read_text().splitlines():
@@ -145,6 +167,12 @@ def changes(stage, home):
         old, new = signature(dest), signature(source)
         if old != new:
             result.append({'path': rel, 'before': old, 'after': new})
+    for rel in json.loads((ROOT / 'config/retired-files.json').read_text()):
+        if (stage / rel).exists() or (stage / rel).is_symlink():
+            raise ValueError('A retired file is also in the new profile: ' + rel)
+        old = signature(checked_path(home, rel))
+        if old is not None:
+            result.append({'path': rel, 'before': old, 'after': None})
     return result
 
 
@@ -268,7 +296,10 @@ def install_transaction(stage, home, history):
             # Keep progress separate: rewriting a 90k-icon manifest per file is quadratic.
             if index % 128 == 0:
                 save_journal(backup / 'progress.json', {'limit': min(index + 128, len(entries))})
-            copy_atomic(stage / entry['path'], dest)
+            if entry['after'] is None:
+                dest.unlink()
+            else:
+                copy_atomic(stage / entry['path'], dest)
         journal['status'] = 'installed'
         save_journal(path, journal)
     except (Exception, KeyboardInterrupt):
@@ -308,6 +339,8 @@ def check_history(history, restore_id=None):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     subs = parser.add_subparsers(dest='command', required=True)
+    deps = subs.add_parser('packages', help='Check or install everyday dependencies without replacing desktop settings')
+    deps.add_argument('--apply', action='store_true', help='Install missing packages using sudo and APT’s own review prompt')
     for name in ['plan', 'install']:
         p = subs.add_parser(name)
         p.add_argument('--list-files', action='store_true')
@@ -336,6 +369,9 @@ def main():
         return
     platform_check()
     control.verify()
+    if args.command == 'packages':
+        provision_packages(apply=args.apply)
+        return
     missing = package_status()
     print('Missing baseline packages:', ', '.join(missing) or 'none')
     legacy = legacy_units(home)
@@ -350,7 +386,8 @@ def main():
         print(f'Profile plan: {len(entries)} changed files; {sum(e["before"] is not None for e in entries)} existing files will be backed up.')
         if args.list_files:
             for entry in entries:
-                print(('replace ' if entry['before'] else 'create  ') + entry['path'])
+                action = 'remove  ' if entry['after'] is None else 'replace ' if entry['before'] else 'create  '
+                print(action + entry['path'])
         if args.command == 'plan':
             print('Read-only plan. No packages or desktop settings changed.')
             return

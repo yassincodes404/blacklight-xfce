@@ -49,6 +49,12 @@ Press **Super + Space** to search installed apps. See the [shared keyboard short
 
 Galinia uses gThumb for images, Celluloid for video, and Amberol for local audio. See [default media apps](docs/RESTORE.md#default-media-apps).
 
+Flameshot is the default screenshot and annotation app. The [everyday component
+guide](docs/EVERYDAY.md) covers dependencies, service checks and package-only setup.
+
+The [memory guide](docs/MEMORY.md) provides one-shot RAM accounting and optional,
+reversible Firefox memory presets. Idle-memory targets require a fresh-login benchmark.
+
 ## Reproduce it
 
 **Galinia is currently a development preview, with no clean-VM-qualified installer or bootable ISO.** An experimental installer now applies this desktop profile to an existing Ubuntu/Xubuntu 26.04 amd64 installation with XFCE. It provides a read-only plan, curated baseline packages, per-file backups and configuration restore. Start with the [first-launch guide](docs/FIRST-LAUNCH.md); boot/login branding remains a separate integration step.

@@ -15,6 +15,9 @@ installation and physical-hardware testing remain release blockers.
   image/video/audio, archives and screenshots.
 - Upstream network/Bluetooth, audio, power, notification, software/update,
   backup and accessibility tools.
+- Flameshot as the default screenshot/annotation app, with native-package-first
+  launching and existing AppImage support without FUSE. Clipman preserves
+  copied text and images. The experimental custom screenshot UI is retired.
 - XFCE screensaver locking enabled, including on suspend. Real lock/unlock and
   suspend/resume tests are mandatory before a public release.
 - Preview installation with per-file backups and conflict-aware restore.
@@ -46,7 +49,21 @@ expands the bundled icon archive, so allow temporary disk space and time.
 
 The package groups are in `config/first-launch.json`; `manifests/packages.lock.tsv`
 is the owner's historical inventory and is not used as an installation list.
-Optional Wayland, office, screenshot and system-snapshot extras are not installed.
+Optional Wayland, office, printing and system-snapshot extras are not installed.
+
+You can check or install just the baseline packages from your normal desktop
+terminal, without replacing the profile or logging out:
+
+```sh
+python3 tools/install.py packages          # read-only APT simulation
+python3 tools/install.py packages --apply  # sudo + APT review prompt
+python3 tools/health.py                    # read-only readiness report
+```
+
+Run the apply command from a normal host terminal with administrator access.
+Agent/container sessions may prohibit elevation using `no_new_privs`; the
+script does not work around that restriction. Log out and in after installing
+packages to load new upstream applets. See [EVERYDAY.md](EVERYDAY.md).
 
 APT simulation, if desired, can be run manually against the listed missing
 packages with `apt-get --simulate --no-remove install PACKAGE...`. Refresh stale
@@ -82,6 +99,8 @@ while preserving unrelated handlers and adds a delimited block to `.xsessionrc`
 while preserving unrelated commands. Other affected profile files are replaced
 with a recoverable backup. Symlinked parent directories and malformed merge
 inputs are rejected rather than followed or silently overwritten.
+Retired custom screenshot files are also backed up and removed on profile
+upgrade, with their paths explicitly listed in `config/retired-files.json`.
 
 Installation prints a restore ID. Journals and originals live in
 `~/.local/state/galinia/installs/RESTORE_ID/`. A per-user lock prevents overlapping

@@ -2,8 +2,8 @@
 Type=Application
 Name=Flameshot
 Comment=Select and annotate a screenshot
-TryExec=/usr/bin/flameshot
-Exec="@HOME@/.local/bin/flameshot" gui
+TryExec=@HOME@/.local/bin/flameshot
+Exec="@HOME@/.local/bin/galinia-screenshot"
 Icon=flameshot
 Terminal=false
 Categories=Graphics;Utility;

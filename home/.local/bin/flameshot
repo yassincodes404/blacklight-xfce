@@ -1,2 +1,17 @@
 #!/bin/sh
-exec /usr/bin/flameshot "$@"
+# Prefer the distribution package; support an existing user-local AppImage.
+if [ -x /usr/bin/flameshot ]; then
+    exec /usr/bin/flameshot "$@"
+fi
+if [ -x "$HOME/.local/opt/flameshot/extracted/AppRun" ]; then
+    exec "$HOME/.local/opt/flameshot/extracted/AppRun" "$@"
+fi
+if [ -x "$HOME/.local/opt/flameshot/Flameshot.AppImage" ]; then
+    # FUSE is not available in every environment.
+    exec env APPIMAGE_EXTRACT_AND_RUN=1 "$HOME/.local/opt/flameshot/Flameshot.AppImage" "$@"
+fi
+if command -v notify-send >/dev/null 2>&1; then
+    notify-send "Flameshot is not installed" "Install the flameshot package, then try Print again." || :
+fi
+printf '%s\n' 'Galinia: install the flameshot package to enable screenshots.' >&2
+exit 1

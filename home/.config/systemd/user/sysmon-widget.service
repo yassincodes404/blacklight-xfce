@@ -1,6 +1,9 @@
 [Unit]
-Description=Blacklight Desktop System Monitor Widget
+Description=Galinia Desktop System Monitor
 After=graphical-session.target
+PartOf=graphical-session.target
+StartLimitIntervalSec=60
+StartLimitBurst=3
 
 [Service]
 Type=simple

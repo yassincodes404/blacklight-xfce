@@ -1,14 +1,109 @@
 {
   "release": "0.1-dev",
-  "platform": {"id": "ubuntu", "version": "26.04", "architectures": ["amd64"], "session": "XFCE / X11", "status": "preview target; clean-VM qualification pending"},
+  "platform": {
+    "id": "ubuntu",
+    "version": "26.04",
+    "architectures": [
+      "amd64"
+    ],
+    "session": "XFCE / X11",
+    "status": "preview target; clean-VM qualification pending"
+  },
   "packages": {
-    "desktop": ["xfce4-session", "xfce4-panel", "xfce4-settings", "xfwm4", "xfdesktop4", "xfce4-terminal", "xfce4-notifyd", "xfce4-power-manager", "xfce4-pulseaudio-plugin", "xfce4-screensaver", "xfce4-screenshooter", "xfce4-taskmanager", "thunar", "thunar-volman", "thunar-archive-plugin", "tumbler", "exo-utils", "xfconf"],
-    "runtime": ["python3", "python3-gi", "gir1.2-gtk-3.0", "gir1.2-xfconf-0", "librsvg2-common", "libx11-6", "libxfixes3", "fonts-noto-core", "adwaita-icon-theme", "dbus-user-session", "xdg-utils", "xdg-user-dirs", "desktop-file-utils", "libglib2.0-bin", "procps", "x11-utils"],
-    "everyday": ["firefox", "mousepad", "mate-calc", "evince", "gthumb", "celluloid", "amberol", "file-roller", "gvfs-backends", "pavucontrol", "network-manager-gnome", "blueman"],
-    "maintenance": ["update-manager", "software-properties-gtk", "gnome-software", "deja-dup", "orca"]
+    "desktop": [
+      "xfce4-session",
+      "xfce4-panel",
+      "xfce4-settings",
+      "xfwm4",
+      "xfdesktop4",
+      "xfce4-terminal",
+      "xfce4-notifyd",
+      "xfce4-power-manager",
+      "xfce4-pulseaudio-plugin",
+      "xfce4-screensaver",
+      "xfce4-screenshooter",
+      "xfce4-taskmanager",
+      "thunar",
+      "thunar-volman",
+      "thunar-archive-plugin",
+      "tumbler",
+      "exo-utils",
+      "xfconf",
+      "xfce4-clipman"
+    ],
+    "runtime": [
+      "python3",
+      "python3-gi",
+      "gir1.2-gtk-3.0",
+      "gir1.2-xfconf-0",
+      "librsvg2-common",
+      "libx11-6",
+      "libxfixes3",
+      "fonts-noto-core",
+      "adwaita-icon-theme",
+      "dbus-user-session",
+      "xdg-utils",
+      "xdg-user-dirs",
+      "desktop-file-utils",
+      "libglib2.0-bin",
+      "procps",
+      "x11-utils"
+    ],
+    "everyday": [
+      "firefox",
+      "mousepad",
+      "mate-calc",
+      "evince",
+      "gthumb",
+      "celluloid",
+      "amberol",
+      "file-roller",
+      "gvfs-backends",
+      "pavucontrol",
+      "network-manager-gnome",
+      "blueman",
+      "flameshot"
+    ],
+    "maintenance": [
+      "update-manager",
+      "software-properties-gtk",
+      "gnome-software",
+      "deja-dup",
+      "orca"
+    ],
+    "hardware": [
+      "network-manager",
+      "bluez",
+      "pipewire",
+      "pipewire-pulse",
+      "wireplumber",
+      "libspa-0.2-bluetooth",
+      "upower",
+      "udisks2"
+    ],
+    "integration": [
+      "xdg-desktop-portal",
+      "xdg-desktop-portal-gtk",
+      "gvfs-fuse",
+      "mate-polkit",
+      "fonts-noto-color-emoji"
+    ]
   },
   "optional_packages": {
-    "wayland_experimental": ["labwc", "libgtk-layer-shell0", "grim", "slurp", "wl-clipboard"],
-    "extras": ["flameshot", "libreoffice", "timeshift"]
+    "wayland_experimental": [
+      "labwc",
+      "libgtk-layer-shell0",
+      "grim",
+      "slurp",
+      "wl-clipboard"
+    ],
+    "extras": [
+      "libreoffice",
+      "timeshift"
+    ],
+    "printing": [
+      "cups",
+      "system-config-printer"
+    ]
   }
 }
