@@ -39,3 +39,18 @@ systemctl --user stop galinia-audio.service
 ```
 
 Disable its checkbox in Control Center to keep it off at the next login.
+
+## Experimental Wayland / labwc
+
+The card uses GTK layer-shell on a native Wayland backend: bottom layer,
+right/bottom anchors and 24-pixel margins, with no exclusive screen reservation.
+Keyboard focus is on demand rather than grabbed at startup. Unlike the passive
+system monitor, the audio card keeps its input region so buttons and the volume
+slider work. The compositor controls placement; GtkWindow.move and X11 stacking
+hints are used only by the X11 path. Install libgtk-layer-shell0 for this session
+(the experimental Wayland package list includes it).
+
+Wayland does not provide the X11 visibility events used for occlusion pausing.
+The record timer still stops when playback pauses and is capped at approximately
+12 fps when playing. Full cross-session parity remains experimental, including
+multi-monitor/hotplug behavior and testing real media apps across both sessions.

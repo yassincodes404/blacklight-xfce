@@ -6,6 +6,8 @@ import re
 import math
 import time
 
+from desktop_layer import anchor_audio
+
 import gi
 gi.require_version('Gtk','3.0');gi.require_version('Gdk','3.0');gi.require_version('GdkPixbuf','2.0')
 from gi.repository import Gtk, Gdk, Gio, GLib, Pango, GdkPixbuf
@@ -26,8 +28,13 @@ class AudioCard(Gtk.Application):
         win.set_app_paintable(True)
         visual=win.get_screen().get_rgba_visual()
         if visual:win.set_visual(visual)
-        win.set_type_hint(Gdk.WindowTypeHint.UTILITY);win.set_skip_taskbar_hint(True);win.set_skip_pager_hint(True)
-        win.set_keep_below(True);win.stick();win.set_focus_on_map(False)
+        self.wayland = Gdk.Display.get_default().__gtype__.name == 'GdkWaylandDisplay'
+        if self.wayland:
+            self.layer = anchor_audio(win)
+        else:
+            win.set_type_hint(Gdk.WindowTypeHint.UTILITY);win.set_skip_taskbar_hint(True);win.set_skip_pager_hint(True)
+            win.set_keep_below(True);win.stick()
+        win.set_focus_on_map(False)
         css=Gtk.CssProvider();css.load_from_data(b'''
         #galinia-audio { background: transparent; color: #f0f0f6; border: none; box-shadow: none; }
         #galinia-audio .heading { color: #bcbcc8; font-size: 9px; font-weight: bold; letter-spacing: 2px; }
@@ -74,10 +81,12 @@ class AudioCard(Gtk.Application):
         volume.pack_start(self.mute,False,False,0);volume.pack_start(self.scale,True,True,0);volume.pack_start(self.percent,False,False,0)
         settings=self.button('preferences-system-symbolic','Open sound settings',lambda:self.command(['pavucontrol']))
         volume.pack_end(settings,False,False,0);box.pack_start(volume,False,False,0)
-        win.add_events(Gdk.EventMask.VISIBILITY_NOTIFY_MASK)
-        win.connect('visibility-notify-event',self.visibility)
-        win.get_screen().connect('monitors-changed',self.position)
-        win.connect('destroy',self.shutdown);win.connect('realize',self.position)
+        if not self.wayland:
+            win.add_events(Gdk.EventMask.VISIBILITY_NOTIFY_MASK)
+            win.connect('visibility-notify-event',self.visibility)
+            win.get_screen().connect('monitors-changed',self.position)
+            win.connect('realize',self.position)
+        win.connect('destroy',self.shutdown)
         win.show_all()
         if self.preview:
             self.title.set_text('GALINIA MIX');self.artist.set_text('AUDIO CHANNEL / STEREO')
@@ -97,6 +106,7 @@ class AudioCard(Gtk.Application):
         button.set_tooltip_text(label);button.get_accessible().set_name(label);button.connect('clicked',lambda *_:callback());return button
 
     def position(self,*_):
+        if self.wayland or self.window is None:return
         display=Gdk.Display.get_default();monitor=display.get_primary_monitor() or display.get_monitor(0)
         if monitor:
             area=monitor.get_workarea();self.window.move(area.x+area.width-self.window.get_allocated_width()-24,area.y+area.height-self.window.get_allocated_height()-24)
