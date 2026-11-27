@@ -45,3 +45,16 @@ it is not yet automatically injected into release ISOs.
 
 Upstream source:
 https://github.com/xfce-mirror/libxfce4windowing/blob/main/libxfce4windowing/libxfce4windowing-private.c
+
+## Reference-session result (2026-11-27)
+
+CI run 46069283095 built the combined patch and passed the native resolver and
+Xvfb icon-loading tests. All 67 repository tests also passed. An extracted
+candidate library was loaded only into a disposable Wayland probe. Against
+existing windows it returned `chatgpt` and AudioRelay's original vendor PNG,
+where the distribution library returned the generic executable icon for both.
+The ChatGPT launcher remained the original system entry; temporary icon aliases
+were removed. AudioRelay retained its vendor icon path with corrected class
+metadata. The candidate preserved all 130 exported symbols and resolved all
+runtime dependencies. APT simulation selected one library upgrade and no
+removals. System installation and visible panel confirmation remain pending.
