@@ -3,6 +3,10 @@
 import gi
 import os
 import subprocess
+from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import preferences
 
 gi.require_version("Gtk", "3.0")
 gi.require_version("Gdk", "3.0")
@@ -166,7 +170,7 @@ class AppSearch(Gtk.Application):
         matches = []
         if not query:
             favorites = ("thunar.desktop", "firefox.desktop", "xfce4-terminal.desktop",
-                         "xfce-settings-manager.desktop", "galinia-welcome.desktop")
+                         "galinia-control-center.desktop", "galinia-welcome.desktop")
             for rank, name in enumerate(favorites):
                 app = self.apps.get(name)
                 if app is not None:
@@ -233,7 +237,11 @@ class AppSearch(Gtk.Application):
             # gio may exit before the application, so retain its unit until
             # all descendants exit, including Chromium's helper processes.
             command = ["systemd-run", "--user", "--collect", "--quiet",
-                       "--property=ExitType=cgroup", "--service-type=exec"]
+                       "--property=ExitType=cgroup", "--service-type=exec", "--slice=app.slice"]
+            try:
+                command.extend(preferences.resource_flags(row.app.get_id()))
+            except (ValueError, OSError) as error:
+                print('Galinia: using default app priority:', error, file=sys.stderr)
             for name in ("DISPLAY", "WAYLAND_DISPLAY", "XAUTHORITY",
                          "XDG_SESSION_TYPE", "XDG_CURRENT_DESKTOP"):
                 if name in os.environ:

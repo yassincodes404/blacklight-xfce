@@ -10,7 +10,7 @@ on XFWM (X11) and labwc (Wayland).
 | Super + Enter | Open the preferred terminal |
 | Super + E | Open the preferred file manager |
 | Super + W | Open the preferred browser |
-| Super + S | Open Galinia Settings Manager |
+| Super + S | Open Galinia Control Center |
 | Super + Left / Right | Tile to the left or right half |
 | Super + Up / Down | Tile to the top or bottom half |
 | Super + keypad 1 / 3 / 7 / 9 | Tile to bottom-left / bottom-right / top-left / top-right |

@@ -17,7 +17,7 @@ def digest(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 def verify():
     failures=[]
     expected=json.loads((ROOT/'manifests/content.sha256.json').read_text())
-    payloads = {str(p.relative_to(ROOT)) for d in ['home', 'assets', 'optional'] for p in (ROOT/d).rglob('*') if p.is_file() or p.is_symlink()}
+    payloads = {str(p.relative_to(ROOT)) for d in ['home', 'assets', 'optional'] for p in (ROOT/d).rglob('*') if (p.is_file() or p.is_symlink()) and '__pycache__' not in p.parts and p.suffix != '.pyc'}
     failures.extend('untracked payload: '+rel for rel in sorted(payloads-set(expected)))
     for rel,value in expected.items():
         path=ROOT/rel
@@ -51,7 +51,7 @@ def render(args):
     if not wallpaper.is_absolute() or any(c in str(wallpaper) for c in '\n\r\x00'):
         raise SystemExit('Wallpaper must be an absolute single-line path.')
     out=fresh(args.output)
-    shutil.copytree(ROOT/'home',out,dirs_exist_ok=True,symlinks=True)
+    shutil.copytree(ROOT/'home',out,dirs_exist_ok=True,symlinks=True,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
     for archive in sorted((ROOT/'assets').glob('*.tar.xz')):
         with tarfile.open(archive) as tar:tar.extractall(out,filter='data')
     for path in out.rglob('*'):

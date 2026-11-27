@@ -1,5 +1,6 @@
 [
   ".local/share/galinia/screenshot-region.py",
   ".local/share/galinia/screenshot-clipboard.py",
-  ".local/share/applications/galinia-screenshot.desktop"
+  ".local/share/applications/galinia-screenshot.desktop",
+  ".local/share/applications/xfce-settings-manager.desktop"
 ]

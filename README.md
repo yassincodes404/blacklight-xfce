@@ -55,6 +55,10 @@ guide](docs/EVERYDAY.md) covers dependencies, service checks and package-only se
 The [memory guide](docs/MEMORY.md) provides one-shot RAM accounting and optional,
 reversible Firefox memory presets. Idle-memory targets require a fresh-login benchmark.
 
+**Super + S opens Galinia Control Center:** adaptive/fixed accents, compact and
+comfortable layouts, per-app CPU priorities, Firefox memory presets and pressure
+feedback. See [controls and performance qualification](docs/CONTROL-CENTER.md).
+
 The [image-development guide](iso/README.md) describes the Xubuntu-based live
 image workflow. A rootless defaults-package builder supplies the Galinia session,
 boot/login assets and fresh-account initialization. No bootable ISO is qualified yet.

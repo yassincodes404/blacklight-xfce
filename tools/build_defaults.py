@@ -28,7 +28,7 @@ def stage_package(root, version):
         raise ValueError('Use a Debian version beginning with a digit.')
     source = ROOT / 'packaging/galinia-defaults'
     payload = root / 'usr/share/galinia'
-    shutil.copytree(ROOT / 'home', payload / 'home', symlinks=True)
+    shutil.copytree(ROOT / 'home', payload / 'home', symlinks=True, ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
     for name in ['first-launch.json', 'retired-files.json']:
         copy(ROOT / 'config' / name, payload / 'config' / name)
     for name in ['control.py', 'install.py']:
@@ -55,7 +55,7 @@ def stage_package(root, version):
     copy(ROOT / 'LICENSE', documentation / 'copyright')
     copy(ROOT / 'NOTICE', documentation / 'NOTICE')
     shutil.copytree(ROOT / 'LICENSES', documentation / 'licenses')
-    for name in ['FIRST-LAUNCH.md', 'IDENTITY.md', 'EVERYDAY.md', 'MEMORY.md', 'SHORTCUTS.md', 'ASSETS.md']:
+    for name in ['FIRST-LAUNCH.md', 'IDENTITY.md', 'EVERYDAY.md', 'MEMORY.md', 'SHORTCUTS.md', 'ASSETS.md', 'CONTROL-CENTER.md']:
         copy(ROOT / 'docs' / name, documentation / name)
     # Let upstream packages own shared fonts/icons; avoid overwriting their files.
     dependencies = sorted(set(install.packages() + ['lightdm', 'lightdm-gtk-greeter', 'plymouth', 'grub-common',

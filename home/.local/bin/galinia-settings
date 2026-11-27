@@ -1,2 +1,2 @@
 #!/bin/sh
-exec /usr/bin/xfce4-settings-manager "$@"
+exec /usr/bin/python3 "$(dirname "$(readlink -f "$0")")/../share/galinia/control-center.py" "$@"

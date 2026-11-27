@@ -17,7 +17,10 @@ from pathlib import Path
 import gi
 gi.require_version("GdkPixbuf", "2.0")
 gi.require_version("Xfconf", "0")
-from gi.repository import GdkPixbuf, GLib, Xfconf
+from gi.repository import GdkPixbuf, Gio, GLib, Xfconf
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'share/galinia'))
+import preferences
 
 HOME = Path.home()
 PALETTE_DIR = HOME / ".config/blacklight-rice"
@@ -1199,7 +1202,7 @@ def update_labwc_theme(pal):
 
 def sync_now() -> dict:
     wp = get_active_wallpaper()
-    pal = extract_palette_from_wallpaper(wp)
+    pal = preferences.apply_palette(extract_palette_from_wallpaper(wp), preferences.load())
     PALETTE_DIR.mkdir(parents=True, exist_ok=True)
     atomic_write(PALETTE_JSON, json.dumps(pal, indent=2))
     patch_base_gtk_theme(pal)
@@ -1224,7 +1227,8 @@ def watch_loop():
         pending[0] = 0
         try:
             wp = get_active_wallpaper()
-            signature = (str(wp), wp.stat().st_mtime_ns)
+            settings = preferences.load()
+            signature = (str(wp), wp.stat().st_mtime_ns, settings['accent_mode'], settings['fixed_accent'])
             share_wallpaper(channel, wp, mirrored)
             if signature != last[0]:
                 sync_now()
@@ -1246,6 +1250,19 @@ def watch_loop():
         pending[0] = GLib.timeout_add(350, refresh)
 
     channel.connect("property-changed", changed)
+    directory = preferences.config_path().parent
+    directory.mkdir(parents=True, exist_ok=True)
+    monitor = Gio.File.new_for_path(str(directory)).monitor_directory(Gio.FileMonitorFlags.WATCH_MOVES, None)
+
+    def preference_changed(monitor, file, other_file, event):
+        names = [item.get_basename() for item in (file, other_file) if item is not None]
+        if preferences.config_path().name not in names:
+            return
+        if pending[0]:
+            GLib.source_remove(pending[0])
+        pending[0] = GLib.timeout_add(350, refresh)
+
+    monitor.connect('changed', preference_changed)
     refresh()
     GLib.MainLoop().run()
 
