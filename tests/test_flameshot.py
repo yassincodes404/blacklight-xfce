@@ -56,7 +56,8 @@ class FlameshotTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         self.assertIn('install the flameshot package', result.stderr)
 
-    def test_screenshot_shortcut_forwards_to_flameshot_with_clipboard_enabled(self):
+    def test_x11_screenshot_shortcut_forwards_to_flameshot_with_clipboard_enabled(self):
+        self.env["XDG_SESSION_TYPE"] = "x11"
         self.provider(self.wrapper, 'shortcut')
         shortcut = self.root / 'galinia-screenshot'
         shortcut.write_text((ROOT / 'home/.local/bin/galinia-screenshot').read_text())

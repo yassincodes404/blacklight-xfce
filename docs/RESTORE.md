@@ -58,9 +58,9 @@ The compositor reads its cursor settings when it starts.
 XFWM and labwc draw their own decorations, and screenshot and global
 shortcut support depend on the compositor and application.
 
-Print, Alt+Print, Shift+Print and Super+Shift+S launch Flameshot. Use Ctrl+C to
-copy a selection, Ctrl+S to save, and Escape to cancel. Labwc requires a working
-screenshot portal and separate qualification of Flameshot's Wayland support.
+On X11, Print, Alt+Print, Shift+Print and Super+Shift+S launch Flameshot.
+Use Ctrl+C to copy, Ctrl+S to save, and Escape to cancel. On Wayland, the
+shortcuts use native grim/slurp capture and Swappy annotation, described below.
 For a persistent manual wallpaper selection, leave wallpaper cycling off
 in XFCE Desktop Settings.
 
@@ -108,3 +108,19 @@ Relaunch Thunar if it was running before the archive plugin was installed.
 ## Application lifetime
 
 App search starts desktop entries in independent systemd user services with `ExitType=cgroup`. This is required: its 60-second idle exit must not kill Chromium helpers or other application descendants. Do not replace this with direct `Gio.AppInfo.launch()` inside the search service. Validate both launcher exit and descendant survival after any lifecycle change.
+
+### Native Wayland screenshots and frames
+
+On labwc, Print and Super+Shift+S select an area with slurp, capture it with
+grim, copy the PNG with wl-clipboard and open Swappy for annotations. Selection
+uses light shading. Ctrl+C in Swappy copies edits; Ctrl+V pastes into the target
+app. Alt+Print and Shift+Print capture the full screen. Images are retained in
+the Pictures/Screenshots directory. Escape cancels selection without a file.
+X11 retains Flameshot. The experimental Wayland package set includes grim,
+slurp, wl-clipboard, swappy and its icon font; no capture daemon is added.
+
+The XFCE Wayland session reads ~/.config/xfce4/labwc/rc.xml. Galinia sets
+`theme/titlebar/showTitle` to `no`; colors are maintained in its Openbox themerc,
+not unsupported nested XML color elements. Frames are black to blend with the
+black terminal canvas, with controls retained. Apps drawing their own title bars
+can still need separate styling. This is a shared theme, not per-app pixel sampling.

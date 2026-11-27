@@ -49,7 +49,8 @@ Press **Super + Space** to search installed apps. See the [shared keyboard short
 
 Galinia uses gThumb for images, Celluloid for video, and Amberol for local audio. See [default media apps](docs/RESTORE.md#default-media-apps).
 
-Flameshot is the default screenshot and annotation app. The [everyday component
+Flameshot is the X11 screenshot and annotation app. Experimental Wayland uses
+grim/slurp, Swappy and native clipboard support. The [everyday component
 guide](docs/EVERYDAY.md) covers dependencies, service checks and package-only setup.
 
 The [memory guide](docs/MEMORY.md) provides one-shot RAM accounting and optional,

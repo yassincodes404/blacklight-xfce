@@ -19,7 +19,7 @@ on XFWM (X11) and labwc (Wayland).
 | Alt + Tab | Switch windows |
 | Alt + F4 | Close the focused window |
 | Super + L | Lock the session |
-| Print or Super + Shift + S | Open Flameshot to select and annotate a region |
+| Print or Super + Shift + S | Open Flameshot on X11 / native capture on Wayland to select and annotate a region |
 | Ctrl + Shift + Esc | Open Task Manager |
 
 Search uses the installed desktop application entries, including their
@@ -36,16 +36,16 @@ an ordinary Task Manager from sending signals to a Snap app.
 
 Settings and Task Manager use their standard GTK widget behavior.
 
-For screenshots, press Print or Super + Shift + S to open Flameshot, then
+For screenshots, press Print or Super + Shift + S to open Flameshot on X11 / native capture on Wayland, then
 select and annotate an area. Ctrl + C copies; Ctrl + V pastes in an application
 that accepts images. Ctrl + S saves a file. Escape cancels. The launcher requests
 clipboard output; saving does not replace the explicit Copy action when needed.
 
-Flameshot is the default and starts once with XFCE so image clipboard requests
+Flameshot on X11 / native capture on Wayland is the default and starts once with XFCE so image clipboard requests
 remain available. The launcher prefers the distribution package, supports an
 existing extracted AppImage and avoids FUSE when using the AppImage fallback.
 The custom Galinia capture UI and clipboard helper have been retired. Wayland
-support depends on Flameshot and a working screenshot portal; qualify it
+support depends on Flameshot on X11 / native capture on Wayland and a working screenshot portal; qualify it
 separately from the supported preview's X11 path.
 
 The XFCE session startup entry primes app search. Super + Space reuses

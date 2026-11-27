@@ -92,10 +92,12 @@
   },
   "optional_packages": {
     "wayland_experimental": [
+      "fonts-font-awesome",
+      "grim",
       "labwc",
       "libgtk-layer-shell0",
-      "grim",
       "slurp",
+      "swappy",
       "wl-clipboard"
     ],
     "extras": [
