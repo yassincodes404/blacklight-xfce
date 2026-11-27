@@ -9,7 +9,7 @@ python3 tools/control.py verify
 python3 tools/control.py doctor
 ```
 
-Core runtime requirements: XFCE panel/desktop/window manager/settings/terminal, the notification, power, PulseAudio and tray panel plugins, Python 3 with PyGObject, GTK 3, GdkPixbuf SVG support, Xfconf introspection, libX11, libXfixes, systemd user services, and JetBrains Mono. Pillow and xcursorgen are needed only to rebuild the original pointer artwork. `nvidia-smi` is optional; the monitor handles its absence. X11 screenshots use xfce4-screenshooter plus Galinia's GTK image clipboard owner; Flameshot is optional for annotation.
+Core runtime requirements: XFCE panel/desktop/window manager/settings/terminal, the notification, power, PulseAudio and tray panel plugins, Python 3 with PyGObject, GTK 3, GdkPixbuf SVG support, Xfconf introspection, libX11, libXfixes, systemd user services, and JetBrains Mono. Pillow and xcursorgen are needed only to rebuild the original pointer artwork. `nvidia-smi` is optional; the monitor handles its absence. X11 screenshots use Galinia's undimmed GTK region selector and image clipboard owner; Flameshot is optional for annotation. The baseline retains xfce4-screenshooter as a separate upstream screenshot utility.
 
 ## Stage a portable home tree
 
@@ -61,7 +61,7 @@ shortcut support depend on the compositor and application.
 On labwc, Print, Alt+Print and Shift+Print open a native drag selector.
 Install the packages grim, slurp and wl-clipboard. Captures go to the
 Screenshots folder under your configured Pictures directory and are copied
-to the clipboard. Escape cancels selection. X11 uses xfce4-screenshooter and the GTK clipboard helper.
+to the clipboard. Escape cancels selection. X11 uses Galinia's full-brightness snapshot selector and GTK clipboard helper.
 For a persistent manual wallpaper selection, leave wallpaper cycling off
 in XFCE Desktop Settings.
 

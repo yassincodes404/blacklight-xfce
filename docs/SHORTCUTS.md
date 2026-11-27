@@ -40,9 +40,11 @@ The image is saved under Pictures/Screenshots and copied automatically. Use
 Ctrl + V in an application that accepts pasted images. Escape cancels.
 Ctrl + S retains its ordinary Save action; it does not copy an image.
 
-X11 uses xfce4-screenshooter and a small GTK clipboard owner that stays alive
-until the clipboard is replaced. This works without a clipboard manager or
-the optional Flameshot AppImage. Wayland uses grim, slurp and wl-clipboard.
+X11 shows a full-brightness frozen desktop with an amber selection outline.
+The crop comes from the snapshot taken before the selection UI appears, so
+the outline is never included. A small GTK clipboard owner stays alive until
+the clipboard is replaced. This works without a clipboard manager or the
+optional Flameshot AppImage. Wayland uses grim, slurp and wl-clipboard.
 Flameshot remains optional for annotation; its own Ctrl + C copies and Ctrl + S saves.
 
 The XFCE session startup entry primes app search. Super + Space reuses
