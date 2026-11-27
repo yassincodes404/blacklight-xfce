@@ -39,7 +39,14 @@ def main():
         source=work/('libxfce4windowing-'+lock['version'])
         private=source/'libxfce4windowing/libxfce4windowing-private.c'
         old=private.read_text();start=old.index('GDesktopAppInfo *\n_xfw_g_desktop_app_info_get(');end=old.index('\nGdkPixbuf *\n_xfw_gicon_load',start)
-        private.write_text(old[:start]+(ROOT/'packaging/windowing/resolve-app.c').read_text()+'\n'+old[end:])
+        patched=old[:start]+(ROOT/'packaging/windowing/resolve-app.c').read_text()+'\n'+old[end:]
+        start=patched.index('GIcon *\n_xfw_g_icon_new(')
+        patched=patched[:start]+(ROOT/'packaging/windowing/icon-lookup.c').read_text()
+        private.write_text(patched)
+        flags=subprocess.check_output(['pkg-config','--cflags','--libs','gtk+-3.0'],text=True).split()
+        probe=work/'test-icon-lookup'
+        run(['cc',ROOT/'packaging/windowing/test-icon-lookup.c','-o',probe,*flags])
+        run(['xvfb-run','-a',probe])
         run(['python3','-m','unittest','discover','-s','tests','-p','test_icon_resolver.py','-v'],cwd=ROOT)
         run(['./configure','--prefix=/usr','--libdir=/usr/lib/x86_64-linux-gnu','--enable-x11','--enable-wayland','--disable-introspection','--disable-gtk-doc'],cwd=source)
         run(['make','-j2'],cwd=source)
@@ -60,7 +67,7 @@ def main():
         text=re.sub(r'^Maintainer:.*$','Maintainer: Galinia Contributors <207205991+yassincodes404@users.noreply.github.com>\nOriginal-Maintainer: '+oldmaint,text,flags=re.M)
         control.write_text(text.rstrip()+'\nOrigin: Galinia\n')
         doc=package/'usr/share/doc/libxfce4windowing-0-0/galinia-resolver';doc.mkdir(parents=True)
-        for name in ['source.json','resolve-app.c']:shutil.copy2(ROOT/'packaging/windowing'/name,doc/name)
+        for name in ['source.json','resolve-app.c','icon-lookup.c']:shutil.copy2(ROOT/'packaging/windowing'/name,doc/name)
         sums=[]
         for p in sorted(package.rglob('*')):
             if p.is_file() and not p.is_symlink() and not p.is_relative_to(package/'DEBIAN'):
