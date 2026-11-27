@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <channel name="xfce4-notifyd" version="1.0">
   <property name="notify-location" type="string" value="top-right" />
-  <property name="theme" type="empty" />
-  <property name="initial-opacity" type="empty" />
-  <property name="do-fadeout" type="empty" />
+  <property name="theme" type="string" value="Galinia" />
+  <property name="initial-opacity" type="double" value="0.98" />
+  <property name="do-fadeout" type="bool" value="true" />
+  <property name="do-slideout" type="bool" value="false" />
+  <property name="expire-timeout" type="int" value="8" />
+  <property name="expire-timeout-enabled" type="bool" value="true" />
+  <property name="expire-timeout-allow-override" type="bool" value="true" />
+  <property name="min-width-enabled" type="bool" value="true" />
+  <property name="min-width" type="uint" value="320" />
+  <property name="notification-log" type="bool" value="false" />
   <property name="log-max-size-enabled" type="bool" value="true" />
-  <property name="applications" type="empty">
-    <property name="known_applications" type="array">
-      <value type="string" value="chatgpt" />
-      <value type="string" value="Flameshot.AppImage" />
-      <value type="string" value="xfce4-settings-helper" />
-    </property>
-  </property>
+  <property name="log-max-size" type="uint" value="100" />
 </channel>

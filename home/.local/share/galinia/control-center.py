@@ -39,6 +39,16 @@ class ControlCenter(Gtk.Application):
         #galinia-control-center .card { background: #202735; border: 1px solid #3d4757; border-radius: 14px; padding: 18px; }
         #galinia-control-center button { border-radius: 8px; padding: 8px 12px; }
         #galinia-control-center .settings-tile { min-height: 48px; background: #252d3b; }
+        #galinia-control-center button { background: #283246; color: #f4eee7; border: 1px solid #42506d; }
+        #galinia-control-center button:hover { background: #34425a; }
+        #galinia-control-center .sidebar list, #galinia-control-center .sidebar row { background: transparent; color: #d9dfe8; }
+        #galinia-control-center .sidebar row:selected { background: #2b3444; color: #efb579; border-radius: 8px; }
+        #galinia-control-center .sidebar row label { color: inherit; }
+        #galinia-control-center spinbutton, #galinia-control-center spinbutton entry { background: #18202d; color: #f4eee7; }
+        #galinia-control-center switch { background: #465165; }
+        #galinia-control-center switch:checked { background: #c4915f; }
+        #galinia-control-center scrollbar trough { background: transparent; }
+        #galinia-control-center scrollbar slider { background: #647184; border-radius: 6px; }
         #galinia-control-center button:focus { outline: 2px solid #ffc17d; outline-offset: 2px; }
         ''')
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
@@ -52,7 +62,7 @@ class ControlCenter(Gtk.Application):
         menu = Gtk.ListBox(selection_mode=Gtk.SelectionMode.SINGLE)
         self.menu = menu
         self.stack = Gtk.Stack(transition_type=Gtk.StackTransitionType.CROSSFADE)
-        for name in ['Overview', 'Appearance', 'Desktop', 'Devices', 'System']:
+        for name in ['Overview', 'Appearance', 'Desktop', 'Notifications', 'Devices', 'System']:
             row = Gtk.ListBoxRow()
             row.name = name
             row.add(Gtk.Label(label=name, xalign=0, margin=12))
@@ -70,6 +80,8 @@ class ControlCenter(Gtk.Application):
         self.build_overview()
         self.build_appearance()
         self.build_categories()
+        from notification_settings import NotificationPage
+        self.notifications_page = NotificationPage(self)
         if getattr(self, 'preference_error', None):
             self.message.set_text('Preferences need repair: ' + self.preference_error)
         menu.select_row(menu.get_row_at_index(0))
@@ -243,7 +255,10 @@ class ControlCenter(Gtk.Application):
                 row.pack_start(Gtk.Image.new_from_icon_name(icons.get(label, 'preferences-system'), Gtk.IconSize.LARGE_TOOLBAR), False, False, 0)
                 row.pack_start(self.label(label), True, True, 0)
                 button.add(row)
-                button.connect('clicked', lambda _, cmd=command: self.action(lambda: self.launch(cmd)))
+                if label == 'Notifications':
+                    button.connect('clicked', lambda _: self.stack.set_visible_child_name('Notifications'))
+                else:
+                    button.connect('clicked', lambda _, cmd=command: self.action(lambda: self.launch(cmd)))
                 grid.attach(button, index % 2, index // 2, 1, 1)
                 if not shutil.which(command[0]):
                     button.set_sensitive(False)

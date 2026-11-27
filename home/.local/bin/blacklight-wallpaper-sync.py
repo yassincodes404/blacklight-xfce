@@ -21,6 +21,7 @@ from gi.repository import GdkPixbuf, Gio, GLib, Xfconf
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'share/galinia'))
 import preferences
+from notifications import theme_css
 
 HOME = Path.home()
 PALETTE_DIR = HOME / ".config/blacklight-rice"
@@ -289,12 +290,20 @@ selection,
     -gtk-icon-shadow: none;
 }}
 
-.xfce4-panel.background button:hover {{
-    background-color: {pal['bg_2']};
-}}
+/* Keep every panel control clear when hovered, pressed or toggled. */
+.xfce4-panel.background button:hover,
 .xfce4-panel.background button:active,
-.xfce4-panel.background button:checked {{
-    background-color: {pal['bg_3']};
+.xfce4-panel.background button:checked,
+.xfce4-panel.background button:focus {{
+    background-image: none;
+    background-color: transparent;
+    border: none;
+    outline-style: none;
+    box-shadow: none;
+}}
+.xfce4-panel.background button:checked,
+.xfce4-panel.background button:focus {{
+    box-shadow: inset 0 -2px 0 {pal['accent_hex']};
 }}
 
 /* Consistent task-button hit areas around 16px icons. */
@@ -304,22 +313,6 @@ selection,
     margin: 3px 2px;
     padding: 0;
 }}
-/* Focus/hover states must not restore the theme's filled task-button block. */
-.xfce4-panel.background .tasklist button:hover,
-.xfce4-panel.background .tasklist button:active,
-.xfce4-panel.background .tasklist button:checked,
-.xfce4-panel.background .tasklist button:focus {{
-    background-image: none;
-    background-color: transparent;
-    border: none;
-    outline-style: none;
-    box-shadow: none;
-}}
-.xfce4-panel.background .tasklist button:checked,
-.xfce4-panel.background .tasklist button:focus {{
-    box-shadow: inset 0 -2px 0 {pal['accent_hex']};
-}}
-
 #clock-button {{
     padding: 0 9px;
     margin: 3px 2px;
@@ -1158,6 +1151,17 @@ def reload_live_desktop():
                        check=True, timeout=5)
 
 
+    # Notifyd caches its theme provider; changing the generated file alone does
+    # not refresh it. Only toggle our aliases, preserving user-selected themes.
+    notify = subprocess.run(['xfconf-query', '-c', 'xfce4-notifyd', '-p', '/theme'],
+                            capture_output=True, text=True, timeout=5)
+    current = notify.stdout.strip()
+    if notify.returncode == 0 and current in ('Galinia', 'Galinia-Live'):
+        target = 'Galinia' if current == 'Galinia-Live' else 'Galinia-Live'
+        subprocess.run(['xfconf-query', '-c', 'xfce4-notifyd', '-p', '/theme', '-s', target],
+                       check=True, timeout=5)
+
+
 def update_terminal_palette(pal: dict):
     settings = {
         "color-background": pal["bg_0"],
@@ -1233,6 +1237,7 @@ def sync_now() -> dict:
     atomic_write(PALETTE_JSON, json.dumps(pal, indent=2))
     patch_base_gtk_theme(pal)
     write_user_gtk_css(pal)
+    atomic_write(HOME / ".local/share/themes/Galinia/xfce-notify-4.0/gtk.css", theme_css(pal))
     update_xfwm4_theme(pal)
     update_labwc_theme(pal)
     update_terminal_palette(pal)
