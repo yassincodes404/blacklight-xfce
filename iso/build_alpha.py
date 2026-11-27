@@ -181,6 +181,9 @@ def main():
     delta=work/'delta';delta.mkdir()
     run('rsync','-aHAXc','--compare-dest='+str(base),str(live)+'/',str(delta)+'/')
     whiteouts(base,live,delta)
+    # Whiteout creation changes parent directory mtimes. Restore all directory
+    # metadata without deleting the new tombstones before validating the merge.
+    run('rsync','-aHAXc','--compare-dest='+str(base),str(live)+'/',str(delta)+'/')
     with mounted(['-t','overlay','overlay','-o',f'lowerdir={delta}:{base}'],work/'verify-live') as rebuilt:
         differences=subprocess.check_output(['rsync','-aHAXcn','--delete','--itemize-changes',str(live)+'/',str(rebuilt)+'/'],text=True)
         unexpected=[line for line in differences.splitlines() if not line.endswith(' ./')]
