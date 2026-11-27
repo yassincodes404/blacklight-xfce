@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Galinia Keyboard Shortcuts
+Comment=Quick offline navigation reference
+Exec="@HOME@/.local/bin/galinia-shortcuts"
+Icon=preferences-desktop-keyboard-shortcuts
+Categories=Utility;Documentation;
+Terminal=false

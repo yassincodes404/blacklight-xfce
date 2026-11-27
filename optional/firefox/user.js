@@ -124,8 +124,6 @@ user_pref("dom.disable_window_move_resize", true);
 user_pref("browser.safebrowsing.downloads.remote.enabled", false); // Keep file hashes private
 
 // --- 7. GPU Hardware Acceleration (NVIDIA RTX 2060 SUPER) ---
-user_pref("gfx.webrender.all", true);
-user_pref("layers.gpu-process.enabled", true);
 user_pref("media.hardware-video-decoding.enabled", true);
 
 // Managed workstation security settings (2026-11-15)
@@ -146,3 +144,6 @@ user_pref("dom.security.https_only_mode", true);
 user_pref("fission.autostart", true);
 user_pref("security.fileuri.strict_origin_policy", true);
 user_pref("browser.download.useDownloadDir", false);
+
+// Use selected-file grants with restricted Snap home access.
+user_pref("widget.use-xdg-desktop-portal.file-picker", 1);

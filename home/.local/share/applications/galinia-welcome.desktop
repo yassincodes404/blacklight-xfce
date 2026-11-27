@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Welcome to Galinia
+Comment=Explore your desktop and first steps
+Exec="@HOME@/.local/bin/galinia-welcome"
+Icon=galinia
+Categories=Settings;
+Terminal=false

@@ -1,0 +1,58 @@
+name: Qualify alpha image
+on:
+  pull_request:
+    types: [labeled]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  image:
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'build-iso'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install isolated image tools
+        run: sudo apt-get update && sudo apt-get install -y xorriso squashfs-tools ubuntu-keyring gpg python3-gi gir1.2-gdkpixbuf-2.0 librsvg2-common python3-yaml rsync initramfs-tools-core qemu-system-x86 ovmf python3-pil
+      - name: Reclaim unused tools on the disposable runner
+        run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+      - name: Verify and inspect source
+        run: python3 iso/source_image.py --output "$RUNNER_TEMP/galinia-source" --report dist/source
+      - name: Build Galinia defaults
+        run: /usr/bin/python3 tools/build_defaults.py --output dist/defaults --version "0.1.0~alpha1.${GITHUB_SHA:0:8}"
+      - name: Prepare clean image roots
+        run: sudo GALINIA_IMAGE_BUILD=1 /usr/bin/python3 iso/build_alpha.py --phase prepare --source "$RUNNER_TEMP/galinia-source" --package "$(realpath dist/defaults/*.deb)" --work "$RUNNER_TEMP/galinia-root" --output dist/image
+      - name: Customize installed system
+        run: sudo GALINIA_IMAGE_BUILD=1 /usr/bin/python3 iso/build_alpha.py --phase installed --source "$RUNNER_TEMP/galinia-source" --package "$(realpath dist/defaults/*.deb)" --work "$RUNNER_TEMP/galinia-root" --output dist/image
+      - name: Customize live session
+        run: sudo GALINIA_IMAGE_BUILD=1 /usr/bin/python3 iso/build_alpha.py --phase live --source "$RUNNER_TEMP/galinia-source" --package "$(realpath dist/defaults/*.deb)" --work "$RUNNER_TEMP/galinia-root" --output dist/image
+      - name: Verify layers and pack alpha ISO
+        run: sudo GALINIA_IMAGE_BUILD=1 /usr/bin/python3 iso/build_alpha.py --phase finish --source "$RUNNER_TEMP/galinia-source" --package "$(realpath dist/defaults/*.deb)" --work "$RUNNER_TEMP/galinia-root" --output dist/image
+      - name: Observe BIOS live boot
+        run: python3 iso/boot_smoke.py --iso dist/image/galinia-0.1-alpha1-amd64.iso --output dist/boot/bios --firmware bios
+      - name: Observe UEFI live boot
+        run: python3 iso/boot_smoke.py --iso dist/image/galinia-0.1-alpha1-amd64.iso --output dist/boot/uefi --firmware uefi
+      - name: Upload source qualification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: galinia-alpha-evidence
+          path: |
+            dist/source
+            dist/defaults
+            dist/boot
+            dist/image/build.json
+            dist/image/SHA256SUMS
+            dist/image/packages.manifest
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
+      - name: Upload completed development ISO
+        if: always() && hashFiles('dist/image/SHA256SUMS') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: galinia-alpha-iso
+          path: dist/image/*.iso
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0

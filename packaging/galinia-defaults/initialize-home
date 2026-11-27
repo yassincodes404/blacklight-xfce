@@ -1,0 +1,33 @@
+#!/usr/bin/python3
+"""Seed only explicitly marked fresh accounts, before XFCE starts."""
+import argparse
+from pathlib import Path
+import sys
+import tempfile
+
+sys.path.insert(0, '/usr/lib/galinia')
+import control
+import install
+
+
+def initialize(home, payload):
+    marker = home / '.config/galinia/initialize'
+    if not marker.is_file():
+        return
+    control.ROOT = payload
+    install.ROOT = payload
+    with tempfile.TemporaryDirectory(prefix='galinia-first-session-') as tmp:
+        stage = Path(tmp) / 'profile'
+        control.render(argparse.Namespace(output=stage, target_home=home, wallpaper=None))
+        install.prepare_stage(stage, home)
+        with install.installation_lock(home) as history:
+            install.check_history(history)
+            install.install_transaction(stage, home, history)
+    marker.unlink()
+
+
+if __name__ == '__main__':
+    import os
+    if os.getuid() == 0:
+        raise SystemExit('Galinia profile initialization must run as the desktop user.')
+    initialize(Path.home().resolve(), Path('/usr/share/galinia'))

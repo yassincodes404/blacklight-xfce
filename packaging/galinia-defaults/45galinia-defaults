@@ -1,0 +1,8 @@
+# Sourced by the distribution's Xsession before xfconfd starts.
+# Existing accounts have no marker and are not modified.
+if [ -f "$HOME/.config/galinia/initialize" ]; then
+    mkdir -p "$HOME/.local/state/galinia"
+    if ! /usr/lib/galinia/initialize-home >> "$HOME/.local/state/galinia/initialize.log" 2>&1; then
+        printf '%s\n' 'Galinia defaults could not initialize. See ~/.local/state/galinia/initialize.log; base desktop startup will continue.' >&2
+    fi
+fi

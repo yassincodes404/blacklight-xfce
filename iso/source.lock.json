@@ -1,0 +1,6 @@
+{
+  "base": "Xubuntu 26.04.1 minimal amd64",
+  "url": "https://cdimage.ubuntu.com/xubuntu/releases/26.04/release/",
+  "filename": "xubuntu-26.04.1-minimal-amd64.iso",
+  "sha256": "f057788b4597321fd13b8daa54fd4492de1b39a1c35372e7fa8d73f77dc109ff"
+}

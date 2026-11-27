@@ -49,15 +49,36 @@ Press **Super + Space** to search installed apps. See the [shared keyboard short
 
 Galinia uses gThumb for images, Celluloid for video, and Amberol for local audio. See [default media apps](docs/RESTORE.md#default-media-apps).
 
+Flameshot is the X11 screenshot and annotation app. Experimental Wayland uses
+grim/slurp, Swappy and native clipboard support. The [everyday component
+guide](docs/EVERYDAY.md) covers dependencies, service checks and package-only setup.
+
+The [memory guide](docs/MEMORY.md) provides one-shot RAM accounting and optional,
+reversible Firefox memory presets. Idle-memory targets require a fresh-login benchmark.
+
+**Super + S opens Galinia Control Center:** adaptive/fixed accents, compact and
+comfortable layouts, desktop, device and system settings. Kernel tuning is handled separately from the desktop UI. See [controls and performance qualification](docs/CONTROL-CENTER.md).
+
+Kitty uses Catppuccin Mocha. The fixed desktop audio card provides volume and
+MPRIS playback controls; see [terminal and audio](docs/AUDIO-TERMINAL.md).
+The [alpha release workflow](docs/ALPHA-RELEASE.md) records build and test gates.
+The [website source](website/README.md) presents the desktop and its current
+qualification status without advertising an untested stable download.
+
+The [image-development guide](iso/README.md) describes the Xubuntu-based live
+image workflow. A rootless defaults-package builder supplies the Galinia session,
+boot/login assets and fresh-account initialization. No bootable ISO is qualified yet.
+
 ## Reproduce it
 
-**Galinia is currently available as a configuration repository.** The planned installer will apply this desktop setup to an existing Xubuntu installation or to Ubuntu with XFCE. The repository contains the configuration, pinned assets and manual staging tools.
+**Galinia is currently a development preview, with no clean-VM-qualified installer or bootable ISO.** An experimental installer now applies this desktop profile to an existing Ubuntu/Xubuntu 26.04 amd64 installation with XFCE. It provides a read-only plan, curated baseline packages, per-file backups and configuration restore. Start with the [first-launch guide](docs/FIRST-LAUNCH.md); boot/login branding remains a separate integration step.
 
 ```sh
 git clone https://github.com/yassincodes404/blacklight-xfce.git
 cd blacklight-xfce
 python3 tools/control.py verify
 python3 tools/control.py doctor
+python3 tools/install.py plan
 ```
 
 Start with the [restoration guide](docs/RESTORE.md). You can render the configuration into an empty staging directory without changing your desktop:
@@ -66,7 +87,6 @@ Start with the [restoration guide](docs/RESTORE.md). You can render the configur
 python3 tools/control.py render \
   --output /tmp/blacklight-stage \
   --target-home "$HOME" \
-  --monitor HDMI-0 \
   --wallpaper "$HOME/Pictures/your-wallpaper.jpg"
 ```
 
@@ -99,7 +119,8 @@ Capture uses an allowlist and a separate output folder. It never copies browser 
 - [x] Offline payload verification
 - [ ] Clean-VM reproduction tests
 - [x] Original Galinia Dusk wallpaper with editable SVG source
-- [ ] An installer with dependency checks, opt-ins and rollback
+- [x] Experimental profile installer with dependency checks, backups and restore
+- [ ] Clean-VM qualification of install, first login and restore
 - [ ] Multi-monitor and scaling profiles
 
 The Galinia flame is available as a [standalone SVG](docs/logo.svg).
@@ -115,3 +136,8 @@ The ring of fire is Galinia’s primary emblem. Galinia Dusk is supplied at 3840
 ![Galinia Dusk](home/.local/share/backgrounds/Galinia/galinia-dusk.png)
 
 Original artwork and code use GPL-2.0-or-later. See [NOTICE](NOTICE) for scope. Optional LightDM styling provides rounded fields, amber focus borders and a clear login button.
+
+The profile includes a Galinia first-login welcome guide, available again from
+the application menu. Matching boot and login assets can be staged without
+changing the running system. See [identity and integration](docs/IDENTITY.md)
+for previews, installation boundaries, rollback and required boot testing.

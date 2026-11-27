@@ -1,35 +1,7 @@
 #!/bin/sh
-set -eu
-
-if [ "${XDG_SESSION_TYPE:-}" != wayland ] && [ -z "${WAYLAND_DISPLAY:-}" ]; then
-    exec "$HOME/.local/bin/flameshot" gui
+# Select the capture backend for the actual desktop session.
+base=$(dirname "$(readlink -f "$0")")
+if [ "${XDG_SESSION_TYPE:-}" = wayland ]; then
+    exec "$base/galinia-wayland-screenshot" "$@"
 fi
-
-# Also support an installation unpacked into the user's home.
-PATH="$PATH:$HOME/.local/opt/galinia-capture/usr/bin"
-export PATH
-for tool in grim slurp wl-copy; do
-    if ! command -v "$tool" >/dev/null; then
-        notify-send "Screenshot unavailable" "Install grim, slurp and wl-clipboard."
-        exit 1
-    fi
-done
-
-region=$(slurp -b '#00000070' -c '#efb579ff' -w 2) || exit 0
-[ -n "$region" ] || exit 0
-
-pictures=$(xdg-user-dir PICTURES)
-directory="$pictures/Screenshots"
-mkdir -p "$directory"
-capture=$(mktemp "$directory/Screenshot-$(date +%F-%H%M%S)-XXXXXX.png")
-trap 'rm -f "$capture"' EXIT
-if ! grim -g "$region" -t png "$capture"; then
-    notify-send "Screenshot failed" "The compositor did not return an image."
-    exit 1
-fi
-trap - EXIT
-if wl-copy --type image/png < "$capture"; then
-    notify-send "Screenshot saved and copied" "$capture"
-else
-    notify-send "Screenshot saved" "$capture"
-fi
+exec "$base/flameshot" gui --clipboard "$@"

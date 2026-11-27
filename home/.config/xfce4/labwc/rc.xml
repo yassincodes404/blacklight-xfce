@@ -9,36 +9,34 @@
     <font name="Noto Sans" size="10" weight="semibold" />
     <titlebar>
       <layout>:iconify,max,close</layout>
-    </titlebar>
+    <showTitle>no</showTitle></titlebar>
   </theme>
   <desktops number="1" />
   <keyboard>
-    <keybind key="C-S-Escape"><action name="Execute" command="sh -c &quot;~/.local/bin/galinia-task-manager&quot;"/></keybind>
+    <keybind key="C-S-Escape"><action name="Execute" command="sh -c &quot;~/.local/bin/galinia-task-manager&quot;" /></keybind>
     <default />
     <keybind key="Print">
       <action name="Execute" command="sh -c &quot;~/.local/bin/galinia-screenshot&quot;" />
     </keybind>
-    <keybind key="A-Print">
+    <keybind key="W-S-s">
       <action name="Execute" command="sh -c &quot;~/.local/bin/galinia-screenshot&quot;" />
+    </keybind>
+    <keybind key="A-Print">
+      <action name="Execute" command="sh -c &quot;~/.local/bin/galinia-screenshot --full&quot;" />
     </keybind>
     <keybind key="S-Print">
-      <action name="Execute" command="sh -c &quot;~/.local/bin/galinia-screenshot&quot;" />
+      <action name="Execute" command="sh -c &quot;~/.local/bin/galinia-screenshot --full&quot;" />
     </keybind>
-    <!-- Use a different terminal emulator -->
+
     <keybind key="W-Return">
       <action name="Execute" command="exo-open --launch TerminalEmulator" />
     </keybind>
-    <!--
-      Remove a previously defined keybind
-      A shorter alternative is <keybind key="W-F4" />
-    -->
+
     <keybind key="W-F4">
       <action name="None" />
     </keybind>
     <numlock>on</numlock>
-    <!--
-       Suggested Xfce key bindings.
-    -->
+
     <keybind key="XF86_AudioLowerVolume">
       <action name="Execute" command="amixer sset Master 5%-" />
     </keybind>
@@ -66,14 +64,14 @@
     <keybind key="W-s">
       <action name="Execute" command="sh -c '~/.local/bin/galinia-settings'" />
     </keybind>
-    <keybind key="W-a">
-      <action name="Execute" command="sh -c '~/.local/bin/artcraft-launcher'" />
+    <keybind key="W-slash">
+      <action name="Execute" command="sh -c '~/.local/bin/galinia-shortcuts'" />
     </keybind>
     <keybind key="W-space">
       <action name="Execute" command="sh -c '~/.local/bin/galinia-search'" />
     </keybind>
     <keybind key="W-l">
-      <action name="Execute" command="xflock4" />
+      <action name="Execute" command="sh -c &quot;~/.local/bin/galinia-lock&quot;" />
     </keybind>
     <keybind key="W-Left">
       <action name="SnapToEdge" direction="left" />

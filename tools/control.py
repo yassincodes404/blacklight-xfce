@@ -17,6 +17,8 @@ def digest(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 def verify():
     failures=[]
     expected=json.loads((ROOT/'manifests/content.sha256.json').read_text())
+    payloads = {str(p.relative_to(ROOT)) for d in ['home', 'assets', 'optional'] for p in (ROOT/d).rglob('*') if (p.is_file() or p.is_symlink()) and '__pycache__' not in p.parts and p.suffix != '.pyc'}
+    failures.extend('untracked payload: '+rel for rel in sorted(payloads-set(expected)))
     for rel,value in expected.items():
         path=ROOT/rel
         actual=('symlink:'+os.readlink(path)) if path.is_symlink() else digest(path) if path.is_file() else 'MISSING'
@@ -31,28 +33,50 @@ def verify():
         elif path.suffix=='.json':json.loads(path.read_text())
         if path.name in ['cookies.sqlite','key4.db','logins.json','rclone.conf','known_hosts','authorized_keys']:
             failures.append('private data: '+str(path.relative_to(ROOT)))
+    shortcuts=ET.parse(ROOT/'home/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml')
+    seen={}
+    for node in shortcuts.findall("./property[@name='xfwm4']/property[@name='custom']/property"):
+        action=node.get('value','')
+        if action.endswith('_key'):
+            if action in seen:failures.append('duplicate XFWM action: '+action)
+            seen[action]=node.get('name')
     if failures:raise SystemExit('Verification failed:\n'+'\n'.join(failures))
     print(f'PASS: {len(expected)} tracked payloads verified; Python/XML/JSON parse; no private runtime files.')
 
 def render(args):
+    target=args.target_home.expanduser()
+    if not target.is_absolute() or any(c in str(target) for c in '\n\r\x00"\\$`'):
+        raise SystemExit('Target home must be absolute and contain no control, quote, backslash, dollar or backtick characters.')
+    wallpaper=args.wallpaper.expanduser() if args.wallpaper else target/'.local/share/backgrounds/Galinia/galinia-dusk.png'
+    if not wallpaper.is_absolute() or any(c in str(wallpaper) for c in '\n\r\x00'):
+        raise SystemExit('Wallpaper must be an absolute single-line path.')
     out=fresh(args.output)
-    shutil.copytree(ROOT/'home',out,dirs_exist_ok=True,symlinks=True)
+    shutil.copytree(ROOT/'home',out,dirs_exist_ok=True,symlinks=True,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
     for archive in sorted((ROOT/'assets').glob('*.tar.xz')):
         with tarfile.open(archive) as tar:tar.extractall(out,filter='data')
     for path in out.rglob('*'):
         if not path.is_file() or path.is_symlink():continue
         try:text=path.read_text()
         except UnicodeDecodeError:continue
-        text=text.replace('@HOME@',str(args.target_home.expanduser()))
-        path.write_text(text)
-    desktop=out/'.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml'
-    tree=ET.parse(desktop)
-    for node in tree.iter('property'):
-        if node.get('name','').startswith('monitor'):node.set('name','monitor'+args.monitor)
-        if node.get('name')=='last-image':node.set('value',str(args.wallpaper.expanduser()))
-    tree.write(desktop,encoding='UTF-8',xml_declaration=True)
-    shared = out / '.config/blacklight-rice/wallpaper'
-    shared.write_text(str(args.wallpaper.expanduser()) + '\n')
+        if '@HOME@' not in text:continue
+        if path.suffix=='.xml':
+            tree=ET.ElementTree(ET.fromstring(text))
+            for node in tree.iter():
+                for key,value in list(node.attrib.items()):
+                    node.set(key,value.replace('@HOME@',str(target)))
+            tree.write(path,encoding='UTF-8',xml_declaration=True)
+        elif path.suffix=='.json':
+            # Replace inside decoded strings, preserving JSON escaping.
+            def replace(value):
+                if isinstance(value,str):return value.replace('@HOME@',str(target))
+                if isinstance(value,list):return [replace(v) for v in value]
+                if isinstance(value,dict):return {k:replace(v) for k,v in value.items()}
+                return value
+            path.write_text(json.dumps(replace(json.loads(text)),indent=2)+'\n')
+        else:path.write_text(text.replace('@HOME@',str(target)))
+    # Monitor connectors are discovered by the session daemon, not copied from the owner.
+    shared=out/'.config/blacklight-rice/wallpaper'
+    shared.write_text(str(wallpaper)+'\n')
     print(f'Staged home: {out}\nNo live settings changed. Read docs/RESTORE.md before copying anything.')
 
 def capture(args):
@@ -80,12 +104,15 @@ def doctor():
     print('Optional NVIDIA metrics:',bool(shutil.which('nvidia-smi')))
     print('External artwork and inherited cursor roles: see docs/ASSETS.md')
 
-p=argparse.ArgumentParser(description=__doc__);commands=p.add_subparsers(dest='command',required=True)
-commands.add_parser('verify');commands.add_parser('doctor')
-r=commands.add_parser('render');r.add_argument('--output',type=Path,required=True);r.add_argument('--target-home',type=Path,default=Path.home());r.add_argument('--monitor',required=True);r.add_argument('--wallpaper',type=Path,required=True)
-c=commands.add_parser('capture');c.add_argument('--output',type=Path,required=True);c.add_argument('--source-home',type=Path,default=Path.home())
-a=p.parse_args()
-if a.command=='verify':verify()
-elif a.command=='doctor':doctor()
-elif a.command=='render':render(a)
-else:capture(a)
+def main():
+    p=argparse.ArgumentParser(description=__doc__);commands=p.add_subparsers(dest='command',required=True)
+    commands.add_parser('verify');commands.add_parser('doctor')
+    r=commands.add_parser('render');r.add_argument('--output',type=Path,required=True);r.add_argument('--target-home',type=Path,default=Path.home());r.add_argument('--monitor',help=argparse.SUPPRESS);r.add_argument('--wallpaper',type=Path)
+    c=commands.add_parser('capture');c.add_argument('--output',type=Path,required=True);c.add_argument('--source-home',type=Path,default=Path.home())
+    a=p.parse_args()
+    if a.command=='verify':verify()
+    elif a.command=='doctor':doctor()
+    elif a.command=='render':render(a)
+    else:capture(a)
+
+if __name__=='__main__':main()

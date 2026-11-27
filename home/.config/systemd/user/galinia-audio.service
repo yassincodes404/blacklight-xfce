@@ -1,0 +1,13 @@
+[Unit]
+Description=Galinia desktop sound and music card
+After=pipewire.service wireplumber.service
+PartOf=galinia-session.target
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 %h/.local/share/galinia/audio-widget.py
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galinia · First steps</title>
+<style>
+  :root { color-scheme: dark; font: 17px/1.7 system-ui, sans-serif; background: #141821; color: #f4eee7; }
+  body { max-width: 760px; margin: 3rem auto; padding: 0 1.5rem 3rem; }
+  header { display: flex; align-items: center; gap: 1rem; }
+  header img { width: 64px; height: 64px; } h1 { margin: 0; }
+  h2, a { color: #efb579; } section { border-top: 1px solid #39414e; margin-top: 2rem; }
+  kbd, code { background: #252c38; border-radius: 4px; padding: .12rem .35rem; overflow-wrap: anywhere; }
+  a:focus { outline: 2px solid #ffd8a5; outline-offset: 3px; }
+  li { margin: .5rem 0; }
+</style>
+<header><img src="../icons/hicolor/scalable/apps/galinia.svg" alt="Galinia ring of fire"><h1>Welcome home.</h1></header>
+<p>This guide is available offline. Galinia is a desktop profile built on Ubuntu / Xubuntu.
+This preview targets XFCE on X11; hardware and clean-install qualification remain in progress.</p>
+<nav aria-label="Contents"><a href="#start">First steps</a> · <a href="#shortcuts">Shortcuts</a> · <a href="#safety">Updates &amp; backups</a> · <a href="#recovery">Recovery</a></nav>
+<section id="start"><h2>Start comfortably</h2><ul>
+<li>Open <strong>Settings</strong> to set display resolution, scaling, keyboard layout and accessibility preferences.</li>
+<li>Use <strong>Desktop Settings</strong> to select a wallpaper. Galinia adapts its accent colors to it.</li>
+<li>Use the panel’s network and audio controls. Open <strong>Bluetooth Manager</strong> to pair devices.</li>
+<li>Open <strong>Software</strong> to find applications. Galinia includes Firefox, Thunar, Mousepad, a calculator, gThumb, Celluloid and Amberol in its baseline package list.</li>
+<li>Open <strong>Welcome to Galinia</strong> from app search whenever you need the setup shortcuts again.</li>
+</ul></section>
+<section id="shortcuts"><h2>A few useful shortcuts</h2><ul>
+<li><kbd>Super</kbd> + <kbd>Space</kbd>: search applications.</li>
+<li><kbd>Super</kbd> + <kbd>/</kbd>: open the small offline keyboard-shortcut guide.</li>
+<li><kbd>Super</kbd> + <kbd>S</kbd>: open Galinia Control Center for appearance, app priorities, memory and system tools.</li>
+<li><kbd>Super</kbd> + <kbd>E</kbd>: open files.</li>
+<li><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>: open a terminal.</li>
+<li><kbd>Super</kbd> + <kbd>L</kbd>: lock the screen. Verify locking works before relying on it.</li>
+<li><kbd>Print Screen</kbd> or <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>: open Flameshot to select and annotate a region. <kbd>Ctrl</kbd> + <kbd>C</kbd> copies it; <kbd>Ctrl</kbd> + <kbd>V</kbd> pastes into an app that accepts images. <kbd>Ctrl</kbd> + <kbd>S</kbd> saves a file. Escape cancels.</li>
+<li><kbd>Alt</kbd> + <kbd>Tab</kbd>: switch windows.</li>
+</ul></section>
+<section id="safety"><h2>Keep your work safe</h2>
+<p>Use <strong>Software Updater</strong> for upstream package and security updates. Restart when requested.
+Use <strong>Software &amp; Updates → Additional Drivers</strong> to review available hardware drivers.
+These operations may require internet access and administrator authentication.</p>
+<p>Use <strong>Backups</strong> (Déjà Dup) to back up personal files to another drive or location.
+Test that you can restore a file. A Galinia configuration backup does not back up your documents.</p>
+<p>The script preview does not automatically update Galinia’s own profile. Review release instructions
+before applying a newer profile. Optional browser policies and boot branding are not applied by this installer.</p>
+</section>
+<section id="recovery"><h2>If something goes wrong</h2>
+<p>Try logging out and selecting the <strong>Xfce Session</strong> on X11 at login.
+The preview installer refuses to change settings while XFCE is running.</p>
+<p>For configuration restore, log out completely, switch to a text console with
+<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F3</kbd>, and log in as the same user.
+From your Galinia repository, run <code>python3 tools/install.py restore RESTORE_ID</code>.
+Use the restore ID printed by installation; journals are kept in
+<code>~/.local/state/galinia/installs/</code>. Restore the newest installation first.</p>
+<p>Restore preserves installed packages and refuses to overwrite files edited after installation.
+Use <code>python3 tools/install.py restore RESTORE_ID --save-conflicts</code> to save later edits
+alongside the backup before restoring. The command prints where those files were preserved.
+An interrupted installation can be restored using the same journal. Empty directories and generated runtime caches may remain.</p>
+<p>If the computer cannot boot, use your Ubuntu/Xubuntu recovery or live media.
+The profile installer does not modify the bootloader, partitioning, authentication, or initramfs.</p>
+</section>
+<footer><p>Galinia · A calm workspace. A little fire.</p></footer>
+</html>

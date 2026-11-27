@@ -1,0 +1,33 @@
+name: Build defaults preview
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'home/**'
+      - 'assets/**'
+      - 'optional/**'
+      - 'config/**'
+      - 'docs/**'
+      - 'packaging/**'
+      - 'tools/**'
+      - '.github/workflows/package-preview.yml'
+permissions:
+  contents: read
+jobs:
+  defaults-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install package build dependencies
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y python3-gi gir1.2-gdkpixbuf-2.0 librsvg2-common
+      - name: Build defaults package without root
+        run: /usr/bin/python3 tools/build_defaults.py --output dist --version "0.1.0~dev.${GITHUB_SHA:0:8}"
+      - name: Inspect package metadata
+        run: dpkg-deb --info dist/*.deb
+      - uses: actions/upload-artifact@v4
+        with:
+          name: galinia-defaults-preview
+          path: |
+            dist/*.deb
+            dist/*.deb.sha256
+          if-no-files-found: error

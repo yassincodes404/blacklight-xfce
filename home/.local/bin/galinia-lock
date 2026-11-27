@@ -1,0 +1,18 @@
+#!/bin/sh
+# Use a native locker for the actual session backend; never recurse into xflock4.
+set -eu
+if [ "${XDG_SESSION_TYPE:-x11}" = wayland ]; then
+    if [ "${1:-}" = --check ]; then
+        for provider in swaylock swayidle wlopm; do
+            command -v "$provider" >/dev/null || { printf 'Missing Wayland locking provider: %s\n' "$provider" >&2; exit 1; }
+        done
+        test -r /etc/pam.d/swaylock || { printf '%s\n' 'Swaylock PAM configuration is missing. Install the distribution package.' >&2; exit 1; }
+        exit 0
+    fi
+    exec swaylock --daemonize --config "${XDG_CONFIG_HOME:-$HOME/.config}/galinia/swaylock.conf"
+fi
+if [ "${1:-}" = --check ]; then
+    command -v xfce4-screensaver-command >/dev/null
+    exit
+fi
+exec xfce4-screensaver-command --lock

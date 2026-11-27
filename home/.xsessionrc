@@ -2,4 +2,10 @@
 # Anime cursor for X11 applications and desktop launchers.
 export XCURSOR_THEME=Blacklight-Chibi
 export XCURSOR_SIZE=28
-export XCURSOR_PATH="@HOME@/.icons:@HOME@/.local/share/icons:/usr/local/share/icons:/usr/share/icons:/usr/share/pixmaps"
+export XCURSOR_PATH="${HOME}/.icons:${HOME}/.local/share/icons:/usr/local/share/icons:/usr/share/icons:/usr/share/pixmaps"
+
+# Desktop actions should find Galinia's launchers after a fresh login.
+case ":$PATH:" in
+    *":$HOME/.local/bin:"*) ;;
+    *) export PATH="$HOME/.local/bin:$PATH" ;;
+esac

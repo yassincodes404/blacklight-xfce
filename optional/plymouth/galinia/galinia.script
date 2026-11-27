@@ -1,0 +1,66 @@
+# Original Galinia splash. Keep authentication and status text visible.
+Window.SetBackgroundTopColor(0.078, 0.094, 0.129);
+Window.SetBackgroundBottomColor(0.047, 0.059, 0.086);
+logo = Sprite(Image("logo.png"));
+wordmark = Sprite(Image.Text("GALINIA", 0.957, 0.933, 0.906, 1, "Sans Bold 24"));
+subtitle = Sprite(Image.Text("A calm workspace. A little fire.", 0.753, 0.769, 0.808, 1, "Sans 12"));
+prompt = Sprite();
+response = Sprite();
+message = Sprite();
+progress = Sprite(Image.Text("Starting Galinia", 0.937, 0.710, 0.475, 1, "Sans 12"));
+
+fun center(sprite, y) {
+    sprite.SetX(Window.GetX() + Window.GetWidth() / 2 - sprite.GetImage().GetWidth() / 2);
+    sprite.SetY(Window.GetY() + y);
+}
+
+fun refresh() {
+    center(logo, Window.GetHeight() / 2 - 150);
+    center(wordmark, Window.GetHeight() / 2 - 30);
+    center(subtitle, Window.GetHeight() / 2 + 18);
+    center(progress, Window.GetHeight() / 2 + 62);
+    if (prompt.GetImage()) center(prompt, Window.GetHeight() / 2 + 100);
+    if (response.GetImage()) center(response, Window.GetHeight() / 2 + 130);
+    if (message.GetImage()) center(message, Window.GetHeight() - 50);
+}
+Plymouth.SetRefreshFunction(refresh);
+
+fun normal() {
+    prompt.SetOpacity(0);
+    response.SetOpacity(0);
+    progress.SetOpacity(1);
+}
+Plymouth.SetDisplayNormalFunction(normal);
+
+fun password(text, bullets) {
+    prompt.SetImage(Image.Text(text, 1, 0.95, 0.87, 1, "Sans 12"));
+    hidden = "";
+    for (i = 0; i < bullets; i++) hidden += "*";
+    response.SetImage(Image.Text(hidden, 1, 0.95, 0.87, 1, "Sans 14"));
+    prompt.SetOpacity(1);
+    response.SetOpacity(1);
+    progress.SetOpacity(0);
+}
+Plymouth.SetDisplayPasswordFunction(password);
+
+fun question(text, entry) {
+    prompt.SetImage(Image.Text(text, 1, 0.95, 0.87, 1, "Sans 12"));
+    response.SetImage(Image.Text(entry, 1, 0.95, 0.87, 1, "Sans 14"));
+    prompt.SetOpacity(1);
+    response.SetOpacity(1);
+    progress.SetOpacity(0);
+}
+Plymouth.SetDisplayQuestionFunction(question);
+
+fun show_message(text) {
+    message.SetImage(Image.Text(text, 0.957, 0.933, 0.906, 1, "Sans 11"));
+    message.SetOpacity(1);
+}
+Plymouth.SetMessageFunction(show_message);
+
+fun boot_progress(duration, fraction) {
+    if (Plymouth.GetMode() == "shutdown") text = "See you soon";
+    else text = "Starting Galinia";
+    progress.SetImage(Image.Text(text, 0.937, 0.710, 0.475, 1, "Sans 12"));
+}
+Plymouth.SetBootProgressFunction(boot_progress);

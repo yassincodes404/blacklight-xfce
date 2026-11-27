@@ -1,0 +1,28 @@
+/* Galinia notification theme, generated with the desktop palette. */
+#XfceNotifyWindow {
+    background-image: none;
+    background-color: #151b24;
+    color: #eef2f7;
+    border: 1px solid #354052;
+    border-left: 3px solid #efb579;
+    border-radius: 12px;
+    padding: 14px;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 13px;
+}
+#XfceNotifyWindow label, #XfceNotifyWindow image { color: #eef2f7; }
+#XfceNotifyWindow label#summary { font-weight: bold; font-size: 14px; }
+#XfceNotifyWindow label#body { color: #cbd3df; }
+#XfceNotifyWindow button {
+    background-image: none;
+    background-color: #232d3c;
+    color: #eef2f7;
+    border: 1px solid #43516a;
+    border-radius: 7px;
+    box-shadow: none;
+    padding: 6px 10px;
+}
+#XfceNotifyWindow button:hover { background-color: #344258; }
+#XfceNotifyWindow button:focus { border-color: #efb579; }
+#XfceNotifyWindow progressbar trough { background-color: #354052; border-radius: 4px; }
+#XfceNotifyWindow progressbar progress { background-color: #efb579; border-radius: 4px; }

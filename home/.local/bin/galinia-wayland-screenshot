@@ -1,0 +1,41 @@
+#!/bin/sh
+# Native wlroots capture/annotation; no screen-capture daemon or portal required.
+set -eu
+export PATH="$HOME/.local/bin:$PATH"
+mode=region
+editor=true
+geometry=
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        --full) mode=full ;;
+        --no-editor) editor=false ;;
+        --geometry) shift; geometry=${1:?Missing capture geometry}; mode=geometry ;;
+        *) printf '%s\n' 'Usage: galinia-wayland-screenshot [--full] [--no-editor] [--geometry "X,Y WxH"]' >&2; exit 2 ;;
+    esac
+    shift
+done
+for tool in grim wl-copy; do
+    command -v "$tool" >/dev/null || { printf 'Install %s for Wayland screenshots.\n' "$tool" >&2; exit 1; }
+done
+if [ "$mode" = region ]; then
+    command -v slurp >/dev/null || { echo 'Install slurp for region selection.' >&2; exit 1; }
+    # Keep the desktop visible while selecting; Escape cancels without a file.
+    geometry=$(slurp -d -b '#00000022' -s '#00000000' -c '#f2f2f8ff' -w 2) || exit 0
+    [ -n "$geometry" ] || exit 0
+fi
+pictures=$(xdg-user-dir PICTURES 2>/dev/null) || pictures="$HOME/Pictures"
+[ -n "$pictures" ] || pictures="$HOME/Pictures"
+directory="$pictures/Screenshots"
+mkdir -p "$directory"
+umask 077
+output=$(mktemp "$directory/Galinia-$(date +%Y%m%d-%H%M%S)-XXXXXX.png")
+if [ "$mode" = full ]; then
+    grim "$output" || { rm -f "$output"; exit 1; }
+else
+    grim -g "$geometry" "$output" || { rm -f "$output"; exit 1; }
+fi
+wl-copy --type image/png < "$output"
+printf 'Saved and copied: %s\n' "$output"
+if [ "$editor" = true ] && command -v swappy >/dev/null; then
+    exec swappy -f "$output" -o "$output"
+fi

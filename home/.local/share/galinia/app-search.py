@@ -1,6 +1,12 @@
 #!/usr/bin/python3
 """Search installed desktop applications without a shell or a network lookup."""
 import gi
+import os
+import subprocess
+from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import preferences
 
 gi.require_version("Gtk", "3.0")
 gi.require_version("Gdk", "3.0")
@@ -69,7 +75,7 @@ class AppSearch(Gtk.Application):
             keywords = app.get_keywords() if hasattr(app, "get_keywords") else []
             terms = " ".join([name, app.get_description() or "",
                               app.get_executable() or "", *(keywords or [])]).casefold()
-            self.apps.setdefault(label, app)
+            self.apps.setdefault(app.get_id(), app)
             self.search_index.append((name, terms, app))
         self.index_dirty = False
 
@@ -163,7 +169,8 @@ class AppSearch(Gtk.Application):
         query = self.entry.get_text().strip().casefold()
         matches = []
         if not query:
-            favorites = ("Thunar", "Firefox", "Xfce Terminal", "Settings Manager", "ArtCraft Launcher")
+            favorites = ("thunar.desktop", "firefox.desktop", "kitty.desktop",
+                         "galinia-control-center.desktop", "galinia-welcome.desktop")
             for rank, name in enumerate(favorites):
                 app = self.apps.get(name)
                 if app is not None:
@@ -179,7 +186,17 @@ class AppSearch(Gtk.Application):
             row.app = app
             content = Gtk.Box(spacing=12, border_width=6)
             icon = app.get_icon() or Gio.ThemedIcon.new("application-x-executable")
-            image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.LARGE_TOOLBAR)
+            theme = Gtk.IconTheme.get_default()
+            pixbuf = None
+            for candidate in (icon, Gio.ThemedIcon.new("application-x-executable")):
+                info = theme.lookup_by_gicon(candidate, 22, Gtk.IconLookupFlags.FORCE_SIZE)
+                if info is not None:
+                    try:
+                        pixbuf = info.load_icon()
+                        break
+                    except GLib.Error:
+                        pass
+            image = Gtk.Image.new_from_pixbuf(pixbuf) if pixbuf else Gtk.Image()
             image.set_pixel_size(22)
             content.pack_start(image, False, False, 0)
             label = Gtk.Label(label=app.get_display_name(), xalign=0, ellipsize=Pango.EllipsizeMode.END)
@@ -216,12 +233,28 @@ class AppSearch(Gtk.Application):
 
     def open_row(self, _, row):
         try:
-            context = self.window.get_display().get_app_launch_context()
-            context.set_timestamp(Gtk.get_current_event_time())
-            if row.app.launch([], context):
-                self.hide_window()
-        except GLib.Error as error:
-            self.message.set_text(f"Could not open {row.app.get_display_name()}: {error.message}")
+            # Keep every descendant outside the search service's cgroup.
+            # gio may exit before the application, so retain its unit until
+            # all descendants exit, including Chromium's helper processes.
+            command = ["systemd-run", "--user", "--collect", "--quiet",
+                       "--property=ExitType=cgroup", "--service-type=exec", "--slice=app.slice"]
+            try:
+                command.extend(preferences.resource_flags(row.app.get_id()))
+            except (ValueError, OSError) as error:
+                print('Galinia: using default app priority:', error, file=sys.stderr)
+            for name in ("DISPLAY", "WAYLAND_DISPLAY", "XAUTHORITY",
+                         "XDG_SESSION_TYPE", "XDG_CURRENT_DESKTOP"):
+                if name in os.environ:
+                    command.append(f"--setenv={name}={os.environ[name]}")
+            filename = row.app.get_filename()
+            if not filename:
+                raise RuntimeError("Application has no desktop file")
+            command.extend(["--", "/usr/bin/gio", "launch", filename])
+            subprocess.run(command, check=True, capture_output=True, text=True, timeout=10)
+            self.hide_window()
+        except (GLib.Error, OSError, subprocess.SubprocessError, RuntimeError) as error:
+            detail = getattr(error, "stderr", None) or str(error)
+            self.message.set_text(f"Could not open {row.app.get_display_name()}: {detail}")
             self.body.set_visible_child_name("message")
 
 

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Flameshot
+Comment=Screenshot annotation and clipboard support
+Exec="@HOME@/.local/bin/galinia-flameshot-autostart"
+TryExec=@HOME@/.local/bin/galinia-flameshot-autostart
+Icon=flameshot
+OnlyShowIn=XFCE;
+Terminal=false

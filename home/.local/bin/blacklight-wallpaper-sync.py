@@ -7,6 +7,7 @@ desktop widget to the active wallpaper.
 """
 
 import colorsys
+import tempfile
 import json
 import os
 import subprocess
@@ -16,7 +17,11 @@ from pathlib import Path
 import gi
 gi.require_version("GdkPixbuf", "2.0")
 gi.require_version("Xfconf", "0")
-from gi.repository import GdkPixbuf, GLib, Xfconf
+from gi.repository import GdkPixbuf, Gio, GLib, Xfconf
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'share/galinia'))
+import preferences
+from notifications import theme_css
 
 HOME = Path.home()
 PALETTE_DIR = HOME / ".config/blacklight-rice"
@@ -28,9 +33,15 @@ USER_GTK3_CSS = HOME / ".config/gtk-3.0/gtk.css"
 USER_GTK4_CSS = HOME / ".config/gtk-4.0/gtk.css"
 
 def atomic_write(path, text):
-    temporary = path.with_name(path.name + ".tmp")
-    temporary.write_text(text, encoding="utf-8")
-    temporary.replace(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, name = tempfile.mkstemp(prefix="." + path.name + ".", dir=path.parent)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            handle.write(text)
+        os.replace(name, path)
+    finally:
+        if os.path.exists(name):
+            os.unlink(name)
 
 
 def clamp(v, lo=0, hi=255):
@@ -61,6 +72,20 @@ def get_active_wallpaper() -> Path:
 def share_wallpaper(channel, wallpaper, mirrored):
     properties = channel.get_properties("/backdrop")
     targets = {prop for prop in properties if prop.endswith("/last-image")}
+
+    if os.environ.get("XDG_SESSION_TYPE") != "wayland":
+        gi.require_version("Gdk", "3.0")
+        from gi.repository import Gdk
+        if Gdk.init_check([])[0]:
+            screen = Gdk.Screen.get_default()
+            workspace = channel.get_int("/backdrop/single-workspace-number", 0)
+            for index in range(screen.get_n_monitors()):
+                connector = screen.get_monitor_plug_name(index)
+                if connector:
+                    prefix = f"/backdrop/screen0/monitor{connector}/workspace{workspace}"
+                    if not channel.has_property(f"{prefix}/image-style"):
+                        channel.set_int(f"{prefix}/image-style", 5)
+                    targets.add(f"{prefix}/last-image")
 
     if os.environ.get("XDG_SESSION_TYPE") == "wayland":
         # XFCE 4.20 settings can write the display model while the desktop
@@ -225,12 +250,13 @@ selection,
     color: {pal['accent_hex']};
 }}
 
-/* --- One full-width wallpaper-adaptive main bar --- */
+/* --- Transparent main bar; keep foreground widgets fully opaque --- */
 .xfce4-panel.background {{
     padding: 0 6px;
-    background-color: {pal['bg_1']};
+    background-image: none;
+    background-color: transparent;
     border: none;
-    border-bottom: 1px solid {pal['border_hex']};
+    border-bottom: none;
     border-radius: 0;
     box-shadow: none;
     color: {pal['fg_hex']};
@@ -264,12 +290,20 @@ selection,
     -gtk-icon-shadow: none;
 }}
 
-.xfce4-panel.background button:hover {{
-    background-color: {pal['bg_2']};
-}}
+/* Keep every panel control clear when hovered, pressed or toggled. */
+.xfce4-panel.background button:hover,
 .xfce4-panel.background button:active,
-.xfce4-panel.background button:checked {{
-    background-color: {pal['bg_3']};
+.xfce4-panel.background button:checked,
+.xfce4-panel.background button:focus {{
+    background-image: none;
+    background-color: transparent;
+    border: none;
+    outline-style: none;
+    box-shadow: none;
+}}
+.xfce4-panel.background button:checked,
+.xfce4-panel.background button:focus {{
+    box-shadow: inset 0 -2px 0 {pal['accent_hex']};
 }}
 
 /* Consistent task-button hit areas around 16px icons. */
@@ -279,10 +313,6 @@ selection,
     margin: 3px 2px;
     padding: 0;
 }}
-.xfce4-panel.background .tasklist button:checked {{
-    box-shadow: inset 0 -2px 0 {pal['accent_hex']};
-}}
-
 #clock-button {{
     padding: 0 9px;
     margin: 3px 2px;
@@ -290,12 +320,13 @@ selection,
     color: {pal['fg_hex']};
 }}
 
-/* External plugin windows need the same opaque surface as the full bar. */
+/* Plugin containers must not paint opaque rectangles over the transparent bar. */
 #XfcePanelWindowWrapper,
 #XfcePanelWindowWrapper.xfce4-panel,
 .xfce4-panel .systray,
 .xfce4-panel > box {{
-    background-color: {pal['bg_1']};
+    background-image: none;
+    background-color: transparent;
     color: {pal['accent_hex']};
     border: none;
     border-radius: 0;
@@ -789,6 +820,11 @@ def write_user_gtk_css(pal: dict):
     USER_GTK3_CSS.parent.mkdir(parents=True, exist_ok=True)
     # A few legacy utilities load their own application-priority notebook CSS.
     gtk3_compat = f"""
+headerbar .title, headerbar .subtitle,
+.titlebar .title, .titlebar .subtitle {{
+    opacity: 0;
+    text-shadow: none;
+}}
 headerbar, .titlebar {{
     min-height: 28px;
     padding: 0 6px;
@@ -876,6 +912,9 @@ headerbar,
     border-bottom: 1px solid {pal['border_hex']};
 }}
 
+headerbar windowtitle .title, headerbar windowtitle .subtitle {{
+    opacity: 0;
+}}
 headerbar > windowhandle > box {{
     min-height: 30px;
     padding: 0 6px;
@@ -929,8 +968,8 @@ def update_xfwm4_theme(pal: dict):
     if not XFWM4_DIR.exists():
         return
 
-    bg_act = pal["bg_0"]
-    bg_inact = pal["bg_0"]
+    bg_act = "#000000"
+    bg_inact = "#000000"
     frame_act = pal["border_hex"]
     frame_inact = pal["bg_2"]
     bot_line = bg_act
@@ -941,15 +980,15 @@ def update_xfwm4_theme(pal: dict):
 
     themerc = (
         f"# Blacklight-Ultra-Rounded (Sleek Obsidian Window Frame)\n"
-        f"active_text_color={fg_act}\n"
+        f"active_text_color=#000000\n"
         f"active_text_shadow_color=#000000\n"
-        f"inactive_text_color={fg_inact}\n"
+        f"inactive_text_color=#000000\n"
         f"inactive_text_shadow_color=#000000\n"
         f"title_shadow_active=false\n"
         f"title_shadow_inactive=false\n"
         f"full_width_title=true\n"
-        f"title_vertical_offset_active=0\n"
-        f"title_vertical_offset_inactive=0\n"
+        f"title_vertical_offset_active=-1000\n"
+        f"title_vertical_offset_inactive=-1000\n"
         f"button_offset=9\n"
         f"button_spacing=2\n"
         f"shadow_delta_height=0\n"
@@ -1112,6 +1151,17 @@ def reload_live_desktop():
                        check=True, timeout=5)
 
 
+    # Notifyd caches its theme provider; changing the generated file alone does
+    # not refresh it. Only toggle our aliases, preserving user-selected themes.
+    notify = subprocess.run(['xfconf-query', '-c', 'xfce4-notifyd', '-p', '/theme'],
+                            capture_output=True, text=True, timeout=5)
+    current = notify.stdout.strip()
+    if notify.returncode == 0 and current in ('Galinia', 'Galinia-Live'):
+        target = 'Galinia' if current == 'Galinia-Live' else 'Galinia-Live'
+        subprocess.run(['xfconf-query', '-c', 'xfce4-notifyd', '-p', '/theme', '-s', target],
+                       check=True, timeout=5)
+
+
 def update_terminal_palette(pal: dict):
     settings = {
         "color-background": pal["bg_0"],
@@ -1126,8 +1176,28 @@ def update_terminal_palette(pal: dict):
         subprocess.run(
             ["xfconf-query", "-c", "xfce4-terminal", "-p", f"/{key}",
              "-n", "-t", "string", "-s", value],
-            check=True,
+            check=True, timeout=5,
         )
+
+
+
+def update_kitty_palette(pal):
+    directory = HOME / ".config/kitty"
+    if not (directory / "kitty.conf").is_file():
+        return
+    if "# galinia-color-mode: fixed" in (directory / "kitty.conf").read_text():
+        return
+    colors = {
+        "background": pal["bg_0"], "foreground": pal["fg_hex"],
+        "cursor": pal["accent_hex"], "cursor_text_color": pal["bg_0"],
+        "selection_background": pal["bg_3"], "selection_foreground": pal["fg_hex"],
+    }
+    atomic_write(directory / "colors.conf", "".join(
+        f"{name} {value}\n" for name, value in colors.items()
+    ))
+    # Kitty supports SIGUSR1 for reloading configuration in existing windows.
+    subprocess.run(["pkill", "-USR1", "-u", str(os.getuid()), "-x", "kitty"],
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=5)
 
 
 def update_labwc_theme(pal):
@@ -1138,16 +1208,18 @@ def update_labwc_theme(pal):
         "window.titlebar.padding.height": "2",
         "window.button.height": "24",
         "window.button.width": "27",
-        "window.active.title.bg.color": pal["bg_0"],
-        "window.inactive.title.bg.color": pal["bg_0"],
+        "window.active.title.bg.color": "#000000",
+        "window.inactive.title.bg.color": "#000000",
         "window.active.title.bg": "Solid",
         "window.inactive.title.bg": "Solid",
         "window.label.text.justify": "center",
+        "osd.bg.color": pal["bg_0"],
+        "osd.label.text.color": pal["fg_hex"],
         "window.button.hover.bg.corner-radius": "8",
-        "window.active.border.color": pal["bg_3"],
-        "window.inactive.border.color": pal["bg_1"],
-        "window.active.label.text.color": pal["fg_hex"],
-        "window.inactive.label.text.color": pal["fg_hex"],
+        "window.active.border.color": "#000000",
+        "window.inactive.border.color": "#000000",
+        "window.active.label.text.color": "#000000",
+        "window.inactive.label.text.color": "#000000",
         "window.active.button.unpressed.image.color": pal["accent_hex"],
         "window.inactive.button.unpressed.image.color": pal["fg_hex"],
     }
@@ -1160,14 +1232,16 @@ def update_labwc_theme(pal):
 
 def sync_now() -> dict:
     wp = get_active_wallpaper()
-    pal = extract_palette_from_wallpaper(wp)
+    pal = preferences.apply_palette(extract_palette_from_wallpaper(wp), preferences.load())
     PALETTE_DIR.mkdir(parents=True, exist_ok=True)
     atomic_write(PALETTE_JSON, json.dumps(pal, indent=2))
     patch_base_gtk_theme(pal)
     write_user_gtk_css(pal)
+    atomic_write(HOME / ".local/share/themes/Galinia/xfce-notify-4.0/gtk.css", theme_css(pal))
     update_xfwm4_theme(pal)
     update_labwc_theme(pal)
     update_terminal_palette(pal)
+    update_kitty_palette(pal)
     reload_live_desktop()
     print(f"Synced system theme to wallpaper: {wp.name} (mono={pal['is_mono']}, bg={pal['bg_0']}, accent={pal['accent_hex']})", flush=True)
     return pal
@@ -1184,7 +1258,8 @@ def watch_loop():
         pending[0] = 0
         try:
             wp = get_active_wallpaper()
-            signature = (str(wp), wp.stat().st_mtime_ns)
+            settings = preferences.load()
+            signature = (str(wp), wp.stat().st_mtime_ns, settings['accent_mode'], settings['fixed_accent'])
             share_wallpaper(channel, wp, mirrored)
             if signature != last[0]:
                 sync_now()
@@ -1206,6 +1281,19 @@ def watch_loop():
         pending[0] = GLib.timeout_add(350, refresh)
 
     channel.connect("property-changed", changed)
+    directory = preferences.config_path().parent
+    directory.mkdir(parents=True, exist_ok=True)
+    monitor = Gio.File.new_for_path(str(directory)).monitor_directory(Gio.FileMonitorFlags.WATCH_MOVES, None)
+
+    def preference_changed(monitor, file, other_file, event):
+        names = [item.get_basename() for item in (file, other_file) if item is not None]
+        if preferences.config_path().name not in names:
+            return
+        if pending[0]:
+            GLib.source_remove(pending[0])
+        pending[0] = GLib.timeout_add(350, refresh)
+
+    monitor.connect('changed', preference_changed)
     refresh()
     GLib.MainLoop().run()
 

@@ -1,4 +1,3 @@
 #!/bin/sh
-# Keep archive dialogs on GTK's OpenGL backend on this profile.
-export GSK_RENDERER=gl
+# Let GTK select a renderer supported by the current hardware.
 exec /usr/bin/file-roller "$@"

@@ -1,12 +1,2 @@
 #!/bin/sh
-# Refresh the user manager after switching between X11 and Wayland.
-set -eu
-for variable in DISPLAY XAUTHORITY WAYLAND_DISPLAY LABWC_PID XDG_SESSION_TYPE; do
-    if printenv "$variable" >/dev/null; then
-        systemctl --user import-environment "$variable"
-    else
-        systemctl --user unset-environment "$variable"
-    fi
-done
-systemctl --user reset-failed sysmon-widget.service blacklight-wallpaper-sync.service
-systemctl --user restart sysmon-widget.service blacklight-wallpaper-sync.service galinia-search.service
+exec /usr/bin/python3 "$(dirname "$(readlink -f "$0")")/../share/galinia/session.py" "$@"

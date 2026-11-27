@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Galinia
+Description=Galinia ring of fire boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/galinia
+ScriptFile=/usr/share/plymouth/themes/galinia/galinia.script

@@ -430,7 +430,7 @@ class SysMonWidget(Gtk.Window):
         return True
 
 
-LOCK_FILE = Path("/tmp/sysmon-widget.lock")
+LOCK_FILE = Path(os.environ.get("XDG_RUNTIME_DIR", str(Path.home() / ".cache"))) / "galinia-sysmon.lock"
 _lock_fd = None
 
 
@@ -449,6 +449,10 @@ def acquire_single_instance_lock():
 
 
 def main():
+    # No display at login/logout is normal, not a reason to restart-loop.
+    if not Gtk.init_check()[0]:
+        print("No graphical display available; waiting for session startup.", flush=True)
+        return
     acquire_single_instance_lock()
     win = SysMonWidget()
     win.connect("destroy", Gtk.main_quit)
