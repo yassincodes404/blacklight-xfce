@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Software on demand
+Exec=gnome-software --gapplication-service
+Hidden=true
+# The software manager remains available from the menu; Ubuntu's updater is separate.

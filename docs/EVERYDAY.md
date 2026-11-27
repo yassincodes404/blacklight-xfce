@@ -89,3 +89,7 @@ reliable public release.
 
 For memory accounting and opt-in Firefox tuning, see [MEMORY.md](MEMORY.md).
 Keep idle-desktop measurements separate from the cost of open applications.
+
+The profile suppresses GNOME Software's login autostart to keep the storefront
+on demand. It remains available from the menu and welcome guide. The upstream
+updater and distribution update timers are separate and are not disabled.

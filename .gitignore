@@ -18,3 +18,8 @@ __pycache__/
 *.pyc
 *replica-private*
 *rollback*
+
+# Generated distribution artifacts are published as release assets.
+*.iso
+*.squashfs
+*.deb

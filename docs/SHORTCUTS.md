@@ -6,6 +6,7 @@ on XFWM (X11) and labwc (Wayland).
 | Shortcut | Action |
 | --- | --- |
 | Super + Space | Search installed apps |
+| Super + / | Open the small offline keyboard-shortcut guide |
 | Super + Enter | Open the preferred terminal |
 | Super + E | Open the preferred file manager |
 | Super + W | Open the preferred browser |

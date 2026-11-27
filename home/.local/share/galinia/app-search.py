@@ -166,7 +166,7 @@ class AppSearch(Gtk.Application):
         matches = []
         if not query:
             favorites = ("thunar.desktop", "firefox.desktop", "xfce4-terminal.desktop",
-                         "xfce-settings-manager.desktop", "ai.storyteller.artcraft-launcher.desktop")
+                         "xfce-settings-manager.desktop", "galinia-welcome.desktop")
             for rank, name in enumerate(favorites):
                 app = self.apps.get(name)
                 if app is not None:

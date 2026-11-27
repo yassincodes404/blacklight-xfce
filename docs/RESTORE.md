@@ -9,7 +9,7 @@ python3 tools/control.py verify
 python3 tools/control.py doctor
 ```
 
-Core runtime requirements: XFCE panel/desktop/window manager/settings/terminal, the notification, power, PulseAudio and tray panel plugins, Python 3 with PyGObject, GTK 3, GdkPixbuf SVG support, Xfconf introspection, libX11, libXfixes, systemd user services, and JetBrains Mono. Pillow and xcursorgen are needed only to rebuild the original pointer artwork. `nvidia-smi` is optional; the monitor handles its absence. Flameshot is the default screenshot and annotation app. The baseline retains xfce4-screenshooter as a separate upstream utility. See [everyday components](EVERYDAY.md).
+Core runtime requirements: XFCE panel/desktop/window manager/settings/terminal, the notification, power, PulseAudio and tray panel plugins, Python 3 with PyGObject, GTK 3, GdkPixbuf SVG support, Xfconf introspection, libX11, libXfixes, systemd user services, and JetBrains Mono. Pillow and xcursorgen are needed only to rebuild the original pointer artwork. `nvidia-smi` is optional; the monitor handles its absence. Flameshot is the default screenshot and annotation app; xfce4-screenshooter is an optional upstream alternative. See [everyday components](EVERYDAY.md).
 
 ## Stage a portable home tree
 

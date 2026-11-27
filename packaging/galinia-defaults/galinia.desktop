@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Galinia OS
+Comment=The Galinia XFCE desktop
+Exec=startxfce4
+TryExec=startxfce4
+Type=Application
+DesktopNames=XFCE;

@@ -66,7 +66,7 @@ class Welcome(Gtk.Application):
         root.pack_start(scroll, True, True, 0)
         self.add_page('Settle in', [
             ('Your desktop, your way', 'Choose a wallpaper and Galinia will follow its colors. Adjust fonts, display scaling and desktop preferences in Settings.', 'Open Settings', ['xfce4-settings-manager']),
-            ('Find your flow', 'Press Super + Space to search your apps. Use the top panel for running apps and system controls.', None, None),
+            ('Find your flow', 'Press Super + Space to search apps. Super + / opens a small offline shortcut guide. Use the top panel for running apps and system controls.', 'Keyboard shortcuts', [str(Path(__file__).resolve().parents[2] / 'bin/galinia-shortcuts')]),
         ])
         self.add_page('Get ready', [
             ('Keep your system current', 'Galinia builds on Ubuntu / Xubuntu. Use the base system’s update tools for packages and security fixes.', 'Check for updates', ['update-manager']),
