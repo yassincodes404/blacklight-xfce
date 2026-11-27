@@ -72,3 +72,9 @@ Qualify locking first, then fix session/portal lifecycle and browser capture,
 then reproduce compositor/GPU crashes. After those changes, test a fresh account
 and repeated X11/Wayland logins, and qualify the actual ISO. Preserve the
 currently working desktop while doing that work.
+
+The latest completed ISO run (46037640446) was also reviewed: both BIOS and UEFI
+180-second screenshots still display the Galinia starting splash. Neither
+screenshot proves desktop arrival, and this observation window does not by
+itself prove a permanent boot hang. Extend the boot investigation and inspect
+guest logs before marking live boot passed.
