@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Galinia's on-demand desktop control center."""
 import copy
-import json
 from pathlib import Path
 import shutil
 import subprocess
@@ -10,12 +9,10 @@ import sys
 import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('Gdk', '3.0')
-from gi.repository import Gdk, Gio, Gtk
+from gi.repository import Gdk, Gtk
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import preferences
-import performance
-import memory_preset
 
 
 class ControlCenter(Gtk.Application):
@@ -41,6 +38,7 @@ class ControlCenter(Gtk.Application):
         #galinia-control-center .muted { color: #c2c8d2; }
         #galinia-control-center .card { background: #202735; border: 1px solid #3d4757; border-radius: 14px; padding: 18px; }
         #galinia-control-center button { border-radius: 8px; padding: 8px 12px; }
+        #galinia-control-center .settings-tile { min-height: 48px; background: #252d3b; }
         #galinia-control-center button:focus { outline: 2px solid #ffc17d; outline-offset: 2px; }
         ''')
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
@@ -52,8 +50,9 @@ class ControlCenter(Gtk.Application):
         sidebar.pack_start(self.label('GALINIA', 'brand'), False, False, 0)
         sidebar.pack_start(self.label('Make it feel like yours.', 'muted'), False, False, 0)
         menu = Gtk.ListBox(selection_mode=Gtk.SelectionMode.SINGLE)
+        self.menu = menu
         self.stack = Gtk.Stack(transition_type=Gtk.StackTransitionType.CROSSFADE)
-        for name in ['Overview', 'Appearance', 'App priorities', 'Memory', 'System tools']:
+        for name in ['Overview', 'Appearance', 'Desktop', 'Devices', 'System']:
             row = Gtk.ListBoxRow()
             row.name = name
             row.add(Gtk.Label(label=name, xalign=0, margin=12))
@@ -65,14 +64,12 @@ class ControlCenter(Gtk.Application):
         content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12, margin=26)
         root.pack_start(content, True, True, 0)
         content.pack_start(self.stack, True, True, 0)
-        self.message = self.label('Changes stay in your account. Use Undo to reverse the last preference change.', 'muted')
+        self.message = self.label('Your desktop settings, together in one place.', 'muted')
         self.message.set_selectable(True)
         content.pack_end(self.message, False, False, 0)
         self.build_overview()
         self.build_appearance()
-        self.build_apps()
-        self.build_memory()
-        self.build_tools()
+        self.build_categories()
         if getattr(self, 'preference_error', None):
             self.message.set_text('Preferences need repair: ' + self.preference_error)
         menu.select_row(menu.get_row_at_index(0))
@@ -135,26 +132,17 @@ class ControlCenter(Gtk.Application):
             return copy.deepcopy(preferences.DEFAULTS)
 
     def build_overview(self):
-        page = self.page('Overview', 'A calm desktop with clear controls for appearance, responsiveness and memory.')
-        card = self.card(page, 'How your system is doing')
-        self.overview = self.label('', 'muted')
-        card.pack_start(self.overview, False, False, 0)
-        self.button(card, 'Refresh snapshot', self.refresh)
-        self.refresh()
-        card = self.card(page, 'Find your flow', 'Super + Space finds applications. Super + / shows navigation and window shortcuts.')
+        page = self.page('Overview', 'Your Galinia desktop. Make it comfortable, connected and ready for everyday work.')
+        card = self.card(page, 'Make it yours', 'Choose your wallpaper, colors and desktop layout in Appearance.')
+        self.button(card, 'Personalize desktop', lambda: self.stack.set_visible_child_name('Appearance'))
+        card = self.card(page, 'Everyday settings', 'Manage displays, sound, connections and power in Devices.')
+        self.button(card, 'Device settings', lambda: self.stack.set_visible_child_name('Devices'))
+        card = self.card(page, 'Find your way', 'Super + Space opens app search. Super + / shows keyboard shortcuts.')
         self.button(card, 'Keyboard shortcuts', lambda: self.launch([str(Path(__file__).resolve().parents[2] / 'bin/galinia-shortcuts')]))
-        self.button(card, 'Undo last preference change', self.undo)
-
-    def refresh(self):
-        snap = performance.snapshot()
-        cpu = snap['cpu_pressure'].get('some', {}).get('avg10')
-        mem = snap['memory_pressure'].get('some', {}).get('avg10')
-        pressure = lambda value: 'unavailable' if value is None else f'{value:.2f}% stalled over the last 10 seconds'
-        self.overview.set_text(f"Memory available: {snap['available_mib'] / 1024:.1f} / {snap['total_mib'] / 1024:.1f} GiB\n\nCPU pressure: {pressure(cpu)}\nMemory pressure: {pressure(mem)}")
-        return 'Snapshot refreshed. Available memory includes reclaimable cache.'
+        self.button(card, 'Undo last appearance change', self.undo)
 
     def build_appearance(self):
-        page = self.page('Appearance', 'Keep colors tied to your wallpaper or choose a readable accent. Changes are event-driven.')
+        page = self.page('Appearance', 'Keep colors tied to your wallpaper or choose a readable accent. Make the desktop feel like yours.')
         data = self.settings()
         card = self.card(page, 'Your desktop palette')
         self.accent_mode = Gtk.ComboBoxText()
@@ -203,76 +191,7 @@ class ControlCenter(Gtk.Application):
                     fixed_accent='#' + ''.join(f'{round(v * 255):02x}' for v in (color.red, color.green, color.blue)),
                     panel_size=self.panel.get_value_as_int(), monitor_enabled=self.monitor.get_active())
         preferences.apply_desktop(data)
-        return 'Appearance saved. Accent changes refresh through the wallpaper service.'
-
-    def build_apps(self):
-        page = self.page('App priorities', 'Decide which work should yield when the CPU is busy. No hard RAM caps or CPU reservations.')
-        card = self.card(page, 'Priority for the next launch', 'Applies when opening the app through Galinia search. Close an existing app first; its running process is not moved.')
-        self.apps = Gtk.ComboBoxText()
-        entries = sorted([app for app in Gio.AppInfo.get_all() if app.should_show() and app.get_id()], key=lambda app: app.get_display_name().casefold())
-        for app in entries:
-            self.apps.append(app.get_id(), app.get_display_name())
-        self.apps.set_active(0)
-        card.pack_start(self.apps, False, False, 0)
-        self.priority = Gtk.ComboBoxText()
-        for key, label in [('normal', 'Normal'), ('interactive', 'Prefer during CPU contention'), ('background', 'Background — yield to other work')]:
-            self.priority.append(key, label)
-        card.pack_start(self.priority, False, False, 0)
-        self.apps.connect('changed', lambda *_: self.priority.set_active_id(self.settings()['app_profiles'].get(self.apps.get_active_id(), 'normal')))
-        self.priority.set_active_id(self.settings()['app_profiles'].get(self.apps.get_active_id(), 'normal'))
-        self.button(card, 'Save app priority', self.save_priority)
-        self.button(card, 'Reset this app to normal', lambda: self.save_priority(reset=True))
-
-    def save_priority(self, reset=False):
-        app_id = self.apps.get_active_id()
-        if not app_id:
-            raise ValueError('Choose an application first.')
-        data = preferences.load()
-        if reset:
-            data['app_profiles'].pop(app_id, None); self.priority.set_active_id('normal')
-        else:
-            data['app_profiles'][app_id] = self.priority.get_active_id()
-        preferences.save(data)
-        return 'Priority saved for the next launch through Galinia app search.'
-
-    def build_memory(self):
-        page = self.page('Memory', 'Let inactive browser tabs yield memory sooner while keeping active work available.')
-        card = self.card(page, 'Firefox memory behavior', 'Aggressive mode allows more reloads when revisiting tabs. These are memory-pressure preferences, not a fixed RAM cap or an inactivity timer.')
-        self.profiles = Gtk.ComboBoxText()
-        for root in [Path.home() / '.mozilla/firefox', Path.home() / 'snap/firefox/common/.mozilla/firefox']:
-            if root.is_dir():
-                for profile in sorted(root.iterdir()):
-                    if profile.is_dir() and (profile / 'prefs.js').is_file():
-                        self.profiles.append(str(profile), profile.name + (' (Snap)' if 'snap' in str(root) else ''))
-        self.profiles.set_active(0)
-        card.pack_start(self.profiles, False, False, 0)
-        self.memory_mode = Gtk.ComboBoxText()
-        self.memory_mode.append('balanced', 'Balanced'); self.memory_mode.append('aggressive', 'Aggressive')
-        self.memory_mode.set_active_id('balanced'); card.pack_start(self.memory_mode, False, False, 0)
-        self.button(card, 'Save for next Firefox startup', self.apply_memory)
-        self.button(card, 'Undo latest Firefox preset', self.undo_memory)
-        self.card(page, 'Understand what the numbers mean', 'Available memory includes reclaimable cache. A browser tab can use substantial RAM for active page content. Use Firefox’s about:unloads page for direct tab control.')
-
-    def selected_profile(self):
-        value = self.profiles.get_active_id()
-        if not value:
-            raise ValueError('No Firefox profile found. Start Firefox once to create one.')
-        return Path(value)
-
-    def apply_memory(self):
-        backup = memory_preset.apply(self.selected_profile(), self.memory_mode.get_active_id())
-        return 'Preset saved for the next Firefox startup. A private restore backup was created.' if backup else 'That preset is already saved.'
-
-    def undo_memory(self):
-        profile = self.selected_profile()
-        current = profile / 'user.js'
-        current_hash = memory_preset.digest(current.read_text()) if current.exists() else None
-        for backup in reversed(sorted((profile / '.galinia-memory-backups').glob('*.json'))):
-            data = json.loads(backup.read_text())
-            if data.get('installed_sha256') == current_hash:
-                memory_preset.restore(profile, backup)
-                return 'Previous Firefox memory preferences restored.'
-        raise ValueError('No matching preset backup was found; preserve any later user.js edits before restoring.')
+        return 'Appearance saved.'
 
     def undo(self):
         preferences.undo()
@@ -280,21 +199,53 @@ class ControlCenter(Gtk.Application):
         self.accent_mode.set_active_id(data['accent_mode'])
         color = Gdk.RGBA(); color.parse(data['fixed_accent']); self.color.set_rgba(color)
         self.panel.set_value(data['panel_size']); self.monitor.set_active(data['monitor_enabled'])
-        self.priority.set_active_id(data['app_profiles'].get(self.apps.get_active_id(), 'normal'))
-        return 'Last desktop/app preference change undone.'
+        return 'Last preference change undone.'
 
-    def build_tools(self):
-        page = self.page('System tools', 'Use the maintained system tools for hardware, updates, accessibility and recovery.')
-        card = self.card(page, 'Everyday controls')
-        for title, command in [('All XFCE settings', 'xfce4-settings-manager'), ('Displays', 'xfce4-display-settings'),
-                               ('Keyboard', 'xfce4-keyboard-settings'), ('Power and suspend', 'xfce4-power-manager-settings'),
-                               ('Audio', 'pavucontrol'), ('Bluetooth', 'blueman-manager'), ('Software', 'gnome-software'),
-                               ('Updates', 'update-manager'), ('Backups', 'deja-dup')]:
-            button = self.button(card, title, lambda cmd=command: self.launch([cmd]))
-            if not shutil.which(command):
-                button.set_sensitive(False); button.set_tooltip_text('Install ' + command + ' to enable this tool.')
-        snap = performance.snapshot()
-        self.card(page, 'Current kernel configuration', f"CPU governor: {snap['governor']}\nSwappiness: {snap['swappiness']}\nCompressed swap cache (zswap): {snap['zswap']}\nKernel settings are shown for diagnosis; desktop controls do not overwrite them.")
+    def build_categories(self):
+        groups = [
+            ('Desktop', 'Set up navigation, windows and your daily workspace.', [
+                ('Windows', 'xfwm4-settings'), ('Window behavior', 'xfwm4-tweaks-settings'),
+                ('Workspaces', 'xfwm4-workspace-settings'), ('Panel', 'xfce4-panel', '--preferences'),
+                ('Keyboard and shortcuts', 'xfce4-keyboard-settings'), ('Mouse and touchpad', 'xfce4-mouse-settings'),
+                ('Notifications', 'xfce4-notifyd-config'), ('Accessibility', 'xfce4-accessibility-settings'),
+                ('Session and startup', 'xfce4-session-settings')]),
+            ('Devices', 'Connect your devices and choose how they work.', [
+                ('Displays', 'xfce4-display-settings'), ('Sound', 'pavucontrol'),
+                ('Network connections', 'nm-connection-editor'), ('Bluetooth', 'blueman-manager'),
+                ('Power and suspend', 'xfce4-power-manager-settings'),
+                ('Screen lock', 'xfce4-screensaver-preferences'), ('Printers', 'system-config-printer')]),
+            ('System', 'Keep your system up to date and your files protected.', [
+                ('Software', 'gnome-software'), ('Updates', 'update-manager'),
+                ('Software sources and drivers', 'software-properties-gtk'), ('Backups', 'deja-dup'),
+                ('All XFCE settings', 'xfce4-settings-manager')]),
+        ]
+        for title, description, tools in groups:
+            page = self.page(title, description)
+            card = self.card(page, title + ' settings')
+            grid = Gtk.Grid(column_spacing=12, row_spacing=12, column_homogeneous=True)
+            card.pack_start(grid, False, False, 0)
+            icons = {'Windows': 'preferences-system-windows', 'Window behavior': 'preferences-system-windows',
+                     'Workspaces': 'preferences-desktop-workspaces', 'Panel': 'preferences-desktop',
+                     'Keyboard and shortcuts': 'input-keyboard', 'Mouse and touchpad': 'input-mouse',
+                     'Notifications': 'preferences-system-notifications', 'Accessibility': 'preferences-desktop-accessibility',
+                     'Displays': 'video-display', 'Sound': 'audio-volume-high', 'Network connections': 'network-workgroup',
+                     'Bluetooth': 'bluetooth', 'Power and suspend': 'battery', 'Screen lock': 'system-lock-screen',
+                     'Printers': 'printer', 'Software': 'system-software-install', 'Updates': 'system-software-update',
+                     'Backups': 'document-save'}
+            for index, (label, *command) in enumerate(tools):
+                button = Gtk.Button()
+                button.get_style_context().add_class('settings-tile')
+                row = Gtk.Box(spacing=12)
+                row.pack_start(Gtk.Image.new_from_icon_name(icons.get(label, 'preferences-system'), Gtk.IconSize.LARGE_TOOLBAR), False, False, 0)
+                row.pack_start(self.label(label), True, True, 0)
+                button.add(row)
+                button.connect('clicked', lambda _, cmd=command: self.action(lambda: self.launch(cmd)))
+                grid.attach(button, index % 2, index // 2, 1, 1)
+                if not shutil.which(command[0]):
+                    button.set_sensitive(False)
+                    button.set_tooltip_text('This tool is not installed.')
+        import platform
+        self.card(page, 'About Galinia', 'Galinia desktop • XFCE\nKernel ' + platform.release())
 
 
 if __name__ == '__main__':

@@ -41,6 +41,8 @@ def snapshot(root=Path('/')):
             'governor': read(root / 'sys/devices/system/cpu/cpu0/cpufreq/scaling_governor') or 'unavailable',
             'swappiness': read(root / 'proc/sys/vm/swappiness') or 'unavailable',
             'zswap': read(root / 'sys/module/zswap/parameters/enabled') or 'unavailable',
+            'mglru': read(root / 'sys/kernel/mm/lru_gen/enabled') or 'unavailable',
+            'scheduler_autogroup': read(root / 'proc/sys/kernel/sched_autogroup_enabled') or 'unavailable',
             'swaps': swaps}
 
 

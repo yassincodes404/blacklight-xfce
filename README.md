@@ -56,8 +56,7 @@ The [memory guide](docs/MEMORY.md) provides one-shot RAM accounting and optional
 reversible Firefox memory presets. Idle-memory targets require a fresh-login benchmark.
 
 **Super + S opens Galinia Control Center:** adaptive/fixed accents, compact and
-comfortable layouts, per-app CPU priorities, Firefox memory presets and pressure
-feedback. See [controls and performance qualification](docs/CONTROL-CENTER.md).
+comfortable layouts, desktop, device and system settings. Kernel tuning is handled separately from the desktop UI. See [controls and performance qualification](docs/CONTROL-CENTER.md).
 
 The [image-development guide](iso/README.md) describes the Xubuntu-based live
 image workflow. A rootless defaults-package builder supplies the Galinia session,
