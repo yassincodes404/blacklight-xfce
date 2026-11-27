@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <unistd.h>
 #include "icon-lookup.c"
 int main(int argc, char **argv) {
     gtk_init(&argc, &argv);

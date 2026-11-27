@@ -4,7 +4,9 @@ The reference XFCE Wayland session exposes XWayland instance names through
 libxfce4windowing. Version 4.20.5 looks for a matching desktop filename and then
 uses GIO's name/keyword search. It does not match StartupWMClass metadata.
 Consequently valid installed icons can become generic executable icons: the
-application identity fails before the icon theme is consulted.
+application identity fails before the icon theme is consulted. A second defect
+uses gtk_icon_theme_has_icon(), which excludes unthemed standard pixmaps even
+when GTK lookup can load them. The patch uses the actual GTK lookup path.
 
 Galinia's candidate fix is in `packaging/windowing/resolve-app.c`. It retains
 exact and lowercase desktop-file matching, then checks for a unique exact
@@ -22,7 +24,8 @@ changing icon themes cannot repair an incorrect application identity.
 `tools/build_windowing.py --output dist` builds on Ubuntu 26.04 amd64 with the
 headers installed by `.github/workflows/windowing-fix.yml`. The source URL and
 SHA256 are locked in `packaging/windowing/source.json`. The builder runs six
-native C resolver regression tests and repackages the original distribution
+native C resolver regression tests plus an Xvfb GTK test that creates and loads
+an unthemed pixmaps fixture and repackages the original distribution
 package with the rebuilt library. It retains both X11 and Wayland backends,
 original package dependencies and SONAME. Version 4.20.5-1galinia1 permits later
 distribution versions to supersede it; no APT pin is installed.
