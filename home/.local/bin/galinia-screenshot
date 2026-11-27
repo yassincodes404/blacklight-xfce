@@ -1,35 +1,51 @@
 #!/bin/sh
 set -eu
 
-if [ "${XDG_SESSION_TYPE:-}" != wayland ] && [ -z "${WAYLAND_DISPLAY:-}" ]; then
-    exec "$HOME/.local/bin/flameshot" gui
-fi
+notify() { if command -v notify-send >/dev/null 2>&1; then notify-send "$@" || :; fi; }
+session=x11
+if [ "${XDG_SESSION_TYPE:-}" = wayland ] || [ -n "${WAYLAND_DISPLAY:-}" ]; then session=wayland; fi
 
 # Also support an installation unpacked into the user's home.
 PATH="$PATH:$HOME/.local/opt/galinia-capture/usr/bin"
 export PATH
-for tool in grim slurp wl-copy; do
+if [ "$session" = wayland ]; then tools='grim slurp wl-copy'; else tools='xfce4-screenshooter'; fi
+for tool in $tools; do
     if ! command -v "$tool" >/dev/null; then
-        notify-send "Screenshot unavailable" "Install grim, slurp and wl-clipboard."
+        notify "Screenshot unavailable" "Missing $tool. See Galinia First Steps."
         exit 1
     fi
 done
 
-region=$(slurp -b '#00000070' -c '#efb579ff' -w 2) || exit 0
-[ -n "$region" ] || exit 0
+if [ "$session" = wayland ]; then
+    region=$(slurp -b '#00000070' -c '#efb579ff' -w 2) || exit 0
+    [ -n "$region" ] || exit 0
+fi
 
-pictures=$(xdg-user-dir PICTURES)
+pictures=$(xdg-user-dir PICTURES 2>/dev/null) || pictures="$HOME/Pictures"
+[ -n "$pictures" ] || pictures="$HOME/Pictures"
 directory="$pictures/Screenshots"
 mkdir -p "$directory"
 capture=$(mktemp "$directory/Screenshot-$(date +%F-%H%M%S)-XXXXXX.png")
 trap 'rm -f "$capture"' EXIT
+if [ "$session" = x11 ]; then
+    if ! xfce4-screenshooter --region --save "$capture"; then
+        notify "Screenshot failed" "No image was captured."
+        exit 1
+    fi
+    # Escape can return success without writing an image.
+    [ -s "$capture" ] || exit 0
+    trap - EXIT
+    helper="$(dirname "$(readlink -f "$0")")/../share/galinia/screenshot-clipboard.py"
+    exec /usr/bin/python3 "$helper" "$capture"
+fi
 if ! grim -g "$region" -t png "$capture"; then
-    notify-send "Screenshot failed" "The compositor did not return an image."
+    notify "Screenshot failed" "The compositor did not return an image."
     exit 1
 fi
 trap - EXIT
 if wl-copy --type image/png < "$capture"; then
-    notify-send "Screenshot saved and copied" "$capture"
+    notify "Screenshot saved and copied" "$capture"
 else
-    notify-send "Screenshot saved" "$capture"
+    notify "Screenshot saved; clipboard failed" "$capture"
+    exit 1
 fi

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Galinia First Steps
+Comment=Offline desktop help and recovery guidance
+Exec=xdg-open "@HOME@/.local/share/galinia/first-steps.html"
+Icon=galinia
+Categories=Utility;Documentation;
+Terminal=false

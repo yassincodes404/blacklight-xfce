@@ -1,12 +1,25 @@
 #!/bin/sh
-# Refresh the user manager after switching between X11 and Wayland.
-set -eu
-for variable in DISPLAY XAUTHORITY WAYLAND_DISPLAY LABWC_PID XDG_SESSION_TYPE; do
+# Run after XFCE has established the graphical session environment.
+set -u
+status=0
+for variable in DISPLAY XAUTHORITY WAYLAND_DISPLAY LABWC_PID XDG_SESSION_TYPE XDG_CURRENT_DESKTOP XCURSOR_THEME XCURSOR_SIZE XCURSOR_PATH QT_QPA_PLATFORMTHEME; do
     if printenv "$variable" >/dev/null; then
-        systemctl --user import-environment "$variable"
+        systemctl --user import-environment "$variable" || status=1
     else
-        systemctl --user unset-environment "$variable"
+        systemctl --user unset-environment "$variable" || status=1
     fi
 done
-systemctl --user reset-failed sysmon-widget.service blacklight-wallpaper-sync.service
-systemctl --user restart sysmon-widget.service blacklight-wallpaper-sync.service galinia-search.service
+for unit in sysmon-widget.service blacklight-wallpaper-sync.service galinia-search.service; do
+    # Loading first also makes reset-failed safe on the first login.
+    if systemctl --user cat "$unit" >/dev/null 2>&1; then
+        systemctl --user reset-failed "$unit" >/dev/null 2>&1 || :
+        if ! systemctl --user restart "$unit"; then
+            printf '%s\n' "Galinia session: failed to start $unit" >&2
+            status=1
+        fi
+    else
+        printf '%s\n' "Galinia session: missing $unit" >&2
+        status=1
+    fi
+done
+exit "$status"

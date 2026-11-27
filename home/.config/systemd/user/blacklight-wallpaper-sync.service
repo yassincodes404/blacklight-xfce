@@ -1,13 +1,12 @@
 [Unit]
 Description=Blacklight Live Wallpaper Color Sync Daemon
 After=graphical-session.target
+PartOf=graphical-session.target
 
 [Service]
 Type=simple
-# Import DISPLAY from the current graphical session before starting.
 ExecStart=/usr/bin/python3 %h/.local/bin/blacklight-wallpaper-sync.py --watch
 Restart=always
 RestartSec=2
 
-[Install]
-WantedBy=default.target
+# Started by galinia-session.desktop after importing the display environment.

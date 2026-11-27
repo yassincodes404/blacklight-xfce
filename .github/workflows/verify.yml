@@ -11,3 +11,5 @@ jobs:
         run: python3 tools/control.py verify
       - name: Compile portable tools
         run: python3 -m compileall -q tools
+      - name: Test portability and startup failure handling
+        run: python3 -m unittest discover -s tests -v

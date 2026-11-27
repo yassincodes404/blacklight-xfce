@@ -7,6 +7,7 @@ desktop widget to the active wallpaper.
 """
 
 import colorsys
+import tempfile
 import json
 import os
 import subprocess
@@ -28,9 +29,15 @@ USER_GTK3_CSS = HOME / ".config/gtk-3.0/gtk.css"
 USER_GTK4_CSS = HOME / ".config/gtk-4.0/gtk.css"
 
 def atomic_write(path, text):
-    temporary = path.with_name(path.name + ".tmp")
-    temporary.write_text(text, encoding="utf-8")
-    temporary.replace(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, name = tempfile.mkstemp(prefix="." + path.name + ".", dir=path.parent)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            handle.write(text)
+        os.replace(name, path)
+    finally:
+        if os.path.exists(name):
+            os.unlink(name)
 
 
 def clamp(v, lo=0, hi=255):
@@ -61,6 +68,20 @@ def get_active_wallpaper() -> Path:
 def share_wallpaper(channel, wallpaper, mirrored):
     properties = channel.get_properties("/backdrop")
     targets = {prop for prop in properties if prop.endswith("/last-image")}
+
+    if os.environ.get("XDG_SESSION_TYPE") != "wayland":
+        gi.require_version("Gdk", "3.0")
+        from gi.repository import Gdk
+        if Gdk.init_check([])[0]:
+            screen = Gdk.Screen.get_default()
+            workspace = channel.get_int("/backdrop/single-workspace-number", 0)
+            for index in range(screen.get_n_monitors()):
+                connector = screen.get_monitor_plug_name(index)
+                if connector:
+                    prefix = f"/backdrop/screen0/monitor{connector}/workspace{workspace}"
+                    if not channel.has_property(f"{prefix}/image-style"):
+                        channel.set_int(f"{prefix}/image-style", 5)
+                    targets.add(f"{prefix}/last-image")
 
     if os.environ.get("XDG_SESSION_TYPE") == "wayland":
         # XFCE 4.20 settings can write the display model while the desktop
@@ -1126,8 +1147,26 @@ def update_terminal_palette(pal: dict):
         subprocess.run(
             ["xfconf-query", "-c", "xfce4-terminal", "-p", f"/{key}",
              "-n", "-t", "string", "-s", value],
-            check=True,
+            check=True, timeout=5,
         )
+
+
+
+def update_kitty_palette(pal):
+    directory = HOME / ".config/kitty"
+    if not (directory / "kitty.conf").is_file():
+        return
+    colors = {
+        "background": pal["bg_0"], "foreground": pal["fg_hex"],
+        "cursor": pal["accent_hex"], "cursor_text_color": pal["bg_0"],
+        "selection_background": pal["bg_3"], "selection_foreground": pal["fg_hex"],
+    }
+    atomic_write(directory / "colors.conf", "".join(
+        f"{name} {value}\n" for name, value in colors.items()
+    ))
+    # Kitty supports SIGUSR1 for reloading configuration in existing windows.
+    subprocess.run(["pkill", "-USR1", "-u", str(os.getuid()), "-x", "kitty"],
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=5)
 
 
 def update_labwc_theme(pal):
@@ -1168,6 +1207,7 @@ def sync_now() -> dict:
     update_xfwm4_theme(pal)
     update_labwc_theme(pal)
     update_terminal_palette(pal)
+    update_kitty_palette(pal)
     reload_live_desktop()
     print(f"Synced system theme to wallpaper: {wp.name} (mono={pal['is_mono']}, bg={pal['bg_0']}, accent={pal['accent_hex']})", flush=True)
     return pal

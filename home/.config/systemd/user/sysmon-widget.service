@@ -4,10 +4,8 @@ After=graphical-session.target
 
 [Service]
 Type=simple
-# Import DISPLAY from the current graphical session before starting.
 ExecStart=/usr/bin/python3 %h/.local/bin/sysmon-widget.py
-Restart=always
-RestartSec=2
+Restart=on-failure
+RestartSec=5
 
-[Install]
-WantedBy=default.target
+# Started by galinia-session.desktop after importing the display environment.

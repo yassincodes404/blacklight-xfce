@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Welcome to Galinia
+Comment=Get comfortable with your Galinia desktop
+Exec="@HOME@/.local/bin/galinia-welcome" --autostart
+Icon=galinia
+OnlyShowIn=XFCE;
+Terminal=false

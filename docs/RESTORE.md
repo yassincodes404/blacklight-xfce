@@ -9,7 +9,7 @@ python3 tools/control.py verify
 python3 tools/control.py doctor
 ```
 
-Core runtime requirements: XFCE panel/desktop/window manager/settings/terminal, the notification, power, PulseAudio and tray panel plugins, Python 3 with PyGObject, GTK 3, GdkPixbuf SVG support, Xfconf introspection, libX11, libXfixes, systemd user services, and JetBrains Mono. Pillow and xcursorgen are needed only to rebuild the original pointer artwork. `nvidia-smi` is optional; the monitor handles its absence. Flameshot is an optional screenshot dependency: the reference shortcut calls `~/.local/bin/flameshot`, whose wrapper expects the official AppImage under `~/.local/opt/flameshot/Flameshot.AppImage`. Install that dependency before enabling the shortcut.
+Core runtime requirements: XFCE panel/desktop/window manager/settings/terminal, the notification, power, PulseAudio and tray panel plugins, Python 3 with PyGObject, GTK 3, GdkPixbuf SVG support, Xfconf introspection, libX11, libXfixes, systemd user services, and JetBrains Mono. Pillow and xcursorgen are needed only to rebuild the original pointer artwork. `nvidia-smi` is optional; the monitor handles its absence. X11 screenshots use xfce4-screenshooter plus Galinia's GTK image clipboard owner; Flameshot is optional for annotation.
 
 ## Stage a portable home tree
 
@@ -17,13 +17,12 @@ Core runtime requirements: XFCE panel/desktop/window manager/settings/terminal, 
 python3 tools/control.py render \
   --output /tmp/blacklight-stage \
   --target-home "$HOME" \
-  --monitor HDMI-0 \
   --wallpaper "$HOME/Pictures/your-wallpaper.jpg"
 ```
 
-This resolves `@HOME@`, expands the pinned Papirus/font archives and adjusts the monitor property. It **does not install anything**. Use the actual output name from `xfconf-query -c xfce4-desktop -lv`. The reference wallpaper and inherited non-pointer cursor set are external assets; see [ASSETS.md](ASSETS.md).
+This resolves `@HOME@` and expands the pinned Papirus/font archives. The session discovers monitor connectors at runtime. It **does not install anything**. The reference wallpaper and inherited non-pointer cursor set are external assets; see [ASSETS.md](ASSETS.md).
 
-For a manual restore, back up your configuration first. Copy the staged home tree while logged out of XFCE, using a TTY or another session. Do not overwrite running xfconfd XML: its in-memory state can overwrite the files. Preserve permissions and symlinks. Log back in, run `systemctl --user daemon-reload`, import the graphical environment with `systemctl --user import-environment DISPLAY XAUTHORITY XDG_SESSION_TYPE`, then enable/start `blacklight-wallpaper-sync.service` and `sysmon-widget.service`. Keep the theme `-Live` aliases: the sync engine alternates identical theme aliases to reload colors without flashing a different theme.
+For a manual restore, back up your configuration first. Copy the staged home tree while logged out of XFCE, using a TTY or another session. Do not overwrite running xfconfd XML: its in-memory state can overwrite the files. Preserve permissions and symlinks. Log back in, run `systemctl --user daemon-reload`, import the graphical environment with `systemctl --user import-environment DISPLAY XAUTHORITY XDG_SESSION_TYPE`, then run `~/.local/bin/galinia-session`. The monitor starts through the session autostart after importing the display environment; do not enable it under `default.target`. For an existing installation, run `systemctl --user disable sysmon-widget.service blacklight-wallpaper-sync.service` (without `--now`) to remove its premature login startup. Keep the theme `-Live` aliases: the sync engine alternates identical theme aliases to reload colors without flashing a different theme.
 
 Choose a wallpaper in XFCE settings after login. The sync service generates GTK CSS, XFWM assets, terminal colors and the palette consumed by the monitor. Never edit generated colors as the long-term source; edit the generator.
 
@@ -33,7 +32,7 @@ The capture contains both `.config/gtk-*` settings and fontconfig preferences, i
 
 A separate **local-only** `blacklight-replica-private.tar.xz` was made alongside this repository, with an explicit allowlist recorded in `manifests/private-replica-scope.json`. It includes exact wallpapers, original inherited cursor roles, active icons/fonts/themes, hardware/display/session XML and the owner-specific integration configurations. It excludes credentials, browser databases and personal documents. The archive has `home/` and `etc/` top-level namespaces. Extract into a new staging directory first, never blindly over `/`.
 
-This is the complete captured customization payload, not a promise of pixel-identical results on different drivers, monitors, font renderers or XFCE/GTK versions. A clean-machine end-to-end installation has **not** yet been tested. The public installer is the next milestone.
+This is the complete captured customization payload, not a promise of pixel-identical results on different drivers, monitors, font renderers or XFCE/GTK versions. A clean-machine end-to-end installation has **not** yet been tested. The experimental public profile installer is described in [FIRST-LAUNCH.md](FIRST-LAUNCH.md); it does not consume the private owner archive.
 
 ## Optional integrations
 
@@ -62,7 +61,7 @@ shortcut support depend on the compositor and application.
 On labwc, Print, Alt+Print and Shift+Print open a native drag selector.
 Install the packages grim, slurp and wl-clipboard. Captures go to the
 Screenshots folder under your configured Pictures directory and are copied
-to the clipboard. Escape cancels selection. X11 still opens Flameshot.
+to the clipboard. Escape cancels selection. X11 uses xfce4-screenshooter and the GTK clipboard helper.
 For a persistent manual wallpaper selection, leave wallpaper cycling off
 in XFCE Desktop Settings.
 
@@ -75,8 +74,7 @@ discovery uses connected DRM outputs exposed in /sys/class/drm.
 The desktop uses Noto Sans for interface text and JetBrains Mono for
 monospace text. Install the Noto core fonts if they are absent. Settings
 Manager launched from its desktop entry can center its search field using
-a small GTK 3 module. The launcher compiles the module into the user cache
-when a C compiler is available and otherwise opens stock Settings Manager.
+an optional GTK 3 module. Native layout hooks are disabled by default for stability; ordinary GTK theming remains enabled. Set `GALINIA_EXPERIMENTAL_LAYOUT=1` only for a deliberate test. With that opt-in, the launcher compiles the module into the user cache when a C compiler is available. Otherwise Settings and Task Manager retain their standard widget behavior.
 
 ## Default media apps
 
@@ -94,7 +92,7 @@ file associations and URL handlers stay available.
 Install `file-roller` and `thunar-archive-plugin` for ZIP and TAR archives
 and Thunar’s Create Archive / Extract Here context menu. Galinia’s MIME
 profile routes common archive types to File Roller. The included launcher
-uses GTK’s OpenGL renderer for File Roller. Keep ~/.local/bin on the
+lets GTK choose its renderer for the installed graphics hardware. Keep ~/.local/bin on the
 session PATH so Thunar’s archive commands use that launcher too.
 
 When merging an existing MIME profile, merge the archive entries under
@@ -107,3 +105,7 @@ update-desktop-database ~/.local/share/applications
 ```
 
 Relaunch Thunar if it was running before the archive plugin was installed.
+
+## Application lifetime
+
+App search starts desktop entries in independent systemd user services with `ExitType=cgroup`. This is required: its 60-second idle exit must not kill Chromium helpers or other application descendants. Do not replace this with direct `Gio.AppInfo.launch()` inside the search service. Validate both launcher exit and descendant survival after any lifecycle change.

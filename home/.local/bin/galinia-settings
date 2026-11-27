@@ -1,4 +1,2 @@
 #!/bin/sh
-set -eu
-. "$HOME/.local/share/galinia/load-layout.sh"
 exec /usr/bin/xfce4-settings-manager "$@"
