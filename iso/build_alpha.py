@@ -59,6 +59,9 @@ def prepare_browser_repo(root):
 
 def customize(root, package, media):
     prepare_browser_repo(root)
+    if (root/'etc/casper.conf').is_file():
+        with (root/'etc/casper.conf').open('a') as stream:
+            stream.write('\nexport USERNAME="galinia"\nexport USERFULLNAME="Galinia live session"\nexport HOST="galinia"\nexport FLAVOUR="Galinia"\n')
     policy = root / 'usr/sbin/policy-rc.d'
     if policy.exists():
         raise ValueError('Unexpected service policy in original image')
@@ -159,9 +162,16 @@ def main():
     if args.phase in ('installed','live'):return
     if not all((work/('.'+phase)).is_file() for phase in ['installed','live']):
         raise ValueError('Both installed and live root customization must succeed before packing')
-    # Live-only Casper selection; all desktop defaults also exist in the installed root.
-    with (live/'etc/casper.conf').open('a') as stream:
-        stream.write('\nexport FLAVOUR="Galinia"\n')
+    # Match the signed source kernel byte-for-byte, not just by its version text.
+    original_kernel_hash=digest(casper/'vmlinuz')
+    kernels=[path for path in (live/'boot').glob('vmlinuz-*') if path.is_file() and digest(path)==original_kernel_hash]
+    if len(kernels)!=1:
+        raise ValueError('Cannot identify the installed kernel matching the signed source payload')
+    kernel_version=kernels[0].name.removeprefix('vmlinuz-')
+    initrd=live/('boot/initrd.img-'+kernel_version)
+    if not initrd.is_file():
+        raise ValueError('No rebuilt initramfs matching the original signed live kernel')
+    shutil.copy2(initrd,casper/'initrd')
     base_manifest,live_manifest=manifest(base),manifest(live)
     (casper/'minimal.manifest').write_text(base_manifest)
     (casper/'minimal.manifest.full').write_text(base_manifest)
@@ -180,13 +190,6 @@ def main():
         run('mksquashfs',root,target,'-noappend','-comp','zstd','-Xcompression-level','10','-processors','2','-no-progress')
         size=subprocess.check_output(['du','-sx','--block-size=1',str(root)],text=True).split()[0]
         (casper/(name+'.size')).write_text(size+'\n')
-    # Retain the signed upstream live kernel. The rebuilt initramfs must match it.
-    text=subprocess.check_output(['file',str(casper/'vmlinuz')],text=True)
-    import re
-    match=re.search(r'version ([^ ,]+)',text)
-    if not match or not (live/('boot/initrd.img-'+match[1])).is_file():
-        raise ValueError('No rebuilt initramfs matching the original signed live kernel')
-    shutil.copy2(live/('boot/initrd.img-'+match[1]),casper/'initrd')
     import yaml
     sources=yaml.safe_load((casper/'install-sources.yaml').read_text())
     sources['sources'][0]['name']['en']='Galinia OS Alpha'

@@ -83,3 +83,8 @@ that limit, use a suitable direct-download mirror or verified split assets with
 clear reconstruction instructions; do not promise a single oversized release
 asset. CI stores the development ISO separately from small qualification evidence.
 Reference: https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases
+
+Source initrd targets omitted from the SquashFS are explicitly created before
+packing. The live kernel is matched byte-for-byte to its installed kernel image
+and its rebuilt initramfs. Packing uses zstd; this changes compression only, not
+the kernel scheduler or application resource policy.

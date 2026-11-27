@@ -15,6 +15,6 @@ script to erase metadata as a cosmetic workaround.
 
 The palette generator maintains these choices when wallpapers change. The
 reference change has a backup in the local workspace; the public installer also
-keeps its usual per-file rollback journal. Selecting a different upstream window
-theme can restore its normal titles; the Galinia generator reapplies its own
-frame at the next palette refresh.
+keeps its usual per-file rollback journal. To restore stock titles, reset the two title_vertical_offset XFconf values to
+zero and select an upstream window theme. The Galinia generator reapplies its
+own frame at the next palette refresh unless its title policy is also changed.
