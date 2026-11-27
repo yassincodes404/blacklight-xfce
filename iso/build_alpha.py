@@ -5,7 +5,7 @@ Preserves the two source layers, customizing installed and live roots separately
 then reconstructs their delta including deletions. Never run on an owner rootfs.
 """
 import argparse
-from contextlib import contextmanager
+from contextlib import contextmanager, ExitStack
 import hashlib
 import json
 import os
@@ -36,7 +36,7 @@ def manifest(root):
     return subprocess.check_output(['chroot',str(root),'dpkg-query','-W','-f=${Package} ${Version}\n'],text=True)
 
 
-def customize(root, package):
+def customize(root, package, media):
     policy = root / 'usr/sbin/policy-rc.d'
     if policy.exists():
         raise ValueError('Unexpected service policy in original image')
@@ -49,13 +49,14 @@ def customize(root, package):
     shutil.copy2(package,root/'tmp/galinia-defaults.deb')
     shutil.copy2(HERE/'customize.sh',root/'tmp/galinia-customize.sh')
     try:
-        with mounted(['--rbind','/dev'],root/'dev'):
-            run('mount','--make-rslave',root/'dev')
-            with mounted(['-t','proc','proc'],root/'proc'):
-                with mounted(['--rbind','/sys'],root/'sys'):
-                    run('mount','--make-rslave',root/'sys')
-                    run('chroot',root,'/usr/bin/env','DEBIAN_FRONTEND=noninteractive','GALINIA_IMAGE_BUILD=1',
-                        'sh','/tmp/galinia-customize.sh','/tmp/galinia-defaults.deb')
+        with ExitStack() as stack:
+            stack.enter_context(mounted(['--bind',media],root/'cdrom'))
+            for name in ['dev','sys']:
+                stack.enter_context(mounted(['--rbind','/'+name],root/name))
+                run('mount','--make-rslave',root/name)
+            stack.enter_context(mounted(['-t','proc','proc'],root/'proc'))
+            run('chroot',root,'/usr/bin/env','DEBIAN_FRONTEND=noninteractive','GALINIA_IMAGE_BUILD=1',
+                'sh','/tmp/galinia-customize.sh','/tmp/galinia-defaults.deb')
     finally:
         policy.unlink(missing_ok=True)
         resolv.unlink(missing_ok=True)
@@ -116,8 +117,9 @@ def main():
             with mounted(['-t','overlay','overlay','-o',f'lowerdir={oldlive}:{oldbase}'],work/'source-merged') as merged:
                 run('rsync','-aHAX',str(oldbase)+'/',str(base)+'/')
                 run('rsync','-aHAX',str(merged)+'/',str(live)+'/')
-    customize(base,args.package.resolve())
-    customize(live,args.package.resolve())
+    with mounted(['-o','loop,ro',iso],work/'source-media') as media:
+        customize(base,args.package.resolve(),media)
+        customize(live,args.package.resolve(),media)
     # Live-only Casper selection; all desktop defaults also exist in the installed root.
     with (live/'etc/casper.conf').open('a') as stream:
         stream.write('\nexport FLAVOUR="Galinia"\n')

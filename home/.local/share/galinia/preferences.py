@@ -9,7 +9,7 @@ import sys
 import tempfile
 
 DEFAULTS = {'version': 1, 'accent_mode': 'wallpaper', 'fixed_accent': '#efb579',
-            'monitor_enabled': True, 'panel_size': 36, 'app_profiles': {}}
+            'monitor_enabled': True, 'audio_enabled': True, 'panel_size': 36, 'app_profiles': {}}
 PRIORITIES = {
     'normal': ['--property=CPUWeight=100'],
     'background': ['--property=CPUWeight=20', '--property=Nice=10'],
@@ -43,7 +43,7 @@ def validate(data):
     if contrast(color, '#242429') < 4.5:
         raise ValueError('Choose a brighter accent so text and controls remain readable.')
     result['fixed_accent'] = color.lower()
-    if type(result['monitor_enabled']) is not bool or type(result['panel_size']) is not int or not 28 <= result['panel_size'] <= 48:
+    if type(result['audio_enabled']) is not bool or type(result['monitor_enabled']) is not bool or type(result['panel_size']) is not int or not 28 <= result['panel_size'] <= 48:
         raise ValueError('Panel size must be 28–48; monitor visibility must be true or false.')
     if not isinstance(result['app_profiles'], dict) or len(result['app_profiles']) > 1000:
         raise ValueError('Invalid application priority settings.')
@@ -93,12 +93,14 @@ def apply_desktop(data, path=None, run=None):
             prefix = ['xfconf-query', '-c', 'xfce4-panel', '-p', '/panels/panel-1/size', '-s']
             run(prefix + [str(new['panel_size'])])
             completed.append(prefix + [str(actual_size)])
-        if new['monitor_enabled'] != previous['monitor_enabled']:
-            state = run(['systemctl', '--user', 'show', 'sysmon-widget.service', '--property=ActiveState', '--value']).stdout.strip()
+        for key, unit in [('monitor_enabled', 'sysmon-widget.service'), ('audio_enabled', 'galinia-audio.service')]:
+            if new[key] == previous[key]:
+                continue
+            state = run(['systemctl', '--user', 'show', unit, '--property=ActiveState', '--value']).stdout.strip()
             if state not in ('active', 'inactive', 'failed'):
-                raise ValueError('Could not determine the monitor service state.')
-            run(['systemctl', '--user', 'start' if new['monitor_enabled'] else 'stop', 'sysmon-widget.service'])
-            completed.append(['systemctl', '--user', 'start' if state == 'active' else 'stop', 'sysmon-widget.service'])
+                raise ValueError('Could not determine the desktop widget service state.')
+            run(['systemctl', '--user', 'start' if new[key] else 'stop', unit])
+            completed.append(['systemctl', '--user', 'start' if state == 'active' else 'stop', unit])
         save(new, path)
     except Exception:
         for command in reversed(completed):

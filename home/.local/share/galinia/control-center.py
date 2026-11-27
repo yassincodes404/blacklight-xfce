@@ -169,6 +169,9 @@ class ControlCenter(Gtk.Application):
         self.monitor = Gtk.CheckButton.new_with_label('Show desktop system monitor')
         self.monitor.set_active(data['monitor_enabled'])
         card.pack_start(self.monitor, False, False, 0)
+        self.audio = Gtk.CheckButton.new_with_label('Show desktop sound and music card')
+        self.audio.set_active(data['audio_enabled'])
+        card.pack_start(self.audio, False, False, 0)
         layout = Gtk.ComboBoxText()
         layout.append('custom', 'Choose a layout preset…')
         layout.append('compact', 'Compact — smaller panel, monitor hidden')
@@ -189,7 +192,7 @@ class ControlCenter(Gtk.Application):
         color = self.color.get_rgba()
         data.update(accent_mode=self.accent_mode.get_active_id(),
                     fixed_accent='#' + ''.join(f'{round(v * 255):02x}' for v in (color.red, color.green, color.blue)),
-                    panel_size=self.panel.get_value_as_int(), monitor_enabled=self.monitor.get_active())
+                    panel_size=self.panel.get_value_as_int(), monitor_enabled=self.monitor.get_active(), audio_enabled=self.audio.get_active())
         preferences.apply_desktop(data)
         return 'Appearance saved.'
 
@@ -199,6 +202,7 @@ class ControlCenter(Gtk.Application):
         self.accent_mode.set_active_id(data['accent_mode'])
         color = Gdk.RGBA(); color.parse(data['fixed_accent']); self.color.set_rgba(color)
         self.panel.set_value(data['panel_size']); self.monitor.set_active(data['monitor_enabled'])
+        self.audio.set_active(data['audio_enabled'])
         return 'Last preference change undone.'
 
     def build_categories(self):

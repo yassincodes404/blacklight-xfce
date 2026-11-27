@@ -6,3 +6,7 @@ SVG files are the editable artwork sources.
 Third-party components retain their own licenses and notices.
 See docs/ASSETS.md and LICENSES/. Third-party wallpaper screenshots are
 excluded from the original-art grant.
+
+Catppuccin Kitty Mocha theme: Catppuccin Org, MIT.
+Upstream https://github.com/catppuccin/kitty, commit 177d447f0c3626959ef001b4605f5d844541fd63.
+See LICENSES/catppuccin-kitty-MIT.txt.

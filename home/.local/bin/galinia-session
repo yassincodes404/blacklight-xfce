@@ -3,6 +3,7 @@
 set -u
 status=0
 monitor_enabled=$(/usr/bin/python3 "$(dirname "$(readlink -f "$0")")/../share/galinia/preferences.py" get monitor_enabled 2>/dev/null) || monitor_enabled=true
+audio_enabled=$(/usr/bin/python3 "$(dirname "$(readlink -f "$0")")/../share/galinia/preferences.py" get audio_enabled 2>/dev/null) || audio_enabled=true
 for variable in DISPLAY XAUTHORITY WAYLAND_DISPLAY LABWC_PID XDG_SESSION_TYPE XDG_CURRENT_DESKTOP XCURSOR_THEME XCURSOR_SIZE XCURSOR_PATH QT_QPA_PLATFORMTHEME; do
     if printenv "$variable" >/dev/null; then
         systemctl --user import-environment "$variable" || status=1
@@ -10,7 +11,11 @@ for variable in DISPLAY XAUTHORITY WAYLAND_DISPLAY LABWC_PID XDG_SESSION_TYPE XD
         systemctl --user unset-environment "$variable" || status=1
     fi
 done
-for unit in sysmon-widget.service blacklight-wallpaper-sync.service galinia-search.service; do
+for unit in galinia-audio.service sysmon-widget.service blacklight-wallpaper-sync.service galinia-search.service; do
+    if [ "$unit" = galinia-audio.service ] && [ "$audio_enabled" = false ]; then
+        systemctl --user stop "$unit" || status=1
+        continue
+    fi
     if [ "$unit" = sysmon-widget.service ] && [ "$monitor_enabled" = false ]; then
         systemctl --user stop "$unit" || status=1
         continue

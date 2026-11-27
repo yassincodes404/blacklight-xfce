@@ -58,6 +58,10 @@ reversible Firefox memory presets. Idle-memory targets require a fresh-login ben
 **Super + S opens Galinia Control Center:** adaptive/fixed accents, compact and
 comfortable layouts, desktop, device and system settings. Kernel tuning is handled separately from the desktop UI. See [controls and performance qualification](docs/CONTROL-CENTER.md).
 
+Kitty uses Catppuccin Mocha. The fixed desktop audio card provides volume and
+MPRIS playback controls; see [terminal and audio](docs/AUDIO-TERMINAL.md).
+The [alpha release workflow](docs/ALPHA-RELEASE.md) records build and test gates.
+
 The [image-development guide](iso/README.md) describes the Xubuntu-based live
 image workflow. A rootless defaults-package builder supplies the Galinia session,
 boot/login assets and fresh-account initialization. No bootable ISO is qualified yet.

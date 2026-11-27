@@ -5,7 +5,7 @@ The navigation is organized around daily desktop tasks:
 
 - Overview: quick access to personalization, devices and shortcuts.
 - Appearance: wallpaper-adaptive/fixed readable accents, panel size, compact or
-  comfortable layouts and desktop monitor visibility, with Undo.
+  comfortable layouts and desktop monitor/audio card visibility, with Undo.
 - Desktop: windows, workspaces, panel, keyboard, mouse, notifications,
   accessibility and login startup.
 - Devices: displays, sound, network, Bluetooth, power, locking and printing.

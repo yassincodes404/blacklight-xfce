@@ -28,7 +28,8 @@
       "tumbler",
       "exo-utils",
       "xfconf",
-      "xfce4-clipman"
+      "xfce4-clipman",
+      "kitty"
     ],
     "runtime": [
       "python3",
@@ -46,7 +47,8 @@
       "desktop-file-utils",
       "libglib2.0-bin",
       "procps",
-      "x11-utils"
+      "x11-utils",
+      "pulseaudio-utils"
     ],
     "everyday": [
       "firefox",

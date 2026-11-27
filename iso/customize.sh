@@ -9,7 +9,7 @@ set -eu
 case "$1" in /*.deb) ;; *) echo 'Provide an absolute .deb path.' >&2; exit 1;; esac
 [ "$(dpkg-deb -f "$1" Package)" = galinia-defaults ] || { echo 'Expected the galinia-defaults package.' >&2; exit 1; }
 apt-get update
-apt-get --no-remove install "$1"
+apt-get --no-remove -y install "$1"
 update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/galinia/galinia.plymouth 80
 update-alternatives --set default.plymouth /usr/share/plymouth/themes/galinia/galinia.plymouth
 update-initramfs -u -k all

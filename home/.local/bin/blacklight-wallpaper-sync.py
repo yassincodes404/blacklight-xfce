@@ -1159,6 +1159,8 @@ def update_kitty_palette(pal):
     directory = HOME / ".config/kitty"
     if not (directory / "kitty.conf").is_file():
         return
+    if "# galinia-color-mode: fixed" in (directory / "kitty.conf").read_text():
+        return
     colors = {
         "background": pal["bg_0"], "foreground": pal["fg_hex"],
         "cursor": pal["accent_hex"], "cursor_text_color": pal["bg_0"],
