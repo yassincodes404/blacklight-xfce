@@ -41,7 +41,7 @@ def main():
         old=private.read_text();start=old.index('GDesktopAppInfo *\n_xfw_g_desktop_app_info_get(');end=old.index('\nGdkPixbuf *\n_xfw_gicon_load',start)
         private.write_text(old[:start]+(ROOT/'packaging/windowing/resolve-app.c').read_text()+'\n'+old[end:])
         run(['python3','-m','unittest','discover','-s','tests','-p','test_icon_resolver.py','-v'],cwd=ROOT)
-        run(['./configure','--prefix=/usr','--libdir=/usr/lib/x86_64-linux-gnu','--enable-x11','--enable-wayland','--disable-introspection','--disable-gtk-doc','--disable-vala'],cwd=source)
+        run(['./configure','--prefix=/usr','--libdir=/usr/lib/x86_64-linux-gnu','--enable-x11','--enable-wayland','--disable-introspection','--disable-gtk-doc'],cwd=source)
         run(['make','-j2'],cwd=source)
         # Keep the distro's complete package layout, dependencies, triggers and license.
         download=work/'official';download.mkdir()
@@ -56,6 +56,7 @@ def main():
         control=package/'DEBIAN/control';text=control.read_text()
         text=re.sub(r'^Version:.*$', 'Version: '+version,text,flags=re.M)
         oldmaint=re.search(r'^Maintainer: (.*)$',text,re.M).group(1)
+        text=re.sub(r'^(Original-Maintainer|Origin):.*\n?', '', text, flags=re.M)
         text=re.sub(r'^Maintainer:.*$','Maintainer: Galinia Contributors <207205991+yassincodes404@users.noreply.github.com>\nOriginal-Maintainer: '+oldmaint,text,flags=re.M)
         control.write_text(text+'\nOrigin: Galinia\n')
         doc=package/'usr/share/doc/libxfce4windowing-0-0/galinia-resolver';doc.mkdir(parents=True)
