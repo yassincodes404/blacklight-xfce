@@ -58,3 +58,6 @@ were removed. AudioRelay retained its vendor icon path with corrected class
 metadata. The candidate preserved all 130 exported symbols and resolved all
 runtime dependencies. APT simulation selected one library upgrade and no
 removals. System installation and visible panel confirmation remain pending.
+
+The user subsequently installed the candidate and confirmed the visible issue
+was solved. A follow-up query confirmed installed version 4.20.5-1galinia1.
